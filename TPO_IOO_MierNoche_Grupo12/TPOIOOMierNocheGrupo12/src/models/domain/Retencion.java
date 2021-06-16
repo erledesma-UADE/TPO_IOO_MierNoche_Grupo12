@@ -12,6 +12,6 @@ public class Retencion {
     }
 
     public float calcularRetencion(){
-        return 0;
+
     }
 }
