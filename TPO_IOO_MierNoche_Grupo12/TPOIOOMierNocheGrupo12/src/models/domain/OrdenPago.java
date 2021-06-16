@@ -18,11 +18,18 @@ public class OrdenPago {
     private float montoTotal;
 
 
-    public OrdenPago(){
-        this.proveedor = Proveedor();
-        this.retenciones = new ArrayList<>();
-        this.documentos = new ArrayList<>();
-
+    public OrdenPago(int idOrdenPago, List<Documento> documentos, String tipoPago, Proveedor proveedor,
+                     float totalRetenciones, List<Retencion> retenciones,
+                     int idDocumento, LocalDateTime fecha, float montoTotal) {
+        this.idOrdenPago = idOrdenPago;
+        this.documentos = documentos;
+        this.tipoPago = tipoPago;
+        this.proveedor = proveedor;
+        this.totalRetenciones = totalRetenciones;
+        this.retenciones = retenciones;
+        this.idDocumento = idDocumento;
+        this.fecha = fecha;
+        this.montoTotal = montoTotal;
     }
 
     public void setIdOrdenPago(int idOrdenPago) {
