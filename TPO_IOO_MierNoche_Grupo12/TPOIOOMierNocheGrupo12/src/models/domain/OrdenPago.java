@@ -18,8 +18,8 @@ public class OrdenPago {
     private float montoTotal;
 
 
-    public OrdenPago(){
-        this.proveedor = Proveedor();
+    public OrdenPago(Proveedor proveedor){
+        this.proveedor = proveedor;
         this.retenciones = new ArrayList<>();
         this.documentos = new ArrayList<>();
 
