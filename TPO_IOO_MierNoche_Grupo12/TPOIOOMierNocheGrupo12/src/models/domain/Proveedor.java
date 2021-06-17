@@ -21,7 +21,7 @@ public class Proveedor {
     private LocalDate inicioActividades;
     private List<Rubro> rubros;
     private float tope;
-    private List<OrdenDeCompra> ordenDeCompra;
+    private List<OrdenCompra> ordenDeCompra;
     private List<Factura> facturasEmitidas;
     private List<PrecioPorProducto> catalogo;
 
@@ -138,7 +138,7 @@ public class Proveedor {
         return rubros;
     }
 
-    public List<OrdenDeCompra> getOrdenDeCompra() {
+    public List<OrdenCompra> getOrdenDeCompra() {
         return ordenDeCompra;
     }
 
