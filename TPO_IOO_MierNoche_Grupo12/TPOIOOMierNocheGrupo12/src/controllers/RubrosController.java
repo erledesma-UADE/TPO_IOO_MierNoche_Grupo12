@@ -6,5 +6,5 @@ public class RubrosController {
 
     public void mostrarCompulsa (int idRubro, int idProducto) {};
 
-    public Rubro getRubroPorID (int idRubro) {};
+    public void/*Rubro*/ getRubroPorID (int idRubro) {}/*no va void, es para que no de error*/
 }
