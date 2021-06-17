@@ -46,4 +46,27 @@ public class Rubro {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor.add(proveedor);
     }
+
+    public RubroDTO toDTO (int idRubro) {
+        RubroDTO dto = new RubroDTO();
+        dto.idRubro = this.idRubro;
+        dto.nombre = this.nombre;
+        //dto.proveedores -> falta definir ProveedorDTO;
+
+        //dto.productos -> recorro la lista de productos de la clase y las convierte a DTO
+        //luego agerga a la lista del RubroDTO
+        for (Producto p : this.productos) {
+                Producto.ProductoDTO pDTO= p.toDTO();
+                dto.productos.add(pDTO);
+            }
+
+        return dto;
+    }
+
+    public static class RubroDTO {
+        public int idRubro;
+        public String nombre;
+        public List<Producto.ProductoDTO> productos;
+        //public List<ProveedorDTO> proveedores;
+    }
 }

@@ -47,4 +47,28 @@ public class Producto {
     public void setImpuesto(float impuesto) {
         this.impuesto = impuesto;
     }
+
+    public ProductoDTO toDTO () {
+        ProductoDTO dto = new ProductoDTO();
+        dto.idProducto = this.idProducto;
+        dto.impuesto = this.impuesto;
+        dto.nombre = this.nombre;
+        dto.tipoUnidad = this.tipoUnidad;
+
+        //dto.precioPorProveedor = this.precioPorProveedor;
+        for (PrecioPorProducto pPproveedor : this.precioPorProveedor) {
+            PrecioPorProducto.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
+            dto.precioPorProveedor.add(pPproveedorDTO);
+        }
+
+        return dto;
+    }
+
+    public static class ProductoDTO {
+        public int idProducto;
+        public String nombre;
+        public String tipoUnidad;
+        public float impuesto;
+        public List<PrecioPorProducto.PrecioPorProductoDTO> precioPorProveedor;
+    }
 }
