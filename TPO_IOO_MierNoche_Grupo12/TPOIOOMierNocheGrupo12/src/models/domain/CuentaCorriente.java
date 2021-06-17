@@ -14,13 +14,15 @@ public class CuentaCorriente {
     private float montoDeuda;
 
 
-    public CuentaCorriente(){
+    public CuentaCorriente(int IDCuentaCorriente, Proveedor proveedor, float debito, float credito,
+                           List<Documento> documentos, float montoDeuda) {
+        this.IDCuentaCorriente = IDCuentaCorriente;
         this.proveedor = proveedor;
-        this.documentos = new ArrayList<>();
-
-
+        this.debito = debito;
+        this.credito = credito;
+        this.documentos = documentos;
+        this.montoDeuda = montoDeuda;
     }
-
 
     public void setIDCuentaCorriente(int IDCuentaCorriente) {
         this.IDCuentaCorriente = IDCuentaCorriente;
