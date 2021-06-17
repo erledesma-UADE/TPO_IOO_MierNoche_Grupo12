@@ -1,5 +1,6 @@
 package models.domain.documentos;
 
+import models.domain.Impuesto;
 import models.domain.OrdenCompra;
 import models.domain.Producto;
 import models.domain.Proveedor;
@@ -10,7 +11,7 @@ public class Factura extends Documento {
     private OrdenCompra ordenDeCompra;
     private Proveedor proveedor;
     private List<Producto> articulos;
-    //private List<Impuesto> impuestos;
+    private List<Impuesto> impuestos;
 
     public OrdenCompra getOrdenDeCompra() {
         return ordenDeCompra;
