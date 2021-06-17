@@ -1,21 +1,23 @@
 package models.domain.documentos;
 
+import models.domain.Impuesto;
+import models.domain.OrdenCompra;
 import models.domain.Producto;
 import models.domain.Proveedor;
 
 import java.util.List;
 
 public class Factura extends Documento {
-    private OrdenDeCompra ordenDeCompra;
+    private OrdenCompra ordenDeCompra;
     private Proveedor proveedor;
     private List<Producto> articulos;
-    //private List<Impuesto> impuestos;
+    private List<Impuesto> impuestos;
 
-    public OrdenDeCompra getOrdenDeCompra() {
+    public OrdenCompra getOrdenDeCompra() {
         return ordenDeCompra;
     }
 
-    public void setOrdenDeCompra(OrdenDeCompra ordenDeCompra) {
+    public void setOrdenDeCompra(OrdenCompra ordenDeCompra) {
         this.ordenDeCompra = ordenDeCompra;
     }
 
