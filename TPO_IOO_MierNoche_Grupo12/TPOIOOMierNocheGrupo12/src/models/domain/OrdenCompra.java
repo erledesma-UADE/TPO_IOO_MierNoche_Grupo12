@@ -18,6 +18,6 @@ public class OrdenCompra{
     }
 
     public boolean verificarTope(Proveedor proveedor){
-        return true;
+        return false;
     }
 }
