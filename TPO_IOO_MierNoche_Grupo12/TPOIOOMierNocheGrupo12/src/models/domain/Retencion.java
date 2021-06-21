@@ -11,7 +11,19 @@ public class Retencion {
         this.monto = monto;
     }
 
-    public float calcularRetencion(){
-        return 0;
+    public int getIdRetencion() {
+        return idRetencion;
+    }
+
+    public Impuesto getImpuesto() {
+        return impuesto;
+    }
+
+    public float getMonto() {
+        return monto;
+    }
+
+    public Impuesto calcularRetencion(){
+        return this.getImpuesto();
     }
 }

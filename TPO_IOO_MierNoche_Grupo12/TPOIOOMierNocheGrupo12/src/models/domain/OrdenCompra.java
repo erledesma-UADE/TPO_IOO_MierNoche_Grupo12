@@ -17,6 +17,22 @@ public class OrdenCompra{
         this.proveedor = proveedor;
     }
 
+    public int getIdDocumentos() {
+        return idDocumentos;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public List<Producto> getProducto() {
+        return producto;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
     public boolean verificarTope(Proveedor proveedor){
         return false;
     }
