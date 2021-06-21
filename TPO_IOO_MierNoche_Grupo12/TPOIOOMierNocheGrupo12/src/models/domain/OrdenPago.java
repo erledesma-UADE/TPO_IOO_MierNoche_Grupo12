@@ -68,6 +68,8 @@ public class OrdenPago {
         this.montoTotal = montoTotal;
     }
 
+
+
     public int getIdOrdenPago() {
         return idOrdenPago;
     }
@@ -103,4 +105,6 @@ public class OrdenPago {
     public float calcularMontoTotal() {  // operacion del diagrama
         return montoTotal;
     }
+
+    
 }
