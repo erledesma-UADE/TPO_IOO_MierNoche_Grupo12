@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f510cc-3339-4e48-abf4-3286a0b232a9" name="Default Changelist" comment="ALL READY">
+      <change afterPath="$PROJECT_DIR$/src/models/domain/CantidadPorProductos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/domain/OrdenPago.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/OrdenPago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/domain/Proveedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/Proveedor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/domain/Retencion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/Retencion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/domain/documentos/Documento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/documentos/Documento.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +47,21 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,7 +74,7 @@
       <workItem from="1623885498249" duration="1059000" />
       <workItem from="1623886591400" duration="54000" />
       <workItem from="1623890633674" duration="1622000" />
-      <workItem from="1624277718607" duration="892000" />
+      <workItem from="1624277718607" duration="7736000" />
     </task>
     <task id="LOCAL-00001" summary="ALL READY">
       <created>1623886420768</created>
