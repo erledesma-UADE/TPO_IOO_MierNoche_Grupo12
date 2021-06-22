@@ -1,12 +1,12 @@
 package models.domain;
 
-public class CantidadPorProductos {
+public class CantidadPorProducto {
     private Producto producto;
     private float cantidad;
     private float impuestoTotal;
 
 
-    public CantidadPorProductos(Producto producto, float cantidad, float impuestoTotal) {
+    public CantidadPorProducto(Producto producto, float cantidad, float impuestoTotal) {
         this.producto = producto;
         this.cantidad = cantidad;
         this.impuestoTotal = impuestoTotal;
