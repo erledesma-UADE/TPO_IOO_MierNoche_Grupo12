@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f510cc-3339-4e48-abf4-3286a0b232a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/models/domain/CantidadPorProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/CantidadPorProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/documentos/Documento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/documentos/Documento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/domain/Retencion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +42,19 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
