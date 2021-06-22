@@ -1,46 +1,18 @@
 package controllers;
 
+import models.domain.documentos.Factura;
+
 import java.time.LocalDate;
 
 public class DocumentosController {
-    public static class MainController {
-        private static MainController instancia;
 
-        private MainController(){
+    public float totalFacturasRecibidas (LocalDate fecha, Factura factura) { return 0; }
 
-        }
+    public void mostrarOrdenesPago () {}
 
-        public static MainController getInstancia(){
-            if(instancia ==  null){
-                instancia = new MainController();
-            }
-            return instancia;
-        }
+    public void getFacturasPorDia (LocalDate fecha, Factura factura) {}
 
-        public int totalFacturasRecibidas(int idProveedor){
-            //todo
-            return 0;
-        }
+    public void libroIVACompras () {}
 
-        public int totalFacturasRecibidasPorProveedor(int idProveedor, LocalDate fecha){
-            //todo
-            return 0;
-        }
-
-        public void detalleCuentaCorriente(int idProveedor){
-            //todo    }
-
-        public float totalDeudaPorProveedor(int idProveedor){
-            //todo
-            return 0;
-        }
-
-        public void mostrarLibroIVACompras(){
-            //todo
-        }
-
-        public void getProveedorPorId (int idProveedor){
-            //todo
-        }
-    }
+    public void getLibroIVACompras () {}
 }

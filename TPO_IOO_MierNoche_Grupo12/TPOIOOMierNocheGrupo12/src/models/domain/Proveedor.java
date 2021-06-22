@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Proveedor {
-    int idProveedor;
-    int cuit;
+    private int idProveedor;
+    private int cuit;
     private Responsabilidad responsabilidad;
     private String razonSocial;
     private String nombre;
@@ -24,6 +24,8 @@ public class Proveedor {
     private List<OrdenCompra> ordenDeCompra;
     private List<Factura> facturasEmitidas;
     private List<PrecioPorProducto> catalogo;
+    private Certificado certificado;
+    private List<Impuesto> impuestos;
 
     public Proveedor(int idProveedor, int cuit, Responsabilidad responsabilidad, String razonSocial, String nombre, String direccion,
                      int telefono, String email, int numeroIngresosBrutos, LocalDate inicioActividades, float tope){
@@ -43,6 +45,7 @@ public class Proveedor {
     }
 
     public void agregarRubro(Rubro... rubros){
+
         Collections.addAll(this.rubros,rubros);
     }
 
@@ -115,6 +118,7 @@ public class Proveedor {
     }
 
     public void setNumeroIngresosBrutos(int numeroIngresosBrutos) {
+
         this.numeroIngresosBrutos = numeroIngresosBrutos;
     }
 
@@ -139,15 +143,45 @@ public class Proveedor {
     }
 
     public List<OrdenCompra> getOrdenDeCompra() {
+
         return ordenDeCompra;
     }
 
     public List<Factura> getFacturasEmitidas() {
+
         return facturasEmitidas;
     }
 
     public List<PrecioPorProducto> getCatalogo() {
+
         return catalogo;
     }
 
+    public static class ProveedorDTO{
+        public int idProveedor;
+        public int cuit;
+        public String razonSocial;
+        public String nombre;
+        public String direccion;
+        public int telefono;
+        public String email;
+        public int numeroIngresosBrutos;
+        public List<Rubro> rubros;
+        public float tope;
+
+    }
+    public ProveedorDTO toTDO(){
+        ProveedorDTO dto = new ProveedorDTO();
+        dto.idProveedor = this.getIdProveedor();
+        dto.cuit = this.getCuit();
+        dto.razonSocial = this.getRazonSocial();
+        dto.nombre = this.getNombre();
+        dto.direccion = this.getDireccion();
+        dto.telefono = this.getTelefono();
+        dto.email = this.getEmail();
+        dto.numeroIngresosBrutos = this.getNumeroIngresosBrutos();
+        dto.rubros = this.getRubros();
+        dto.tope = this.getTope();
+        return dto;
+    }
 }
