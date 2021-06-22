@@ -2,7 +2,7 @@ package models.domain;
 
 import java.time.LocalDate;
 
-public class PrecioPorProducto {
+public class PrecioPorProducto extends ID {
     private LocalDate fechaAcuerdo;
     private float monto;
     private Producto producto;

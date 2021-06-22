@@ -1,7 +1,7 @@
 package models.domain;
 
 import models.domain.documentos.Factura;
-import models.domain.documentos.OrdenDeCompra;
+import models.domain.OrdenCompra;
 import models.domain.enums.Responsabilidad;
 
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Proveedor {
+public class Proveedor extends ID {
     private int idProveedor;
     private int cuit;
     private Responsabilidad responsabilidad;

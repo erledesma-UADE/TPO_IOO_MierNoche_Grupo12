@@ -33,5 +33,5 @@ public class RubrosController {
 
     public Optional getRubroPorID (int idRubro) {////////REVISAR
         return repositorioRubros.getPorID(idRubro);
-    }
+    }//Creo que este no hace falta, usaria el del repositorio directamente
 }

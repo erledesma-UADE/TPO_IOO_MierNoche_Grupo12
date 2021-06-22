@@ -1,6 +1,6 @@
 package models.domain;
 
-public class Retencion {
+public class Retencion extends ID {
     private int idRetencion;
     private Impuesto impuesto;
     private float monto;

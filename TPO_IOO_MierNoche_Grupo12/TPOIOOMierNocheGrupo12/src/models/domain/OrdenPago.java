@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdenPago {
+public class OrdenPago extends ID {
     private int idOrdenPago;
     private List<Documento> documentos;
     private String tipoPago;
