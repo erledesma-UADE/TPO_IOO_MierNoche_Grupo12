@@ -1,6 +1,6 @@
 package models.domain.documentos;
 
-import models.domain.CantidadPorProductos;
+import models.domain.CantidadPorProducto;
 import models.domain.Proveedor;
 
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ public abstract class Documento {
     private float montoTotal;
     private String tipoDocumento;
     private boolean pagado;
-    private List<CantidadPorProductos> articulos;
+    private List<CantidadPorProducto> articulos;
     private Proveedor proveedor;
 
 
@@ -58,7 +58,7 @@ public abstract class Documento {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public List<CantidadPorProductos> getArticulos() {
+    public List<CantidadPorProducto> getArticulos() {
         return articulos;
     }
 
