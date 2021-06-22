@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f510cc-3339-4e48-abf4-3286a0b232a9" name="Default Changelist" comment="ALL READY">
-      <change afterPath="$PROJECT_DIR$/src/models/domain/ID.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/RubrosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/RubrosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/CuentaCorriente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/CuentaCorriente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/OrdenCompra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/OrdenCompra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/OrdenPago.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/OrdenPago.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/PrecioPorProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/PrecioPorProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/Proveedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/Proveedor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/Retencion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/Retencion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/Rubro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/Rubro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/repositories/Repositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/repositories/Repositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/repositories/RepositorioPrecioPorProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/repositories/RepositorioPrecioPorProducto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/repositories/RepositorioProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/repositories/RepositorioProductos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/domain/repositories/RepositorioRubros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/domain/repositories/RepositorioRubros.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
