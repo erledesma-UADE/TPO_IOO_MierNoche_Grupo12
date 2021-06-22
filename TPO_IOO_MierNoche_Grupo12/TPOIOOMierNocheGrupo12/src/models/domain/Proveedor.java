@@ -1,6 +1,7 @@
 package models.domain;
 
 import models.domain.documentos.Factura;
+import models.domain.documentos.OrdenDeCompra;
 import models.domain.enums.Responsabilidad;
 
 import java.time.LocalDate;
@@ -9,8 +10,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Proveedor {
-    int idProveedor;
-    int cuit;
+    private int idProveedor;
+    private int cuit;
     private Responsabilidad responsabilidad;
     private String razonSocial;
     private String nombre;
