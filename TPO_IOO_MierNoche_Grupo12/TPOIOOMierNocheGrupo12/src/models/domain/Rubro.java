@@ -2,7 +2,7 @@ package models.domain;
 
 import java.util.List;
 
-public class Rubro {
+public class Rubro extends ID {
     private int idRubro;
     private String nombre;
     private List<Producto> productos;

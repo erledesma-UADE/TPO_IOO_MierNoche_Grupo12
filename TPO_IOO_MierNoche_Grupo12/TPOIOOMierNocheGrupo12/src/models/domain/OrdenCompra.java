@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdenCompra{
+public class OrdenCompra extends ID {
     private int idDocumentos;
     private LocalDate fecha;
     private List<Producto> producto;

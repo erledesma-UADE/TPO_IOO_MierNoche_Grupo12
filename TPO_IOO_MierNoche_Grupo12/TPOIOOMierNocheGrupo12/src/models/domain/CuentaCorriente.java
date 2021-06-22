@@ -5,7 +5,7 @@ import models.domain.documentos.Documento;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuentaCorriente {
+public class CuentaCorriente extends ID {
     private int IDCuentaCorriente;
     private Proveedor proveedor;
     private float debito;

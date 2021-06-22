@@ -1,7 +1,9 @@
 package models.domain;
 
-public abstract class ID {
+public class ID {
     private Integer id;
 
-    public Integer getID () { return this.id; }
+    public Integer getID () {
+        return id;
+    }
 }

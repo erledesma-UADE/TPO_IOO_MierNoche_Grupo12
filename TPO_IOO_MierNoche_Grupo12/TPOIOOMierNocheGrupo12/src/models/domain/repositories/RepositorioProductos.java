@@ -1,4 +1,6 @@
 package models.domain.repositories;
 
-public class RepositorioProductos extends Repositorio{
+import models.domain.Producto;
+
+public class RepositorioProductos extends Repositorio<Producto> {
 }

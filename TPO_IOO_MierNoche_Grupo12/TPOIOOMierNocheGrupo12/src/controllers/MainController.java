@@ -14,8 +14,7 @@ public class MainController {
         return 0;
     }
 
-    public void detalleCuentaCorriente(int idProveedor) {
-    }
+    public void detalleCuentaCorriente(int idProveedor) {}
 
     public float totalDeudaProveedor(int idProveedor) {
         return 0;
