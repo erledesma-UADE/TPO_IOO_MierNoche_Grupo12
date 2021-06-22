@@ -1,5 +1,6 @@
 package controllers;
 
+import models.domain.Producto;
 import models.domain.Rubro;
 import models.domain.repositories.RepositorioRubros;
 
@@ -19,9 +20,18 @@ public class RubrosController {
         this.repositorioRubros = new RepositorioRubros();
     }
 
-    public void mostrarCompulsa (int idRubro, int idProducto) {};
+    public void mostrarCompulsa (int idRubro, int idProducto) {
+        try {
+            Optional<Rubro> rubro = this.repositorioRubros.getPorID(idRubro);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se encontro el Rubro solicitado");
+        }
+
+    };
 
     public Optional getRubroPorID (int idRubro) {////////REVISAR
-        return repositorioRubros.buscarID(idRubro);
+        return repositorioRubros.getPorID(idRubro);
     }
 }

@@ -1,7 +1,5 @@
 package models.domain.repositories;
 
-import models.domain.ID;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +16,12 @@ public abstract class Repositorio<T extends ID> {
         return this.elementos;
     }
 
-    public Optional<T> buscarID(Integer id) {
+    /*public Optional<T> getPorID(Integer id) {
         return this.elementos
                 .stream()
                 .filter(e -> e.getID().equals(id))
                 .findFirst();
-    }
+    }*/
 
     public void agregar(T elemento) {
         //INSERT
