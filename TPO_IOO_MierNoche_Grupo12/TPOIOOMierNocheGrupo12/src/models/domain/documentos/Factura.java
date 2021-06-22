@@ -4,7 +4,9 @@ import models.domain.Impuesto;
 import models.domain.OrdenCompra;
 import models.domain.Producto;
 import models.domain.Proveedor;
+import models.domain.enums.TipoDocumento;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Factura extends Documento {
@@ -12,6 +14,10 @@ public class Factura extends Documento {
     private Proveedor proveedor;
     private List<Producto> articulos;
     private List<Impuesto> impuestos;
+
+    public Factura(TipoDocumento tipoDocumento, Proveedor proveedor, LocalDateTime fecha) {
+        super(tipoDocumento, proveedor, fecha);
+    }
 
     public OrdenCompra getOrdenDeCompra() {
         return ordenDeCompra;
