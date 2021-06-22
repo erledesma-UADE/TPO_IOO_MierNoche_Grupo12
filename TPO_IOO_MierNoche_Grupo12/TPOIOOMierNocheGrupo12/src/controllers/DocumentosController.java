@@ -1,9 +1,11 @@
 package controllers;
 
+import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
 import models.domain.repositories.RepositorioDocumentos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class DocumentosController {
 
@@ -16,7 +18,13 @@ public class DocumentosController {
         return instancia;
     }
 
-    public float totalFacturasRecibidas (LocalDate fecha, Factura factura) { return 0; }
+    private DocumentosController(){ this.repositorio = new RepositorioDocumentos();};
+
+    public float totalFacturasRecibidas (LocalDate fecha, Factura factura) {
+        List<Documento> todosLosDocumentos = this.repositorio.buscarTodos();
+        int contador = 0;
+
+    }
 
     public void mostrarOrdenesPago () {}
 

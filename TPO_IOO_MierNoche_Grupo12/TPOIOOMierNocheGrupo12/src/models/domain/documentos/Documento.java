@@ -78,6 +78,17 @@ public abstract class Documento {
         this.proveedor = proveedor;
     }
 
+
+    public static class DocumentoDTO{
+        public Proveedor proveedor;
+        public int idDocumento;
+        public LocalDateTime fecha;
+        public float montoTotal;
+        public boolean pagado;
+        public List<CantidadPorProducto> articulos;
+        public TipoDocumento tipoDocumento;
+    }
+
     public DocumentoDTO toDTO() {
         DocumentoDTO dto    = new DocumentoDTO();
         dto.proveedor       = this.proveedor;
@@ -90,14 +101,4 @@ public abstract class Documento {
         return dto;
     }
 
-
-    public static class DocumentoDTO{
-        public Proveedor proveedor;
-        public int idDocumento;
-        public LocalDateTime fecha;
-        public float montoTotal;
-        public boolean pagado;
-        public List<CantidadPorProducto> articulos;
-        public TipoDocumento tipoDocumento;
-    }
 }
