@@ -1,16 +1,18 @@
 package models.domain.documentos;
 
+import models.domain.CantidadPorProducto;
 import models.domain.Proveedor;
 import models.domain.enums.TipoDocumento;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class NotaDebito extends Documento{
     private String descripcion;
     private String emisor;
 
-    public NotaDebito(TipoDocumento tipoDocumento, Proveedor proveedor, LocalDateTime fecha) {
-        super(tipoDocumento, proveedor, fecha);
+    public NotaDebito(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
+        super(tipoDocumento, proveedor, fecha, articulos);
     }
 
     public String getDescripcion() {

@@ -17,13 +17,16 @@ public abstract class Documento extends ID {
     private List<CantidadPorProducto> articulos;
     private Proveedor proveedor;
 
-    public Documento(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha) {
+    public Documento(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
+        super();
         this.tipoDocumento = tipoDocumento;
         this.proveedor = proveedor;
         this.fecha = fecha;
         this.pagado = false;
         this.montoTotal = 0;
+        this.articulos = articulos;
     }
+
 
 
     public int getIdDocumento() {

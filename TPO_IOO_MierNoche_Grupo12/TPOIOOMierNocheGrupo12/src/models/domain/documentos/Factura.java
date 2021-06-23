@@ -1,5 +1,6 @@
 package models.domain.documentos;
 
+import models.domain.CantidadPorProducto;
 import models.domain.Impuesto;
 import models.domain.OrdenCompra;
 import models.domain.Producto;
@@ -11,12 +12,10 @@ import java.util.List;
 
 public class Factura extends Documento {
     private OrdenCompra ordenDeCompra;
-    private Proveedor proveedor;
-    private List<Producto> articulos;
     private List<Impuesto> impuestos;
 
-    public Factura(TipoDocumento tipoDocumento, Proveedor proveedor, LocalDateTime fecha) {
-        super(tipoDocumento, proveedor, fecha);
+    public Factura(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
+        super(tipoDocumento, proveedor, fecha, articulos);
     }
 
     public OrdenCompra getOrdenDeCompra() {
@@ -27,21 +26,6 @@ public class Factura extends Documento {
         this.ordenDeCompra = ordenDeCompra;
     }
 
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
-    }
-
-    public List<Producto> getArticulos() {
-        return articulos;
-    }
-
-    public void setArticulos(List<Producto> articulos) {
-        this.articulos = articulos;
-    }
 
     public List<Impuesto> getImpuestos() {
         return impuestos;
