@@ -1,6 +1,7 @@
 package models.domain;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Rubro extends ID {
     private int idRubro;
