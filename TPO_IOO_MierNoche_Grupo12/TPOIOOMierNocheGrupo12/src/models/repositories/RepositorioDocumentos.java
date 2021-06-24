@@ -1,4 +1,4 @@
-package models.domain.repositories;
+package models.repositories;
 
 import models.domain.documentos.Documento;
 

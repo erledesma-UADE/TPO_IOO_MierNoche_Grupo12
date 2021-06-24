@@ -1,4 +1,4 @@
-package models.domain.repositories;
+package models.repositories;
 
 import models.domain.ID;
 
@@ -27,6 +27,7 @@ public abstract class Repositorio<T extends ID> {
 
     public void agregar(T elemento) {
         //INSERT
+        elemento.setID(this.elementos.size() + 1);
         this.elementos.add(elemento);
     }
 

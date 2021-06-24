@@ -1,7 +1,5 @@
 package controllers;
 
-import models.domain.Proveedor;
-
 import java.time.LocalDate;
 
 public class MainController {

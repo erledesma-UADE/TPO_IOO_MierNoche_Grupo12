@@ -1,13 +1,9 @@
 package controllers;
 
 
-import models.domain.Proveedor;
 import models.domain.documentos.Documento;
-import models.domain.documentos.Factura;
-import models.domain.repositories.RepositorioDocumentos;
-import models.domain.repositories.RepositorioOrdenesDePago;
+import models.repositories.RepositorioDocumentos;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -1,15 +1,16 @@
 package models.domain;
 
+import models.domain.enums.Iva;
+
 public class CantidadPorProducto {
     private Producto producto;
     private float cantidad;
     private float impuestoTotal;
 
-
-    public CantidadPorProducto(Producto producto, float cantidad, float impuestoTotal) {
+    public CantidadPorProducto(Producto producto, float cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
-        this.impuestoTotal = impuestoTotal;
+        calcularImpuestoTotal();
     }
 
     public void setProducto(Producto producto) {
@@ -36,5 +37,12 @@ public class CantidadPorProducto {
         return impuestoTotal;
     }
 
+    public void calcularImpuestoTotal () {
+        this.impuestoTotal = this.producto.montoImpuesto() * this.cantidad;
+        setImpuestoTotal(this.impuestoTotal);
+    }
 
+    public Iva getTipoImpuesto () {
+        return this.producto.getImpuesto();
+    }
 }

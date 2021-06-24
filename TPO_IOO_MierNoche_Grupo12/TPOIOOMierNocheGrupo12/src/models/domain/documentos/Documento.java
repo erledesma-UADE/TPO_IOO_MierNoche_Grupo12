@@ -3,7 +3,6 @@ package models.domain.documentos;
 import models.domain.CantidadPorProducto;
 import models.domain.ID;
 import models.domain.Proveedor;
-import models.domain.enums.TipoDocumento;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +17,6 @@ public abstract class Documento extends ID {
     private Proveedor proveedor;
 
     public Documento(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
-        super();
         this.tipoDocumento = tipoDocumento;
         this.proveedor = proveedor;
         this.fecha = fecha;

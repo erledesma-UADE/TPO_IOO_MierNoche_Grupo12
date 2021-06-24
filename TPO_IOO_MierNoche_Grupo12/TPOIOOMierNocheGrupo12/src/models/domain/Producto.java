@@ -1,27 +1,19 @@
 package models.domain;
 
+import models.domain.enums.Iva;
+
 import java.util.List;
 
 public class Producto extends ID {
-    private int idProducto;
     private String nombre;
     private String tipoUnidad;
-    private float impuesto;
+    private Iva impuesto;
     private List<PrecioPorProducto> precioPorProveedor;
 
-    public Producto(int idProducto, String nombre, String tipoUnidad, float impuesto) {
-        this.idProducto = idProducto;
+    public Producto(String nombre, String tipoUnidad,Iva impuesto) {
         this.nombre = nombre;
         this.tipoUnidad = tipoUnidad;
         this.impuesto = impuesto;
-    }
-
-    public int getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -40,21 +32,23 @@ public class Producto extends ID {
         this.tipoUnidad = tipoUnidad;
     }
 
-    public float getImpuesto() {
+    public Iva getImpuesto() {
         return impuesto;
     }
 
-    public void setImpuesto(float impuesto) {
-        this.impuesto = impuesto;
+    public void setImpuesto(Iva impuesto) { this.impuesto = impuesto; }
+
+    //HACER -> devuelve el monto del impuesto para este producto
+    public float montoImpuesto () {
+        return 0;
     }
 
     public ProductoDTO toDTO () {
         ProductoDTO dto = new ProductoDTO();
-        dto.idProducto = this.idProducto;
         dto.impuesto = this.impuesto;
         dto.nombre = this.nombre;
         dto.tipoUnidad = this.tipoUnidad;
-
+        dto.idProducto = super.getID();
         //dto.precioPorProveedor = this.precioPorProveedor;
         for (PrecioPorProducto pPproveedor : this.precioPorProveedor) {
             PrecioPorProducto.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
@@ -68,7 +62,7 @@ public class Producto extends ID {
         public int idProducto;
         public String nombre;
         public String tipoUnidad;
-        public float impuesto;
+        public Iva impuesto;
         public List<PrecioPorProducto.PrecioPorProductoDTO> precioPorProveedor;
     }
 }

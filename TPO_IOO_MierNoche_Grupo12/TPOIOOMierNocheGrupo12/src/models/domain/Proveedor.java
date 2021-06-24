@@ -1,7 +1,6 @@
 package models.domain;
 
 import models.domain.documentos.Factura;
-import models.domain.OrdenCompra;
 import models.domain.enums.Responsabilidad;
 
 import java.time.LocalDate;
@@ -10,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Proveedor extends ID {
-    private int idProveedor;
     private int cuit;
     private Responsabilidad responsabilidad;
     private String razonSocial;
@@ -25,10 +23,12 @@ public class Proveedor extends ID {
     private List<OrdenCompra> ordenDeCompra;
     private List<Factura> facturasEmitidas;
     private List<PrecioPorProducto> catalogo;
+    private Certificado certificado;
+    private List<Impuesto> impuestos;
 
-    public Proveedor(int idProveedor, int cuit, Responsabilidad responsabilidad, String razonSocial, String nombre, String direccion,
-                     int telefono, String email, int numeroIngresosBrutos, LocalDate inicioActividades, float tope){
-        this.idProveedor = idProveedor;
+    public Proveedor(int cuit, Responsabilidad responsabilidad, String razonSocial, String nombre,
+                     String direccion, int telefono, String email, int numeroIngresosBrutos,
+                     LocalDate inicioActividades, List<Rubro> rubros, float tope) {
         this.cuit = cuit;
         this.responsabilidad = responsabilidad;
         this.razonSocial = razonSocial;
@@ -38,21 +38,12 @@ public class Proveedor extends ID {
         this.email = email;
         this.numeroIngresosBrutos = numeroIngresosBrutos;
         this.inicioActividades = inicioActividades;
+        this.rubros = rubros;
         this.tope = tope;
-        this.rubros = new ArrayList<>();
-
     }
 
     public void agregarRubro(Rubro... rubros){
         Collections.addAll(this.rubros,rubros);
-    }
-
-    public int getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
     }
 
     public int getCuit() {
@@ -151,4 +142,7 @@ public class Proveedor extends ID {
         return catalogo;
     }
 
+    public void emitirDocumento () {}
+
+    public List<Factura> getFacturasPorFecha (LocalDate fecha) { return null; }
 }
