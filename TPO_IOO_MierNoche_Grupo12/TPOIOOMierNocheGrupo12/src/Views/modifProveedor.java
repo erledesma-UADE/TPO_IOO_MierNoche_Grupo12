@@ -1,6 +1,11 @@
 package Views;
 
+import controllers.MainController;
+import models.domain.Proveedor;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class modifProveedor extends JFrame{
     private JTextField txtIdProv;
@@ -28,5 +33,55 @@ public class modifProveedor extends JFrame{
         this.setSize(400,400);
         this.pack();
         this.setTitle("Modificar Proveedor");
+
+        txtNombre.setEditable(false);
+        txtRazSocial.setEditable(false);
+        txtCuit.setEditable(false);
+        txtDireccion.setEditable(false);
+        txtTelefono.setEditable(false);
+        txtMail.setEditable(false);
+        cboResp.setEditable(false);
+        txtIIBB.setEditable(false);
+        txtIniAct.setEditable(false);
+        txtARubro.setEditable(false);
+
+
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Integer id = Integer.parseInt(txtIdProv.getText());
+                System.out.println("Variable prueba0 = " +id);
+                Proveedor.ProveedorDTO prov;
+                prov = MainController.getInstancia().buscarProveedor(id);
+                Proveedor.ProveedorDTO dto = new Proveedor.ProveedorDTO();
+
+                txtIdProv.setEditable(true);
+                txtNombre.setEditable(true);
+                txtRazSocial.setEditable(true);
+                txtCuit.setEditable(true);
+                txtDireccion.setEditable(true);
+                txtTelefono.setEditable(true);
+                txtMail.setEditable(true);
+                cboResp.setEditable(true);
+                txtIIBB.setEditable(true);
+                txtIniAct.setEditable(true);
+                txtARubro.setEditable(true);
+
+                txtNombre.setText(prov.nombre);
+                txtRazSocial.setText(prov.razonSocial);
+                txtCuit.setText(String.valueOf(prov.cuit));
+                txtDireccion.setText(prov.direccion);
+                txtTelefono.setText(String.valueOf(prov.telefono));
+                txtMail.setText(prov.email);
+                cboResp.setSelectedItem(prov.responsabilidad);
+
+
+
+            }
+        });
+
     }
+
+
 }
