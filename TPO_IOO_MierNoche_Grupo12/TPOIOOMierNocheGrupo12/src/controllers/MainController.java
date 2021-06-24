@@ -1,15 +1,8 @@
 package controllers;
 
-import models.domain.Proveedor;
-import repositorios.RepositorioProveedor;
-
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class MainController {
-
-    private static MainController instancia;
-    private RepositorioProveedor repoProveedor;
 
     public float totalFacturasRecibidas(int idProveedor) {
         return 0;
@@ -19,8 +12,7 @@ public class MainController {
         return 0;
     }
 
-    public void detalleCuentaCorriente(int idProveedor) {
-    }
+    public void detalleCuentaCorriente(int idProveedor) {}
 
     public float totalDeudaProveedor(int idProveedor) {
         return 0;
@@ -41,52 +33,4 @@ public class MainController {
     public float getTotalRetencionesPorProveedor (int idProveedor) { return 0; }
 
     public void /*ProveedorDTO*/getProveedorPorId (int idProveedor) {}
-
-    public static MainController getInstancia(){
-        if(MainController.instancia == null){
-            instancia = new MainController();
-        }
-        return instancia;
-    }
-
-    private MainController(){
-        this.repoProveedor = new RepositorioProveedor();
-    }
-
-    public Proveedor.ProveedorDTO ver(Integer Id){
-        return null;
-    }
-
-    private void asignarParamA(Proveedor proveedor, Proveedor.ProveedorDTO dto){
-        proveedor.setID(dto.id);
-        proveedor.setCuit(dto.cuit);
-        proveedor.setRazonSocial(dto.razonSocial);
-        proveedor.setNombre(dto.nombre);
-        proveedor.setDireccion(dto.direccion);
-        proveedor.setTelefono(dto.telefono);
-        proveedor.setEmail(dto.email);
-        proveedor.setNumeroIngresosBrutos(dto.numeroIngresosBrutos);
-        proveedor.setResponsabilidad(dto.responsabilidad);
-        proveedor.setInicioActividades(dto.inicioActividades);
-        proveedor.setTope(dto.tope);
-
-        //--------------FALTA SETEAR RUBRO----------------
-
-
-    }
-    public void crearProveedor(Proveedor.ProveedorDTO dto){
-        Proveedor prov = new Proveedor();
-        this.asignarParamA(prov,dto);
-        this.repoProveedor.agregar(prov);
-    }
-
-    public Proveedor.ProveedorDTO buscarProveedor(Integer id){
-        Optional<Proveedor> prov = this.repoProveedor.buscar(id);
-        Proveedor proveedor = new Proveedor();
-        if(!prov.isPresent()){
-            //throw new Exception().
-        }
-        return prov.get().toTDO();
-    }
-
 }

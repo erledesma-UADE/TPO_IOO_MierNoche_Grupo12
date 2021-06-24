@@ -2,7 +2,6 @@ package models.domain;
 
 import models.domain.documentos.Factura;
 import models.domain.enums.Responsabilidad;
-import repositorios.ID;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,9 +26,9 @@ public class Proveedor extends ID {
     private Certificado certificado;
     private List<Impuesto> impuestos;
 
-    public Proveedor(int cuit, Responsabilidad responsabilidad, String razonSocial, String nombre, String direccion,
-                     int telefono, String email, int numeroIngresosBrutos, LocalDate inicioActividades, float tope){
-
+    public Proveedor(int cuit, Responsabilidad responsabilidad, String razonSocial, String nombre,
+                     String direccion, int telefono, String email, int numeroIngresosBrutos,
+                     LocalDate inicioActividades, List<Rubro> rubros, float tope) {
         this.cuit = cuit;
         this.responsabilidad = responsabilidad;
         this.razonSocial = razonSocial;
@@ -39,17 +38,11 @@ public class Proveedor extends ID {
         this.email = email;
         this.numeroIngresosBrutos = numeroIngresosBrutos;
         this.inicioActividades = inicioActividades;
+        this.rubros = rubros;
         this.tope = tope;
-        this.rubros = new ArrayList<>();
-
-    }
-
-    public Proveedor(){
-
     }
 
     public void agregarRubro(Rubro... rubros){
-
         Collections.addAll(this.rubros,rubros);
     }
 
@@ -114,7 +107,6 @@ public class Proveedor extends ID {
     }
 
     public void setNumeroIngresosBrutos(int numeroIngresosBrutos) {
-
         this.numeroIngresosBrutos = numeroIngresosBrutos;
     }
 
@@ -139,53 +131,18 @@ public class Proveedor extends ID {
     }
 
     public List<OrdenCompra> getOrdenDeCompra() {
-
         return ordenDeCompra;
     }
 
     public List<Factura> getFacturasEmitidas() {
-
         return facturasEmitidas;
     }
 
     public List<PrecioPorProducto> getCatalogo() {
-
         return catalogo;
     }
 
-    public static class ProveedorDTO{
-        public Integer id;
-        public int cuit;
-        public String razonSocial;
-        public Responsabilidad responsabilidad;
-        public String nombre;
-        public String direccion;
-        public int telefono;
-        public String email;
-        public int numeroIngresosBrutos;
-        public LocalDate inicioActividades;
-        public float tope;
-        public List<Rubro> rubros;
+    public void emitirDocumento () {}
 
-
-    }
-    public ProveedorDTO toTDO(){
-        ProveedorDTO dto = new ProveedorDTO();
-        dto.id = super.getID();
-        System.out.println("Variable prueba10 = " +super.getID());
-        dto.cuit = this.getCuit();
-        dto.responsabilidad = this.getResponsabilidad();
-        dto.razonSocial = this.getRazonSocial();
-        dto.nombre = this.getNombre();
-        dto.direccion = this.getDireccion();
-        dto.telefono = this.getTelefono();
-        dto.email = this.getEmail();
-        dto.numeroIngresosBrutos = this.getNumeroIngresosBrutos();
-        dto.inicioActividades = this.getInicioActividades();
-        dto.rubros = this.getRubros();
-        dto.tope = this.getTope();
-        return dto;
-    }
-
-
+    public List<Factura> getFacturasPorFecha (LocalDate fecha) { return null; }
 }

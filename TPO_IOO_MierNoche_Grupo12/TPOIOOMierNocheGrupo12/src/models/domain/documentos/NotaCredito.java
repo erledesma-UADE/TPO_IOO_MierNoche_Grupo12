@@ -1,9 +1,19 @@
 package models.domain.documentos;
 
+
+import models.domain.CantidadPorProducto;
+import models.domain.Proveedor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class NotaCredito extends Documento {
     private String descripcion;
     private String emisor;
-    private String receptor;
+
+    public NotaCredito(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
+        super(tipoDocumento, proveedor, fecha, articulos);
+    }
 
     public String getDescripcion() {
         return descripcion;
@@ -21,11 +31,4 @@ public class NotaCredito extends Documento {
         this.emisor = emisor;
     }
 
-    public String getReceptor() {
-        return receptor;
-    }
-
-    public void setReceptor(String receptor) {
-        this.receptor = receptor;
-    }
 }

@@ -1,18 +1,55 @@
 package controllers;
 
-import models.domain.documentos.Factura;
 
-import java.time.LocalDate;
+import models.domain.documentos.Documento;
+import models.repositories.RepositorioDocumentos;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class DocumentosController {
 
-    public float totalFacturasRecibidas (LocalDate fecha, Factura factura) { return 0; }
+    private static DocumentosController instancia;
+    private RepositorioDocumentos repositorioDocumentos;
 
-    public void mostrarOrdenesPago () {}
+    public static DocumentosController getInstancia(){
+        if(DocumentosController.instancia == null)
+            instancia = new DocumentosController();
+        return instancia;
+    }
 
-    public void getFacturasPorDia (LocalDate fecha, Factura factura) {}
+    private DocumentosController(){
+        this.repositorioDocumentos = new RepositorioDocumentos();
+    };
+
+    public int totalFacturasRecibidas () {
+        List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
+        final int[] contador = {0};
+        todosLosDocumentos.forEach(documento -> {
+            if(documento.getTipoDocumento() == "Factura"){
+                contador[0] += 1;
+            }
+        });
+        return contador[0];
+    }
+
+    public int getFacturasPorDia (LocalDateTime fecha) {
+            List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
+            final int[] contador = {0};
+            todosLosDocumentos.forEach(documento -> {
+                if(documento.getTipoDocumento() == "Factura" && documento.getFecha() == fecha){
+                    contador[0] += 1;
+                }
+            });
+            return contador[0];
+    }
+
 
     public void libroIVACompras () {}
 
     public void getLibroIVACompras () {}
+
+
+
+
 }
