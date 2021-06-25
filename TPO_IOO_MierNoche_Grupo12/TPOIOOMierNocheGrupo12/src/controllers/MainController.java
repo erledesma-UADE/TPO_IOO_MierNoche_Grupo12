@@ -1,16 +1,74 @@
 package controllers;
 
+import controllers.exceptions.cuitRepetidoException;
+import models.domain.PrecioPorProducto;
 import models.domain.Proveedor;
-import models.repositories.RepositorioProveedor;
+import models.repositories.RepositorioProductos;
+import models.repositories.RepositorioProveedores;
+import models.repositories.RepositorioRubros;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class MainController {
+
     private static MainController instancia;
-    private RepositorioProveedor repoProveedor;
+    private RepositorioProveedores repositorioProveedores;
+
+    public static MainController getInstancia () {
+        if(MainController.instancia == null)
+            instancia = new MainController();
+        return instancia;
+    }
+
+    public MainController(){
+        this.repositorioProveedores = new RepositorioProveedores();
+    }
+
+    public void altaProveedor(Proveedor.ProveedorDTO proveedorDTO){
+        this.validarDatosProveedor(proveedorDTO);
+        Proveedor proveedor = new Proveedor();
+        asignarParametrosProveedor(proveedor,proveedorDTO);
+        this.repositorioProveedores.agregar(proveedor);
+    }
+
+    private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
+        if(this.validarCuit(proveedorDTO.cuit)){
+            throw new cuitRepetidoException("El proveedor ya existe");
+        }
+    }
+
+    private boolean validarCuit(int cuit){
+        Optional<Proveedor> proveedor = this.repositorioProveedores.buscarPorCuit(cuit);
+        return proveedor.isPresent();
+    }
+
+    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
+        proveedor.setCuit(proveedorDto.cuit);
+        proveedor.setDireccion(proveedorDto.direccion);
+        proveedor.setEmail(proveedorDto.email);
+        proveedor.setNombre(proveedorDto.nombre);
+        proveedor.setInicioActividades(proveedorDto.inicioActividades);
+        proveedor.setRazonSocial(proveedorDto.razonSocial);
+        proveedor.setResponsabilidad(proveedorDto.responsabilidad);
+        proveedor.setNumeroIngresosBrutos(proveedorDto.numeroIngresosBrutos);
+        proveedor.setTope(proveedorDto.tope);
+        proveedor.setCertificado(proveedorDto.certificado);
+        proveedor.setCatalogo(proveedorDto.catalogo);
+        proveedor.setRubros(proveedorDto.rubros);
+        proveedor.setImpuestos(proveedorDto.impuestos);
+    }
+
+    public List<Proveedor.ProveedorDTO> listarProveedores(){
+        List<Proveedor.ProveedorDTO> listaProveedoresDto = new ArrayList<>();
+        for (Proveedor proveedorOriginal : this.repositorioProveedores.getElementos()) {
+            Proveedor.ProveedorDTO proveedorDto = proveedorOriginal.toDTO();
+            listaProveedoresDto.add(proveedorDto);
+        }
+        return listaProveedoresDto;
+    }
 
     public float totalFacturasRecibidas(int idProveedor) {
         return 0;
@@ -41,60 +99,4 @@ public class MainController {
     public float getTotalRetencionesPorProveedor (int idProveedor) { return 0; }
 
     public void /*ProveedorDTO*/getProveedorPorId (int idProveedor) {}
-
-    public static MainController getInstancia(){
-        if(MainController.instancia == null){
-            instancia = new MainController();
-        }
-        return instancia;
-    }
-
-    private MainController(){
-        this.repoProveedor = new RepositorioProveedor();
-    }
-
-    //public Proveedor.ProveedorDTO ver(Integer Id){
-    //    return null;
-    //}
-
-    private void asignarParamA(Proveedor proveedor, Proveedor.ProveedorDTO dto){
-        proveedor.setID(dto.id);
-        proveedor.setCuit(dto.cuit);
-        proveedor.setRazonSocial(dto.razonSocial);
-        proveedor.setNombre(dto.nombre);
-        proveedor.setDireccion(dto.direccion);
-        proveedor.setTelefono(dto.telefono);
-        proveedor.setEmail(dto.email);
-        proveedor.setNumeroIngresosBrutos(dto.numeroIngresosBrutos);
-        proveedor.setResponsabilidad(dto.responsabilidad);
-        proveedor.setInicioActividades(dto.inicioActividades);
-        proveedor.setTope(dto.tope);
-
-        //--------------FALTA SETEAR RUBRO----------------
-
-        dto.rubros.forEach(p -> proveedor.agregarRubro(p));
-
-    }
-    public void altaProveedor(Proveedor.ProveedorDTO dto){
-        Proveedor prov = new Proveedor();
-        this.asignarParamA(prov,dto);
-        this.repoProveedor.agregar(prov);
-    }
-
-    public Proveedor.ProveedorDTO buscarProveedor(Integer id){
-        Optional<Proveedor> prov = this.repoProveedor.getPorID(id);
-        Proveedor proveedor = new Proveedor();
-        if(!prov.isPresent()){
-            //throw new Exception().
-        }
-        return prov.get().toTDO();
-    }
-
-    public List<Proveedor.ProveedorDTO> listarTodos() {
-        return this.repoProveedor
-                .buscarTodos()
-                .stream()
-                .map(Proveedor::toTDO)
-                .collect(Collectors.toList());
-    }
 }

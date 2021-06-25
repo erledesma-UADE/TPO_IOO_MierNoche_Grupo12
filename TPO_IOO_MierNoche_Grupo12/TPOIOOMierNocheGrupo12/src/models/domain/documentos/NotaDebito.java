@@ -10,8 +10,7 @@ public class NotaDebito extends Documento{
     private String descripcion;
     private String emisor;
 
-    public NotaDebito(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
-        super(tipoDocumento, proveedor, fecha, articulos);
+    public NotaDebito() {
     }
 
     public String getDescripcion() {

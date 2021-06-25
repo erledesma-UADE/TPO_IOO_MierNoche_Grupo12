@@ -1,6 +1,7 @@
 package models.domain;
 
-import models.domain.documentos.Documento ;
+import models.domain.documentos.Documento;
+import models.domain.enums.TipoDocumento;
 import models.domain.enums.TipoPago;
 
 import java.time.LocalDateTime;
@@ -103,6 +104,35 @@ public class OrdenPago extends ID {
         return formaPago;
     }
 
+
+    public static class OrdenPagoDto{
+        public List<Documento> documentos;
+        public String tipoPago;
+        public Proveedor proveedor;
+        public float totalRetenciones;
+        public List<Retencion> retenciones;
+        public LocalDateTime fecha;
+        public float montoTotal;
+        public TipoPago formaPago;
+        public boolean pagado;
+    }
+
+    public OrdenPagoDto toDTO() {
+        OrdenPagoDto dto = new OrdenPagoDto();
+        dto.fecha = this.fecha;
+        dto.montoTotal = this.montoTotal;
+        dto.pagado = this.pagado;
+        dto.proveedor = this.proveedor;
+        dto.formaPago = this.formaPago;
+        dto.retenciones = this.retenciones;
+        dto.tipoPago = this.tipoPago;
+        dto.totalRetenciones = this.totalRetenciones;
+        dto.documentos = this.documentos;
+        return dto;
+    }
+
+
+
     /*public float getTotalRetencionesPorProveedor(){  //reconoce que habla de proveedor por eso no lo paso como parametros
         int mainController = 0; //reemplazar por getProveedorPorid(proveedorid);
         if (proveedor.getIdProveedor()==mainController){
@@ -163,4 +193,9 @@ public class OrdenPago extends ID {
         System.out.println(cadena);
 
     }*/
+
+
+
+
+
 }
