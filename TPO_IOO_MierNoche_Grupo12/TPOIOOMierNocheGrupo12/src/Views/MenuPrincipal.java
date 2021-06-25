@@ -120,16 +120,16 @@ public class MenuPrincipal{
         bajaProv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bajaProveedor bajaProv =  new bajaProveedor();
-                bajaProv.setVisible(true);
+                //bajaProveedor bajaProv =  new bajaProveedor();
+                //bajaProv.setVisible(true);
             }
         });
 
         modifProv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modifProveedor modifProv =  new modifProveedor();
-                modifProv.setVisible(true);
+                //modifProveedor modifProv =  new modifProveedor();
+                //modifProv.setVisible(true);
             }
         });
 
@@ -137,8 +137,8 @@ public class MenuPrincipal{
         consultaIVA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prueba consulta =  new prueba();
-                consulta.setVisible(true);
+                //prueba consulta =  new prueba();
+                //consulta.setVisible(true);
 
             }
         });
