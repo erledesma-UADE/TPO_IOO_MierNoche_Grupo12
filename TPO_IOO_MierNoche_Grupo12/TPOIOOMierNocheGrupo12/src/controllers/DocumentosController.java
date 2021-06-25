@@ -1,7 +1,13 @@
 package controllers;
 
 
+
+import models.domain.Proveedor;
 import models.domain.documentos.Documento;
+import models.domain.documentos.Factura;
+import models.domain.documentos.NotaCredito;
+import models.domain.documentos.NotaDebito;
+import models.domain.enums.TipoDocumento;
 import models.repositories.RepositorioDocumentos;
 
 import java.time.LocalDateTime;
@@ -22,7 +28,40 @@ public class DocumentosController {
         this.repositorioDocumentos = new RepositorioDocumentos();
     };
 
-    public int totalFacturasRecibidas () {
+    public void altaDocumento(Documento.DocumentoDTO documentoDTO){
+        this.validarDatosDocumento(documentoDTO);
+        TipoDocumento tipoDocumento = documentoDTO.tipoDocumento;
+
+        if(tipoDocumento == TipoDocumento.Factura){
+            Documento documento = new Factura();
+            asignarParametrosDocumento(documento,documentoDTO);
+            this.repositorioDocumentos.agregar(documento);
+        }else if (tipoDocumento == TipoDocumento.NotaDebito){
+            Documento documento = new NotaDebito();
+            asignarParametrosDocumento(documento,documentoDTO);
+            this.repositorioDocumentos.agregar(documento);
+        }else {
+            Documento documento = new NotaCredito();
+            asignarParametrosDocumento(documento,documentoDTO);
+            this.repositorioDocumentos.agregar(documento);
+        }
+    }
+
+    private void validarDatosDocumento(Documento.DocumentoDTO documentoDto){
+
+    }
+
+    private void asignarParametrosDocumento(Documento documento, Documento.DocumentoDTO documentoDto){
+        documento.setTipoDocumento(documentoDto.tipoDocumento);
+        documento.setFecha(documentoDto.fecha);
+        //documento.setMontoTotal(documentoDto.montoTotal);
+        documento.setProveedor(documentoDto.proveedor);
+        documento.setArticulos(documentoDto.articulos);
+    }
+
+
+
+    /*public int totalFacturasRecibidas () {
         List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
         final int[] contador = {0};
         todosLosDocumentos.forEach(documento -> {
@@ -49,7 +88,7 @@ public class DocumentosController {
 
     public void getLibroIVACompras () {}
 
-
+*/
 
 
 }

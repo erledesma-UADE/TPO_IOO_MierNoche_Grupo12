@@ -6,14 +6,15 @@ import models.domain.OrdenCompra;
 import models.domain.Proveedor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Factura extends Documento {
     private OrdenCompra ordenDeCompra;
     private List<Impuesto> impuestos;
 
-    public Factura(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
-        super(tipoDocumento, proveedor, fecha, articulos);
+    public Factura() {
+        this.impuestos = new ArrayList<>();
     }
 
     public OrdenCompra getOrdenDeCompra() {

@@ -14,7 +14,6 @@ public abstract class Repositorio<T extends ID> {
     }
 
     public List<T> buscarTodos() {
-        //SELECT
         return this.elementos;
     }
 
@@ -26,7 +25,6 @@ public abstract class Repositorio<T extends ID> {
     }
 
     public void agregar(T elemento) {
-        //INSERT
         elemento.setID(this.elementos.size() + 1);
         this.elementos.add(elemento);
     }
@@ -40,4 +38,9 @@ public abstract class Repositorio<T extends ID> {
         //DELETE
         this.elementos.remove(unElemento);
     }
+
+    public List<T> getElementos(){
+        return this.elementos;
+    }
+
 }

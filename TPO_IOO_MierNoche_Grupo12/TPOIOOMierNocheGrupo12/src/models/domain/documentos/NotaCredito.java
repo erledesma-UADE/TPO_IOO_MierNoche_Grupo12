@@ -11,8 +11,8 @@ public class NotaCredito extends Documento {
     private String descripcion;
     private String emisor;
 
-    public NotaCredito(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
-        super(tipoDocumento, proveedor, fecha, articulos);
+    public NotaCredito() {
+
     }
 
     public String getDescripcion() {
