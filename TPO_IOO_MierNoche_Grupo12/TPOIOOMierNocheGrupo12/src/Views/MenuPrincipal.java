@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 public class MenuPrincipal{
 
-    //private JPanel mainPanel;
     private JButton proveedoresButton;
     private JButton consultasGeneralesButton;
     private JMenuBar barMenu;

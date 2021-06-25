@@ -44,7 +44,6 @@ public class altaProveedor extends JFrame{
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.setBounds(100,100,600,500);
-        //this.pack();
         this.setTitle("Alta Proveedor");
 
         cancelarButton.addActionListener(new ActionListener() {

@@ -196,6 +196,7 @@
         </constraints>
         <properties>
           <text value="Agregar Certificado No Retención"/>
+          <toolTipText value="Certificado"/>
         </properties>
       </component>
       <component id="520b4" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
