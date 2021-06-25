@@ -1,6 +1,6 @@
 package models.domain;
 
-import models.domain.documentos.Documento;
+import models.domain.documentos.Documento ;
 import models.domain.enums.TipoPago;
 
 import java.time.LocalDateTime;

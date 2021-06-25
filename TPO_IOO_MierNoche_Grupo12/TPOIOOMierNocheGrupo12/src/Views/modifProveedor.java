@@ -2,6 +2,7 @@ package Views;
 
 import controllers.MainController;
 import models.domain.Proveedor;
+import models.domain.enums.Responsabilidad;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -51,10 +52,8 @@ public class modifProveedor extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 Integer id = Integer.parseInt(txtIdProv.getText());
-                System.out.println("Variable prueba0 = " +id);
                 Proveedor.ProveedorDTO prov;
                 prov = MainController.getInstancia().buscarProveedor(id);
-                Proveedor.ProveedorDTO dto = new Proveedor.ProveedorDTO();
 
                 txtIdProv.setEditable(true);
                 txtNombre.setEditable(true);
@@ -75,6 +74,7 @@ public class modifProveedor extends JFrame{
                 txtTelefono.setText(String.valueOf(prov.telefono));
                 txtMail.setText(prov.email);
                 cboResp.setSelectedItem(prov.responsabilidad);
+                cboResp.setModel(new DefaultComboBoxModel(Responsabilidad.values()));
 
 
 

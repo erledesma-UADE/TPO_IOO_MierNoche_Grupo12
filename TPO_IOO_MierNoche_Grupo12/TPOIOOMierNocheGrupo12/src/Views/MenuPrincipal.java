@@ -12,7 +12,7 @@ public class MenuPrincipal{
     private JButton proveedoresButton;
     private JButton consultasGeneralesButton;
     private JMenuBar barMenu;
-    private JFrame framePpal;
+    public JFrame framePpal;
     private JMenu jmuser;
     private JMenu jmProv;
     private JMenu jmOrdenCompra;
@@ -30,11 +30,6 @@ public class MenuPrincipal{
 
 
         framePpal = new JFrame();
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //framePpal.setContentPane(framePpal);
-        //this.setSize(400, 400);
-        //this.pack();
-
         framePpal.setTitle("Menu Principal");
         framePpal.setBounds(100,100,850,500);
         framePpal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,14 +46,48 @@ public class MenuPrincipal{
         jmOrdenCompra = new JMenu("Ordenes de Compra");
         barMenu.add(jmOrdenCompra);
 
+        JMenuItem emitirOC = new JMenuItem("Emitir Órden");
+        jmOrdenCompra.add(emitirOC);
+
         jmDocumentos = new JMenu("Documentos Recibidos");
         barMenu.add(jmDocumentos);
+
+        JMenuItem nFactura = new JMenuItem("Nueva Factura");
+        JMenuItem nNotaC = new JMenuItem("Nueva Nota Crédito");
+        JMenuItem nNotaD = new JMenuItem("Nueva Nota Débito");
+        jmDocumentos.add(nFactura);
+        jmDocumentos.add(nNotaC);
+        jmDocumentos.add(nNotaD);
 
         jmOrderPago = new JMenu("Ordenes de Pago");
         barMenu.add(jmOrderPago);
 
+        JMenuItem emitirOP = new JMenuItem("Emitir Órden");
+        jmOrderPago.add(emitirOP);
+
         jmConsultas = new JMenu("Consultas Generales");
         barMenu.add(jmConsultas);
+
+        JMenuItem totFactRec = new JMenuItem("Total Facturas Recibidas");
+        jmConsultas.add(totFactRec);
+
+        JMenuItem ctaCtaProv = new JMenuItem("Cuenta Cliente Proveedores");
+        jmConsultas.add(ctaCtaProv);
+
+        JMenuItem compPrecio = new JMenuItem("Compulsas de Precios");
+        jmConsultas.add(compPrecio);
+
+        JMenuItem ordPagoEmit = new JMenuItem("Ordenes de Pago Emitidas");
+        jmConsultas.add(ordPagoEmit);
+
+        JMenuItem totDeudaProv = new JMenuItem("Total Deuda por Proveedor");
+        jmConsultas.add(totDeudaProv);
+
+        JMenuItem totImpReten = new JMenuItem("Total Impuestos Retenidos");
+        jmConsultas.add(totImpReten);
+
+        JMenuItem consultaIVA = new JMenuItem("Consulta Libro IVA");
+        jmConsultas.add(consultaIVA);
 
         jmSalir = new JMenu("Salir");
         barMenu.add(jmSalir);
@@ -105,6 +134,16 @@ public class MenuPrincipal{
             }
         });
 
+
+        consultaIVA.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                prueba consulta =  new prueba();
+                consulta.setVisible(true);
+
+            }
+        });
+
         jmSalir.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
@@ -124,11 +163,12 @@ public class MenuPrincipal{
 
     }
 
-    public static void main(String[] args) {
+    //---------------->ESTO VA EN EL MAIN APP<---------------
+   /* public static void main(String[] args) {
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.framePpal.setVisible(true);
         //System.exit(0);
-    }
+    }*/
 
 
 }

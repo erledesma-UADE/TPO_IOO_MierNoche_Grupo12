@@ -42,6 +42,14 @@ public class Proveedor extends ID {
         this.tope = tope;
     }
 
+    public Proveedor(){
+        this.rubros = new ArrayList<>();
+        this.ordenDeCompra = new ArrayList<>();
+        this.facturasEmitidas = new ArrayList<>();
+        this.catalogo = new ArrayList<>();
+        this.impuestos = new ArrayList<>();
+    }
+
     public void agregarRubro(Rubro... rubros){
         Collections.addAll(this.rubros,rubros);
     }
@@ -145,4 +153,39 @@ public class Proveedor extends ID {
     public void emitirDocumento () {}
 
     public List<Factura> getFacturasPorFecha (LocalDate fecha) { return null; }
+
+    public ProveedorDTO toTDO(){
+        ProveedorDTO dto = new ProveedorDTO();
+        dto.id = super.getID();
+        dto.cuit = this.cuit;
+        dto.responsabilidad = this.responsabilidad;
+        dto.razonSocial = this.razonSocial;
+        dto.nombre = this.nombre;
+        dto.direccion = this.direccion;
+        dto.telefono = this.telefono;
+        dto.email = this.email;
+        dto.numeroIngresosBrutos = this.numeroIngresosBrutos;
+        dto.inicioActividades = this.inicioActividades;
+        dto.rubros = this.rubros;
+        dto.tope = this.tope;
+
+        return dto;
+    }
+
+    public static class ProveedorDTO {
+        public Integer id;
+        public int cuit;
+        public String razonSocial;
+        public Responsabilidad responsabilidad;
+        public String nombre;
+        public String direccion;
+        public int telefono;
+        public String email;
+        public int numeroIngresosBrutos;
+        public LocalDate inicioActividades;
+        public float tope;
+        public List<Rubro> rubros;
+
+    }
+
 }
