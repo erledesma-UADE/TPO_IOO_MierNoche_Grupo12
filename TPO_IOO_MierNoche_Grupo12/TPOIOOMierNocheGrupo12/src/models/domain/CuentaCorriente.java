@@ -79,7 +79,7 @@ public class CuentaCorriente extends ID {
         return montoDeuda;
     }
 
-    public void MostrarDetalle(){
+    /*public void MostrarDetalle(){
         String cadena;
         cadena= "id cuenta corriente: " + this.getIDCuentaCorriente() +
                 "\nproveedor: " + this.getProveedor() +
@@ -88,5 +88,32 @@ public class CuentaCorriente extends ID {
                 "\ndocumentos: "+ this.getDocumentos() +
                 "\nmonto deuda: "+ this.getMontoDeuda();
         System.out.print(cadena);
+    }*/
+
+    public CuentaCorrienteDTO toDTO(){
+        CuentaCorrienteDTO dto = new CuentaCorrienteDTO();
+        dto.IDCuentaCorriente = super.getID();
+        dto.proveedor = this.proveedor;
+        dto.debito = this.debito;
+        dto.credito = this.credito;
+        dto.documentos = this.documentos;
+        dto.montoDeuda = this.montoDeuda;
+        return dto;
+
+
+
     }
+
+    public class CuentaCorrienteDTO{
+        public Integer IDCuentaCorriente;
+        public Proveedor proveedor;
+        public float debito;
+        public float credito;
+        public List<Documento> documentos;
+        public float montoDeuda;
+
+        public CuentaCorrienteDTO(){this.documentos = new ArrayList<>();}
+
+    }
+
 }

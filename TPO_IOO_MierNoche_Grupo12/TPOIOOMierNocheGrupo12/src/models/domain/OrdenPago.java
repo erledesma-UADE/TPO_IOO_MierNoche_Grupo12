@@ -188,7 +188,7 @@ public class OrdenPago extends ID {
 
             }
             cadena+= "\ntipo de documento: " + documentos.get(i).getTipoDocumento() +
-                    "\n proovedor: " + documentos.get(i).getProveedor().getIdProveedor();
+                    "\nproveedor: " + documentos.get(i).getProveedor().getIdProveedor();
 
 
         }
@@ -196,4 +196,40 @@ public class OrdenPago extends ID {
         System.out.println(cadena);
 
     }
+
+
+    public OrdenPagoDTO toDTO(){
+        OrdenPagoDTO dto= new OrdenPagoDTO();
+        dto.idOrdenpago = super.getID();
+        dto.documentos = this.documentos;
+        dto.TipoPago = this.tipoPago;
+        dto.proveedor = this.proveedor;
+        dto.totalRetenciones = this.totalRetenciones;
+        dto.idDocumento = super.getID();
+        dto.fecha = this.fecha;
+        dto.montoTotal = this.montoTotal;
+        dto.formaPago = this.formaPago;
+        dto.pagado = this.pagado;
+        return dto;
+
+
+    }
+
+    public class OrdenPagoDTO{
+        public int idOrdenpago;
+        public List<Documento> documentos;
+        public String TipoPago;
+        public Proveedor proveedor;
+        public float totalRetenciones;
+        public List<Retencion> retenciones;
+        public int idDocumento;
+        public LocalDateTime fecha;
+        public float montoTotal;
+        
+        public TipoPago formaPago;
+        public boolean pagado;
+
+    }
+
+
 }
