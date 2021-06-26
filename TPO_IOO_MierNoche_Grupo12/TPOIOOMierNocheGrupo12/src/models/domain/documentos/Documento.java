@@ -6,25 +6,21 @@ import models.domain.Proveedor;
 import models.domain.enums.TipoDocumento;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Documento extends ID {
     private int idDocumento;
     private LocalDateTime fecha;
     private float montoTotal;
-    private String tipoDocumento;
+    private TipoDocumento tipoDocumento;
     private boolean pagado;
     private List<CantidadPorProducto> articulos;
     private Proveedor proveedor;
 
-    public Documento(String tipoDocumento, Proveedor proveedor, LocalDateTime fecha, List<CantidadPorProducto> articulos) {
-        super();
-        this.tipoDocumento = tipoDocumento;
-        this.proveedor = proveedor;
-        this.fecha = fecha;
+    public Documento() {
+        this.articulos = new ArrayList<>();
         this.pagado = false;
-        this.montoTotal = 0;
-        this.articulos = articulos;
     }
 
 
@@ -61,11 +57,11 @@ public abstract class Documento extends ID {
         this.pagado = pagado;
     }
 
-    public String getTipoDocumento() {
+    public TipoDocumento getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -81,6 +77,9 @@ public abstract class Documento extends ID {
         this.proveedor = proveedor;
     }
 
+    public void setArticulos(List<CantidadPorProducto> articulos) {
+        this.articulos = articulos;
+    }
 
     public static class DocumentoDTO{
         public Proveedor proveedor;
@@ -89,7 +88,7 @@ public abstract class Documento extends ID {
         public float montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
-        public String tipoDocumento;
+        public TipoDocumento tipoDocumento;
     }
 
     public DocumentoDTO toDTO() {

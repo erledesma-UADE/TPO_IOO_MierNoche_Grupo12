@@ -3,10 +3,10 @@ package controllers;
 import models.domain.PrecioPorProducto;
 import models.domain.Producto;
 import models.domain.Rubro;
-import models.domain.exceptions.ProductoNoPertenceAlRubroException;
-import models.domain.exceptions.RubroNoExisteException;
-import models.domain.repositories.RepositorioProductos;
-import models.domain.repositories.RepositorioRubros;
+import controllers.exceptions.ProductoNoPertenceAlRubroException;
+import controllers.exceptions.RubroNoExisteException;
+import models.repositories.RepositorioProductos;
+import models.repositories.RepositorioRubros;
 
 import java.util.List;
 import java.util.Optional;
