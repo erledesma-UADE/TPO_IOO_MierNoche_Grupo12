@@ -49,9 +49,9 @@ public class CuentaCorriente extends ID {
 
     }
 
-    public void actualizarMontoDeuda(Documento documento){ // metodo diagrama
+    /*public void actualizarMontoDeuda(Documento documento){ // metodo diagrama
         this.montoDeuda = documento.getMontoTotal();
-    }
+    }*/
 
 
 

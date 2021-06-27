@@ -70,9 +70,19 @@ public class MainController {
         return listaProveedoresDto;
     }
 
-    public float totalFacturasRecibidas(int idProveedor) {
-        return 0;
+    public int totalFacturasRecibidas(int idProveedor) {
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+         proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitidas();
     }
+
+    public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+        proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
+    }
+
+
 
     public float totalFacturasRecibidasProveedorDia(int idProveedor, LocalDate fecha) {
         return 0;

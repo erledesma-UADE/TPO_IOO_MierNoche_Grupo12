@@ -5,12 +5,12 @@ import models.domain.enums.Iva;
 public class CantidadPorProducto {
     private Producto producto;
     private float cantidad;
-    private float impuestoTotal;
+    private double precioFinal;
 
-    public CantidadPorProducto(Producto producto, float cantidad) {
+    public CantidadPorProducto(Producto producto, float cantidad,Integer idProveedor) {
         this.producto = producto;
         this.cantidad = cantidad;
-        calcularImpuestoTotal();
+        calcularPrecioFinal(idProveedor);
     }
 
     public void setProducto(Producto producto) {
@@ -21,25 +21,27 @@ public class CantidadPorProducto {
         this.cantidad = cantidad;
     }
 
-    public void setImpuestoTotal(float impuestoTotal) {
-        this.impuestoTotal = impuestoTotal;
+    public void setPrecioFinal(double precioFinal) {
+        this.precioFinal = precioFinal;
     }
 
     public Producto getProducto() {
-        return producto;
+        return this.producto;
     }
 
     public float getCantidad() {
-        return cantidad;
+        return this.cantidad;
     }
 
-    public float getImpuestoTotal() {
-        return impuestoTotal;
+    public double getPrecioFinal() {
+        return this.precioFinal;
     }
 
-    public void calcularImpuestoTotal () {
-        this.impuestoTotal = this.producto.montoImpuesto() * this.cantidad;
-        setImpuestoTotal(this.impuestoTotal);
+    public void calcularPrecioFinal (Integer idProveedor) {
+        float precioProveedor = this.producto.buscarPrecioProveedor(idProveedor);
+        Iva impuestoProducto = this.producto.getImpuesto();
+        this.precioFinal = precioProveedor * this.cantidad * (1+impuestoProducto.getPorcentaje());
+        setPrecioFinal(precioFinal);
     }
 
     public Iva getTipoImpuesto () {
