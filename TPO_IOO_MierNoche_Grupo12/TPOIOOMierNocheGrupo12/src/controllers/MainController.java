@@ -87,7 +87,12 @@ public class MainController {
         return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
     }
 
-    // PARA ORDEN PAGO DTO (CAGADAS)
+    public float totalImpuestosRetenidosPorProvedor(int idProveedor){
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+        proveedorActual=this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().sumarOrdenesPago();
+
+    }
 
     public List<OrdenPago.OrdenPagoDto> ListarOrdenPago(){
         List<OrdenPago.OrdenPagoDto> ListaOrdenPagoDTO = new ArrayList<>();
@@ -99,11 +104,10 @@ public class MainController {
 
     }
 
-    public int totalOrdenCompraEmitirdas(int idProveedor){
-        Optional<Proveedor> provedorActual = Optional.of(new Proveedor());
-        provedorActual = this.repositorioProveedores.getPorID(idProveedor);
-        return provedorActual.get().cantidadOrdenCompraEmitidas();
-    }
+
+
+
+
 
 
 
