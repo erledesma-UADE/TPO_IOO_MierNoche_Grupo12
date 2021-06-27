@@ -10,7 +10,9 @@ import models.domain.documentos.NotaDebito;
 import models.domain.enums.TipoDocumento;
 import models.repositories.RepositorioDocumentos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DocumentosController {
@@ -24,7 +26,7 @@ public class DocumentosController {
         return instancia;
     }
 
-    private DocumentosController(){
+    public DocumentosController(){
         this.repositorioDocumentos = new RepositorioDocumentos();
     };
 
@@ -48,15 +50,18 @@ public class DocumentosController {
     }
 
     private void validarDatosDocumento(Documento.DocumentoDTO documentoDto){
-
+        //validarExistenciaProveedor
     }
 
     private void asignarParametrosDocumento(Documento documento, Documento.DocumentoDTO documentoDto){
         documento.setTipoDocumento(documentoDto.tipoDocumento);
         documento.setFecha(documentoDto.fecha);
-        //documento.setMontoTotal(documentoDto.montoTotal);
-        documento.setProveedor(documentoDto.proveedor);
+        documento.setProveedor(documentoDto.cuitProveedor);
         documento.setArticulos(documentoDto.articulos);
+    }
+
+    public int facturasEmitidasElDia(LocalDate unDia){
+        return this.repositorioDocumentos.facturasEmitdasElDia(unDia).size();
     }
 
 

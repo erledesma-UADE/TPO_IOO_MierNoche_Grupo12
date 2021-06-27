@@ -47,6 +47,9 @@ public class PrecioPorProducto extends ID {
         this.proveedor = proveedor;
     }
 
+
+
+
     public PrecioPorProductoDTO toDTO () {
         PrecioPorProductoDTO dto = new PrecioPorProductoDTO();
         dto.fechaAcuerdo = this.fechaAcuerdo;

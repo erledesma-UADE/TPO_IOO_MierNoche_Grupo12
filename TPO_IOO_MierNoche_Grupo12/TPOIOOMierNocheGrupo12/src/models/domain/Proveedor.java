@@ -171,8 +171,19 @@ public class Proveedor extends ID {
 
     public void emitirDocumento () {}
 
-    public List<Factura> getFacturasPorFecha (LocalDate fecha) { return null; }
+    public int cantidadFacturasEmitidas(){
+        return getFacturasEmitidas().size();
+    }
 
+    public int cantidadFacturasEmitasElDia(LocalDate unDia){
+        List<Factura> facturasEmitidasElDia = new ArrayList<>();
+        getFacturasEmitidas().forEach(factura ->{
+            if(factura.getFecha().equals(unDia)){
+                facturasEmitidasElDia.add(factura);
+            }
+        });
+        return facturasEmitidasElDia.size();
+    }
 
     public static class ProveedorDTO{
         public int cuit;

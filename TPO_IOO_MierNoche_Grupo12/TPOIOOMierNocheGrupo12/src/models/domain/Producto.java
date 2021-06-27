@@ -43,6 +43,18 @@ public class Producto extends ID {
         return 0;
     }
 
+
+    public float buscarPrecioProveedor(Integer idProveedor){
+        final float[] monto = {0};
+        this.precioPorProveedor.stream().forEach(precioProveedor ->{
+            if(precioProveedor.getProveedor().getID().equals(idProveedor)){
+                monto[0] = precioProveedor.getMonto();
+            }
+        });
+            return monto[0];
+        }
+
+
     public ProductoDTO toDTO () {
         ProductoDTO dto = new ProductoDTO();
         dto.impuesto = this.impuesto;

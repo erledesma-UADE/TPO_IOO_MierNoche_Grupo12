@@ -3,6 +3,7 @@ package controllers;
 import controllers.exceptions.cuitRepetidoException;
 import models.domain.PrecioPorProducto;
 import models.domain.Proveedor;
+import models.repositories.RepositorioOrdenesDePago;
 import models.repositories.RepositorioProductos;
 import models.repositories.RepositorioProveedores;
 import models.repositories.RepositorioRubros;
@@ -16,6 +17,7 @@ public class MainController {
 
     private static MainController instancia;
     private RepositorioProveedores repositorioProveedores;
+    private RepositorioOrdenesDePago repositorioOrdenesDePago;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -24,7 +26,9 @@ public class MainController {
     }
 
     public MainController(){
+
         this.repositorioProveedores = new RepositorioProveedores();
+        this.repositorioOrdenesDePago  = new RepositorioOrdenesDePago();
     }
 
     public void altaProveedor(Proveedor.ProveedorDTO proveedorDTO){
@@ -70,9 +74,19 @@ public class MainController {
         return listaProveedoresDto;
     }
 
-    public float totalFacturasRecibidas(int idProveedor) {
-        return 0;
+    public int totalFacturasRecibidas(int idProveedor) {
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+         proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitidas();
     }
+
+    public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+        proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
+    }
+
+
 
     public float totalFacturasRecibidasProveedorDia(int idProveedor, LocalDate fecha) {
         return 0;
