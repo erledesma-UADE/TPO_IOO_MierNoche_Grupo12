@@ -157,8 +157,13 @@ public class Proveedor extends ID {
         return rubros;
     }
 
-    public List<OrdenCompra> getOrdenDeCompra() {
+    public List<OrdenCompra> getOrdenDeCompra() { // no estoy seguro si el size de orde de compra lo tengo que pedir aca
+        //y luego abajo armar otro metodo o que.
         return ordenDeCompra;
+    }
+
+    public int cantidadOrdenCompraEmitidas(){ // no estoy seguro si el metodo va aca?
+        return getOrdenDeCompra().size();
     }
 
     public List<Factura> getFacturasEmitidas() {
