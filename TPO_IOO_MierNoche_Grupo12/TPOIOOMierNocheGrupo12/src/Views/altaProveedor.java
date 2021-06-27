@@ -2,7 +2,6 @@ package Views;
 
 import controllers.MainController;
 import controllers.RubrosController;
-import models.domain.Proveedor;
 import models.domain.Proveedor.ProveedorDTO;
 import models.domain.Rubro;
 import models.domain.enums.Responsabilidad;
@@ -98,23 +97,20 @@ public class altaProveedor extends JFrame{
                 }
 
                 LocalDate inicioAct2 = inicioAct.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
                 float tope = Float.parseFloat(txtTope.getText());
 
-                Proveedor prov = new Proveedor();
-                prov.setCuit(cuit);
-                prov.setResponsabilidad(resp);
-                prov.setRazonSocial(razonSocial);
-                prov.setNombre(nombre);
-                prov.setDireccion(direccion);
-                prov.setTelefono(telefono);
-                prov.setEmail(email);
-                prov.setNumeroIngresosBrutos(numeroIngresosBrutos);
-                prov.setInicioActividades(inicioAct2);
-                //prov.agregarRubro(rubroP);
-                prov.setTope(tope);
-                ProveedorDTO prov2 = prov.toTDO();
-
+                ProveedorDTO prov2 = new ProveedorDTO();//prov.toDTO();
+                prov2.cuit = cuit;
+                prov2.responsabilidad = resp;
+                prov2.razonSocial = razonSocial;
+                prov2.nombre = nombre;
+                prov2.direccion = direccion;
+                prov2.telefono = telefono;
+                prov2.email = email;
+                prov2.numeroIngresosBrutos = numeroIngresosBrutos;
+                prov2.inicioActividades = inicioAct2;
+                //prov2.rubros = rubro;
+                prov2.tope = tope;
                 MainController.getInstancia().altaProveedor(prov2);
 
             }

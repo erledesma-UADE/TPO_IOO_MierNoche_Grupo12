@@ -70,7 +70,7 @@ public class MenuPrincipal{
         JMenuItem totFactRec = new JMenuItem("Total Facturas Recibidas");
         jmConsultas.add(totFactRec);
 
-        JMenuItem ctaCtaProv = new JMenuItem("Cuenta Cliente Proveedores");
+        JMenuItem ctaCtaProv = new JMenuItem("Cuenta Corriente Proveedores");
         jmConsultas.add(ctaCtaProv);
 
         JMenuItem compPrecio = new JMenuItem("Compulsas de Precios");
