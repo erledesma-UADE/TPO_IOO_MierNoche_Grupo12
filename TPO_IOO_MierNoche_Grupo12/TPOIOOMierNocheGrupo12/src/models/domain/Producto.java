@@ -2,7 +2,10 @@ package models.domain;
 
 import models.domain.enums.Iva;
 
+import javax.swing.text.html.parser.Parser;
 import java.util.List;
+
+import static java.lang.Float.parseFloat;
 
 public class Producto extends ID {
     private String nombre;
@@ -10,10 +13,10 @@ public class Producto extends ID {
     private Iva impuesto;
     private List<PrecioPorProducto> precioPorProveedor;
 
-    public Producto(String nombre, String tipoUnidad,Iva impuesto) {
+    public Producto(String nombre, String tipoUnidad, String impuestoAux) {
         this.nombre = nombre;
         this.tipoUnidad = tipoUnidad;
-        this.impuesto = impuesto;
+        this.impuesto = Iva.valueOf(impuestoAux);
     }
 
     public String getNombre() {
@@ -61,7 +64,6 @@ public class Producto extends ID {
         dto.nombre = this.nombre;
         dto.tipoUnidad = this.tipoUnidad;
         dto.idProducto = super.getID();
-        //dto.precioPorProveedor = this.precioPorProveedor;
         for (PrecioPorProducto pPproveedor : this.precioPorProveedor) {
             PrecioPorProducto.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
             dto.precioPorProveedor.add(pPproveedorDTO);
