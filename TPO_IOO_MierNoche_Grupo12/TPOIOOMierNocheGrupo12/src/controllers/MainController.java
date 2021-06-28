@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.exceptions.cuitRepetidoException;
+import models.domain.OrdenPago;
 import models.domain.PrecioPorProducto;
 import models.domain.Proveedor;
 import models.repositories.RepositorioOrdenesDePago;
@@ -85,6 +86,32 @@ public class MainController {
         proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
         return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
     }
+
+    public float totalImpuestosRetenidosPorProvedor(int idProveedor){
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+        proveedorActual=this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().sumarOrdenesPago();
+
+    }
+
+    public List<OrdenPago.OrdenPagoDto> ListarOrdenPago(){
+        List<OrdenPago.OrdenPagoDto> ListaOrdenPagoDTO = new ArrayList<>();
+        for (OrdenPago ordenPagoOriginal : this.repositorioOrdenesDePago.getElementos()){
+            OrdenPago.OrdenPagoDto ordenPagoDto = ordenPagoOriginal.toDTO();
+            ListaOrdenPagoDTO.add(ordenPagoDto);
+        }
+        return ListaOrdenPagoDTO;
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 
