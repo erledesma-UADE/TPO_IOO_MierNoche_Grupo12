@@ -21,6 +21,7 @@ public abstract class Documento extends ID {
     private Integer cuitProveedor;
 
     public Documento() {
+        this.fecha = LocalDate.now();
         this.articulos = new ArrayList<>();
         this.pagado = false;
     }
@@ -98,7 +99,13 @@ public abstract class Documento extends ID {
         public double montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
+        public List<String> articulosVista;
         public TipoDocumento tipoDocumento;
+
+        public void agregarArticulo(CantidadPorProducto articulo){
+            this.articulos.add(articulo);
+        }
+
     }
 
     public DocumentoDTO toDTO() {

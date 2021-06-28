@@ -9,6 +9,7 @@ import models.domain.documentos.NotaCredito;
 import models.domain.documentos.NotaDebito;
 import models.domain.enums.TipoDocumento;
 import models.repositories.RepositorioDocumentos;
+import models.repositories.RepositorioProductos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class DocumentosController {
 
     private static DocumentosController instancia;
     private RepositorioDocumentos repositorioDocumentos;
+    private RepositorioProductos  repositorioProductos;
 
     public static DocumentosController getInstancia(){
         if(DocumentosController.instancia == null)
@@ -28,6 +30,7 @@ public class DocumentosController {
 
     public DocumentosController(){
         this.repositorioDocumentos = new RepositorioDocumentos();
+        this.repositorioProductos = new RepositorioProductos();
     };
 
     public void altaDocumento(Documento.DocumentoDTO documentoDTO){
@@ -57,8 +60,19 @@ public class DocumentosController {
         documento.setTipoDocumento(documentoDto.tipoDocumento);
         documento.setFecha(documentoDto.fecha);
         documento.setProveedor(documentoDto.cuitProveedor);
-        documento.setArticulos(documentoDto.articulos);
+
+        List<String> articulosVista = documentoDto.articulosVista; //[["Lapicera","3"],["goma","4"]]
+        for (int i = 0; i < articulosVista.size(); i++) {
+            for (int j = 0; j < 2.; j++) {
+                if(i == 0){
+
+                }
+            }
+        }
+
     }
+
+
 
     public int facturasEmitidasElDia(LocalDate unDia){
         return this.repositorioDocumentos.facturasEmitdasElDia(unDia).size();
