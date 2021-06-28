@@ -3,6 +3,7 @@ package models.domain;
 import models.domain.enums.Iva;
 
 import javax.swing.text.html.parser.Parser;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Float.parseFloat;

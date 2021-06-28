@@ -29,74 +29,21 @@ import java.util.Locale;
 
 public class App {
 
-    public static void cargarJson(Repositorio repositorio, String archivoJson, ArrayList arr, Gson gson){
-        try {
-            String json = "";
-            BufferedReader br = new BufferedReader(new FileReader(archivoJson));
-            String linea = "";
-            while ((linea = br.readLine()) != null) {
-                json += linea;
-            }
-            br.close();
-
-            arr = gson.fromJson(json, arr.getClass());
-
-            arr.forEach(x->{
-                repositorio.agregar((ID) x);
-            });
-
-
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public static void main(String[] args) {
 
         RepositorioProductos repositorioProductos = new RepositorioProductos();
+        CargaJsons cargaJsons = new CargaJsons();
 
-        Gson gson = new Gson();
+        cargaJsons.cargaArchivos(repositorioProductos);
 
-        /*ArrayList<Producto> arr = new ArrayList<>();
-
-        cargarJson(repositorioProductos,"Productos.json",arr,gson);*/
-
-        BufferedReader br = null;
-        String json = "";
-        try {
-
-            br = new BufferedReader(new FileReader("Productos.json"));
-            String linea = "";
-            while ((linea = br.readLine()) != null) {
-                json += linea;
-            }
-            br.close();
-
-            //PrecioPorProducto[] precioxproducto = gson.fromJson(json, PrecioPorProducto[].class);
-
-            //System.out.println(precioxproducto);
-
-            Producto[] userArray = gson.fromJson(json, Producto[].class);
-
-            for (Producto producto : userArray) {
-                repositorioProductos.agregar(producto);
-            }
-
-        } catch (
-                FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-        }
 
         List<Producto> listaProductos = repositorioProductos.getElementos();
         for (Producto producto : listaProductos) {
             System.out.println(producto.getNombre());
         }
+
+        String[][] nombre = new String[1][2];
+
 
 
         //Producto p = gson.fromJson(jsonProductos,Producto.class);

@@ -7,7 +7,6 @@ public class PrecioPorProducto extends ID {
     private float monto;
     private Producto producto;
     private Proveedor proveedor;
-
     private String fecha;
     private String productoString;
     private int cuitProveedor;
@@ -18,7 +17,6 @@ public class PrecioPorProducto extends ID {
         this.monto = Float.parseFloat(monto);
         this.productoString = productoString;
         this.cuitProveedor = Integer.parseInt(cuitProveedor);
-
     }
 
     private LocalDate stringToLocalDate(String fecha){

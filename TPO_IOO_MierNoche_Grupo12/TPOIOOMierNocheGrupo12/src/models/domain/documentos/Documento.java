@@ -99,11 +99,13 @@ public abstract class Documento extends ID {
         public double montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
+        public List<String> articulosVista;
         public TipoDocumento tipoDocumento;
 
         public void agregarArticulo(CantidadPorProducto articulo){
             this.articulos.add(articulo);
         }
+
     }
 
     public DocumentoDTO toDTO() {
