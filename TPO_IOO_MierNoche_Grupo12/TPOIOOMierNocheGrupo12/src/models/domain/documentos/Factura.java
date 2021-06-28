@@ -1,39 +1,30 @@
 package models.domain.documentos;
 
-import models.domain.Producto;
+import models.domain.CantidadPorProducto;
+import models.domain.Impuesto;
+import models.domain.OrdenCompra;
 import models.domain.Proveedor;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Factura extends Documento {
-    private OrdenDeCompra ordenDeCompra;
-    private Proveedor proveedor;
-    private List<Producto> articulos;
-    //private List<Impuesto> impuestos;
+    private OrdenCompra ordenDeCompra;
+    private List<Impuesto> impuestos;
 
-    public OrdenDeCompra getOrdenDeCompra() {
+    public Factura() {
+        this.impuestos = new ArrayList<>();
+    }
+
+    public OrdenCompra getOrdenDeCompra() {
         return ordenDeCompra;
     }
 
-    public void setOrdenDeCompra(OrdenDeCompra ordenDeCompra) {
+    public void setOrdenDeCompra(OrdenCompra ordenDeCompra) {
         this.ordenDeCompra = ordenDeCompra;
     }
 
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
-    }
-
-    public List<Producto> getArticulos() {
-        return articulos;
-    }
-
-    public void setArticulos(List<Producto> articulos) {
-        this.articulos = articulos;
-    }
 
     public List<Impuesto> getImpuestos() {
         return impuestos;
