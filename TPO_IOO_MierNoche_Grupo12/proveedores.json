@@ -1,0 +1,29 @@
+[
+  {
+    "cuit" : "1234",
+    "razon social" : "pepitos company",
+    "nombre" : "pepito",
+    "direccion" : "independencia 321",
+    "telefono" : "1545688694",
+    "mail" : "pepito@hotmail.com",
+    "Ingresos brutos" : "12345",
+    "tope" : "5",
+    "certificado":
+                    {
+
+                              }
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+]

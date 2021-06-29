@@ -1,8 +1,12 @@
 package controllers;
 
-import controllers.exceptions.CuitRepetidoException;
+import controllers.exceptions.cuitRepetidoException;
+import models.domain.PrecioPorProducto;
 import models.domain.Proveedor;
+import models.repositories.RepositorioOrdenesDePago;
+import models.repositories.RepositorioProductos;
 import models.repositories.RepositorioProveedores;
+import models.repositories.RepositorioRubros;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +17,7 @@ public class MainController {
 
     private static MainController instancia;
     private RepositorioProveedores repositorioProveedores;
+    private RepositorioOrdenesDePago repositorioOrdenesDePago;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -21,7 +26,9 @@ public class MainController {
     }
 
     public MainController(){
+
         this.repositorioProveedores = new RepositorioProveedores();
+        this.repositorioOrdenesDePago  = new RepositorioOrdenesDePago();
     }
 
     public void altaProveedor(Proveedor.ProveedorDTO proveedorDTO){
@@ -33,7 +40,7 @@ public class MainController {
 
     private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
         if(this.validarCuit(proveedorDTO.cuit)){
-            throw new CuitRepetidoException("El proveedor ya existe");
+            throw new cuitRepetidoException("El proveedor ya existe");
         }
     }
 
@@ -67,8 +74,32 @@ public class MainController {
         return listaProveedoresDto;
     }
 
-    public float totalFacturasRecibidas(int idProveedor) {
-        return 0;
+    public int totalFacturasRecibidas(int idProveedor) {
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+         proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitidas();
+    }
+
+    public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
+        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
+        proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
+    }
+
+    public RepositorioProveedores getRepositorioProveedores() {
+        return repositorioProveedores;
+    }
+
+    public void setRepositorioProveedores(RepositorioProveedores repositorioProveedores) {
+        this.repositorioProveedores = repositorioProveedores;
+    }
+
+    public RepositorioOrdenesDePago getRepositorioOrdenesDePago() {
+        return repositorioOrdenesDePago;
+    }
+
+    public void setRepositorioOrdenesDePago(RepositorioOrdenesDePago repositorioOrdenesDePago) {
+        this.repositorioOrdenesDePago = repositorioOrdenesDePago;
     }
 
     public float totalFacturasRecibidasProveedorDia(int idProveedor, LocalDate fecha) {

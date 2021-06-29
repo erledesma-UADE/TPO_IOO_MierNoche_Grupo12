@@ -20,6 +20,7 @@ public class Proveedor extends ID {
     private String email;
     private int numeroIngresosBrutos;
     private LocalDate inicioActividades;
+    private String inicioActividad; //agregado para json
     private List<Rubro> rubros;
     private float tope;
     private List<OrdenCompra> ordenDeCompra;
