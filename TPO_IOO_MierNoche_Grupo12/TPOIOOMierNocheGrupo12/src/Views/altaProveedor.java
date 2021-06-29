@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,9 +39,10 @@ public class altaProveedor extends JFrame{
     private JTextField txtTope;
     private JList listRubros;
     public ProveedorDTO prov;
+    public String rubroSelect;
 
     public altaProveedor(){
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.setBounds(100,100,600,500);
         this.setTitle("Alta Proveedor");
@@ -66,7 +68,7 @@ public class altaProveedor extends JFrame{
         listRubros.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String rubroSelect = (String) listRubros.getSelectedValue();
+                rubroSelect = (String) listRubros.getSelectedValue();
                 System.out.println("rubro select: " +rubroSelect);
             }
         });
@@ -85,13 +87,32 @@ public class altaProveedor extends JFrame{
 
                 //FALTA SETEAR RUBRO
 
+                List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarTodos();
+                String rubrotxt = rubroSelect;
+                List<Rubro.RubroDTO> rubroDTO = new ArrayList<>();
+                List<Rubro> rubroO = new ArrayList<>();
+                Rubro rubroCont = new Rubro();
+                System.out.println("rubro tamaño: " +rubro.size());
+
+                for (int i = 1;i < rubro.size(); i++) {
+                    if(rubro.get(i).nombre.equals(rubrotxt)) {
+                        rubroDTO.add(rubro.get(i));
+                        rubroCont.setNombre(rubroDTO.get(i).nombre);
+                        rubroCont.setIdRubro(rubroDTO.get(i).id);
+                        System.out.println("rubro selecionado: " +i);
+                        rubroO.set(i,rubroCont);
+                        //rubroO.add(rubroCont);
+                    }
+                }
+
+
                 String pattern = "dd/MM/yyyy";
                 String date = txtIniAct.getText();
                 Date inicioAct = null ;
                 try {
                     DateFormat df = new SimpleDateFormat(pattern);
                     inicioAct = df.parse(date);
-                    System.out.println("Today = " + df.format(inicioAct));
+                    //System.out.println("Today = " + df.format(inicioAct));
                 } catch (ParseException ie) {
                     ie.printStackTrace();
                 }
@@ -109,13 +130,16 @@ public class altaProveedor extends JFrame{
                 prov2.email = email;
                 prov2.numeroIngresosBrutos = numeroIngresosBrutos;
                 prov2.inicioActividades = inicioAct2;
-                //prov2.rubros = rubro;
+                prov2.rubros = rubroO;
                 prov2.tope = tope;
                 MainController.getInstancia().altaProveedor(prov2);
 
+                int ok = JOptionPane.showConfirmDialog(null, "Proveedor Creado","Confirmación",JOptionPane.DEFAULT_OPTION);
             }
 
-
         });
+
     }
+
+
 }
