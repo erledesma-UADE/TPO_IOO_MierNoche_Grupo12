@@ -57,8 +57,29 @@ public class PrecioPorProducto extends ID {
         this.proveedor = proveedor;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
 
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
+    public String getProductoString() {
+        return productoString;
+    }
+
+    public void setProductoString(String productoString) {
+        this.productoString = productoString;
+    }
+
+    public int getCuitProveedor() {
+        return cuitProveedor;
+    }
+
+    public void setCuitProveedor(int cuitProveedor) {
+        this.cuitProveedor = cuitProveedor;
+    }
 
     public PrecioPorProductoDTO toDTO () {
         PrecioPorProductoDTO dto = new PrecioPorProductoDTO();
