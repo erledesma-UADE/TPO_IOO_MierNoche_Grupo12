@@ -7,12 +7,22 @@ public class PrecioPorProducto extends ID {
     private float monto;
     private Producto producto;
     private Proveedor proveedor;
+    private String fecha;
+    private String productoString;
+    private int cuitProveedor;
 
-    public PrecioPorProducto(LocalDate fechaAcuerdo, float monto, Producto producto, Proveedor proveedor) {
-        this.fechaAcuerdo = fechaAcuerdo;
-        this.monto = monto;
-        this.producto = producto;
-        this.proveedor = proveedor;
+    public PrecioPorProducto(String fecha, String monto,String productoString,String cuitProveedor) {
+        //this.fechaAcuerdo = this.stringToLocalDate(fechaAcuerdo);
+        this.fecha = fecha;
+        this.monto = Float.parseFloat(monto);
+        this.productoString = productoString;
+        this.cuitProveedor = Integer.parseInt(cuitProveedor);
+    }
+
+    private LocalDate stringToLocalDate(String fecha){
+        String[] fechas = fecha.split("-");
+        LocalDate dia = LocalDate.of(Integer.parseInt(fechas[0]), Integer.parseInt(fechas[1]), Integer.parseInt(fechas[2]));
+        return dia;
     }
 
     public LocalDate getFechaAcuerdo() {
@@ -47,8 +57,29 @@ public class PrecioPorProducto extends ID {
         this.proveedor = proveedor;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
 
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
+    public String getProductoString() {
+        return productoString;
+    }
+
+    public void setProductoString(String productoString) {
+        this.productoString = productoString;
+    }
+
+    public int getCuitProveedor() {
+        return cuitProveedor;
+    }
+
+    public void setCuitProveedor(int cuitProveedor) {
+        this.cuitProveedor = cuitProveedor;
+    }
 
     public PrecioPorProductoDTO toDTO () {
         PrecioPorProductoDTO dto = new PrecioPorProductoDTO();

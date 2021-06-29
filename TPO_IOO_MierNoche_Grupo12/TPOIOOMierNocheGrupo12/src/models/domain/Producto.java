@@ -2,7 +2,11 @@ package models.domain;
 
 import models.domain.enums.Iva;
 
+import javax.swing.text.html.parser.Parser;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Float.parseFloat;
 
 public class Producto extends ID {
     private String nombre;
@@ -10,10 +14,10 @@ public class Producto extends ID {
     private Iva impuesto;
     private List<PrecioPorProducto> precioPorProveedor;
 
-    public Producto(String nombre, String tipoUnidad,Iva impuesto) {
+    public Producto(String nombre, String tipoUnidad, String impuestoAux) {
         this.nombre = nombre;
         this.tipoUnidad = tipoUnidad;
-        this.impuesto = impuesto;
+        this.impuesto = Iva.valueOf(impuestoAux);
     }
 
     public String getNombre() {
@@ -43,16 +47,23 @@ public class Producto extends ID {
         return 0;
     }
 
+    public List<PrecioPorProducto> getPrecioPorProveedor() {
+        return precioPorProveedor;
+    }
 
-    public float buscarPrecioProveedor(Integer idProveedor){
+    public void setPrecioPorProveedor(List<PrecioPorProducto> precioPorProveedor) {
+        this.precioPorProveedor = precioPorProveedor;
+    }
+
+    public float buscarPrecioProveedor(Integer cuitProveedor){
         final float[] monto = {0};
-        this.precioPorProveedor.stream().forEach(precioProveedor ->{
-            if(precioProveedor.getProveedor().getID().equals(idProveedor)){
+        this.getPrecioPorProveedor().stream().forEach(precioProveedor ->{
+            if(precioProveedor.getCuitProveedor()== cuitProveedor){
                 monto[0] = precioProveedor.getMonto();
             }
         });
-            return monto[0];
-        }
+        return monto[0];
+    }
 
 
     public ProductoDTO toDTO () {
@@ -61,7 +72,6 @@ public class Producto extends ID {
         dto.nombre = this.nombre;
         dto.tipoUnidad = this.tipoUnidad;
         dto.idProducto = super.getID();
-        //dto.precioPorProveedor = this.precioPorProveedor;
         for (PrecioPorProducto pPproveedor : this.precioPorProveedor) {
             PrecioPorProducto.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
             dto.precioPorProveedor.add(pPproveedorDTO);

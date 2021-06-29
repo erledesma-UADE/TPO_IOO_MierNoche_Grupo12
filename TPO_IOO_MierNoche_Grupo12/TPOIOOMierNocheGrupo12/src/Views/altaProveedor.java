@@ -1,4 +1,4 @@
-package Views;
+/*package Views;
 
 import controllers.MainController;
 import controllers.RubrosController;
@@ -143,3 +143,4 @@ public class altaProveedor extends JFrame{
 
 
 }
+*/

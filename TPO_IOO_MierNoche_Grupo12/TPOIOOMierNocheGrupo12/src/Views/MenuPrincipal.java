@@ -1,4 +1,4 @@
-package Views;
+/*package Views;
 
 import controllers.MainController;
 import models.domain.Proveedor;
@@ -293,7 +293,7 @@ public class MenuPrincipal{
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.framePpal.setVisible(true);
         //System.exit(0);
-    }*/
+    }
 
 
-}
+}*/
