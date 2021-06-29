@@ -27,6 +27,7 @@ public class Proveedor extends ID {
     private List<PrecioPorProducto> catalogo;
     private Certificado certificado;
     private List<Impuesto> impuestos;
+    private List<OrdenPago> ordenPago;
 
     public Proveedor() {
         this.rubros = new ArrayList<>();
@@ -36,6 +37,18 @@ public class Proveedor extends ID {
         this.impuestos = new ArrayList<>();
 
     }
+
+    public float sumarOrdenesPago(){
+        float sumador = 0;
+
+        for( int i=0; i<ordenPago.size();i++){
+            sumador+= ordenPago.get(i).calcularTotalRetenciones();
+        }
+        return sumador;
+
+
+    }
+
 
     public void agregarRubro(Rubro... rubros){
         Collections.addAll(this.rubros,rubros);
@@ -157,8 +170,13 @@ public class Proveedor extends ID {
         return rubros;
     }
 
-    public List<OrdenCompra> getOrdenDeCompra() {
+    public List<OrdenCompra> getOrdenDeCompra() { // no estoy seguro si el size de orde de compra lo tengo que pedir aca
+        //y luego abajo armar otro metodo o que.
         return ordenDeCompra;
+    }
+
+    public int cantidadOrdenCompraEmitidas(){ // no estoy seguro si el metodo va aca?
+        return getOrdenDeCompra().size();
     }
 
     public List<Factura> getFacturasEmitidas() {
@@ -171,8 +189,27 @@ public class Proveedor extends ID {
 
     public void emitirDocumento () {}
 
-    public List<Factura> getFacturasPorFecha (LocalDate fecha) { return null; }
+    public int cantidadFacturasEmitidas(){
+        return getFacturasEmitidas().size();
+    }
 
+    public List<OrdenPago> getOrdenPago() {  // hay que acordarse de agregar orden de pago .
+        return ordenPago;
+    }
+
+    public void setOrdenPago(List<OrdenPago> ordenPago) {
+        this.ordenPago = ordenPago;
+    }
+
+    public int cantidadFacturasEmitasElDia(LocalDate unDia){
+        List<Factura> facturasEmitidasElDia = new ArrayList<>();
+        getFacturasEmitidas().forEach(factura ->{
+            if(factura.getFecha().equals(unDia)){
+                facturasEmitidasElDia.add(factura);
+            }
+        });
+        return facturasEmitidasElDia.size();
+    }
 
     public static class ProveedorDTO{
         public int cuit;

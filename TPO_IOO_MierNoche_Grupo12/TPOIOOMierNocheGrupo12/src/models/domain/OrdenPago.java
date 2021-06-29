@@ -28,6 +28,21 @@ public class OrdenPago extends ID {
         this.pagado = pagado;
     }
 
+    public void agregarRetencion(Retencion retencion){
+        this.retenciones.add(retencion);
+    }
+
+
+    public float calcularTotalRetenciones(){
+        float sumador = 0;
+
+        for(int i = 0; i< retenciones.size(); i++){
+            sumador += retenciones.get(i).getMonto();
+
+        }
+        return sumador;
+    }
+
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
     }

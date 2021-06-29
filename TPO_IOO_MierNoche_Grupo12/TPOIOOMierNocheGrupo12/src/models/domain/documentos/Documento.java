@@ -1,28 +1,29 @@
 package models.domain.documentos;
 
+import controllers.MainController;
 import models.domain.CantidadPorProducto;
 import models.domain.ID;
 import models.domain.Proveedor;
 import models.domain.enums.TipoDocumento;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Documento extends ID {
     private int idDocumento;
-    private LocalDateTime fecha;
-    private float montoTotal;
+    private LocalDate fecha;
+    private double montoTotal;
     private TipoDocumento tipoDocumento;
     private boolean pagado;
     private List<CantidadPorProducto> articulos;
-    private Proveedor proveedor;
+    private Integer cuitProveedor;
 
     public Documento() {
         this.articulos = new ArrayList<>();
         this.pagado = false;
     }
-
 
 
     public int getIdDocumento() {
@@ -33,20 +34,25 @@ public abstract class Documento extends ID {
         this.idDocumento = idDocumento;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public float getMontoTotal() {
+    public double getMontoTotal() {
         return montoTotal;
     }
 
-    public void setMontoTotal(float montoTotal) {
-        this.montoTotal = montoTotal;
+    public void setMontoTotal(){
+        double sumaTotal = 0.0;
+        List<CantidadPorProducto> articulosAux = this.getArticulos();
+        for (int i = 0; i<articulosAux.size(); i++){
+            sumaTotal += articulosAux.get(i).getPrecioFinal();
+        }
+        this.montoTotal = sumaTotal;
     }
 
     public boolean isPagado() {
@@ -69,12 +75,16 @@ public abstract class Documento extends ID {
         return articulos;
     }
 
-    public Proveedor getProveedor() {
-        return proveedor;
+    public Integer getCuitProveedor() {
+        return cuitProveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
+    public void setProveedor(Integer cuitProveedor) {
+        this.cuitProveedor = cuitProveedor;
+    }
+
+    public void agregarArticulo(){
+
     }
 
     public void setArticulos(List<CantidadPorProducto> articulos) {
@@ -82,10 +92,10 @@ public abstract class Documento extends ID {
     }
 
     public static class DocumentoDTO{
-        public Proveedor proveedor;
+        public Integer cuitProveedor;
         public int idDocumento;
-        public LocalDateTime fecha;
-        public float montoTotal;
+        public LocalDate fecha;
+        public double montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
         public TipoDocumento tipoDocumento;
@@ -93,7 +103,7 @@ public abstract class Documento extends ID {
 
     public DocumentoDTO toDTO() {
         DocumentoDTO dto    = new DocumentoDTO();
-        dto.proveedor       = this.proveedor;
+        dto.cuitProveedor   = this.cuitProveedor;
         dto.idDocumento     = this.idDocumento;
         dto.fecha           = this.fecha;
         dto.montoTotal      = this.montoTotal;

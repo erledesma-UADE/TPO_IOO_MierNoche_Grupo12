@@ -2,9 +2,11 @@ package models.domain;
 
 import models.domain.documentos.Documento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CuentaCorriente extends ID {
+    private int IDCuentaCorriente;
     private Proveedor proveedor;
     private float debito;
     private float credito;
@@ -12,13 +14,18 @@ public class CuentaCorriente extends ID {
     private float montoDeuda;
 
 
-    public CuentaCorriente(Proveedor proveedor, float debito, float credito,
+    public CuentaCorriente(int IDCuentaCorriente, Proveedor proveedor, float debito, float credito,
                            List<Documento> documentos, float montoDeuda) {
+        this.IDCuentaCorriente = IDCuentaCorriente;
         this.proveedor = proveedor;
         this.debito = debito;
         this.credito = credito;
         this.documentos = documentos;
         this.montoDeuda = montoDeuda;
+    }
+
+    public void setIDCuentaCorriente(int IDCuentaCorriente) {
+        this.IDCuentaCorriente = IDCuentaCorriente;
     }
 
     public void setProveedor(Proveedor proveedor) {
@@ -42,9 +49,14 @@ public class CuentaCorriente extends ID {
 
     }
 
-    //REVISAR Logica Por Tipo De Documento
-    public void actualizarMontoDeuda(Documento documento){ // metodo diagrama
+    /*public void actualizarMontoDeuda(Documento documento){ // metodo diagrama
         this.montoDeuda = documento.getMontoTotal();
+    }*/
+
+
+
+    public int getIDCuentaCorriente() {
+        return IDCuentaCorriente;
     }
 
     public Proveedor getProveedor() {
@@ -67,7 +79,6 @@ public class CuentaCorriente extends ID {
         return montoDeuda;
     }
 
-    //REVISAR
     /*public void MostrarDetalle(){
         String cadena;
         cadena= "id cuenta corriente: " + this.getIDCuentaCorriente() +
@@ -79,5 +90,30 @@ public class CuentaCorriente extends ID {
         System.out.print(cadena);
     }*/
 
-    public void getDetalleDocumentosRecibidos () {}
+    public CuentaCorrienteDTO toDTO(){
+        CuentaCorrienteDTO dto = new CuentaCorrienteDTO();
+        dto.IDCuentaCorriente = super.getID();
+        dto.proveedor = this.proveedor;
+        dto.debito = this.debito;
+        dto.credito = this.credito;
+        dto.documentos = this.documentos;
+        dto.montoDeuda = this.montoDeuda;
+        return dto;
+
+
+
+    }
+
+    public class CuentaCorrienteDTO{
+        public Integer IDCuentaCorriente;
+        public Proveedor proveedor;
+        public float debito;
+        public float credito;
+        public List<Documento> documentos;
+        public float montoDeuda;
+
+        public CuentaCorrienteDTO(){this.documentos = new ArrayList<>();}
+
+    }
+
 }
