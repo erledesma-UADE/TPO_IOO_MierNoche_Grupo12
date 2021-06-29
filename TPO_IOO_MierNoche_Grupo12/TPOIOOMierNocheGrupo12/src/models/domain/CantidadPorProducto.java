@@ -2,20 +2,22 @@ package models.domain;
 
 import models.domain.enums.Iva;
 
+import java.util.Optional;
+
 public class CantidadPorProducto {
-    private Producto producto;
+    private Optional<Producto> producto;
     private float cantidad;
     private double precioFinal;
 
 
-    public CantidadPorProducto(Producto producto, float cantidad,Integer idProveedor) {
+    public CantidadPorProducto(Optional<Producto> producto, float cantidad, Integer cuitProveedor) {
         this.producto = producto;
         this.cantidad = cantidad;
-        calcularPrecioFinal(idProveedor);
+        calcularPrecioFinal(cuitProveedor);
     }
 
 
-    public void setProducto(Producto producto) {
+    public void setProducto(Optional<Producto> producto) {
         this.producto = producto;
     }
 
@@ -30,7 +32,7 @@ public class CantidadPorProducto {
     }
 
 
-    public Producto getProducto() {
+    public Optional<Producto> getProducto() {
         return this.producto;
     }
 
@@ -45,15 +47,21 @@ public class CantidadPorProducto {
     }
 
 
-    public void calcularPrecioFinal (Integer idProveedor) {
-        float precioProveedor = this.producto.buscarPrecioProveedor(idProveedor);
-        Iva impuestoProducto = this.producto.getImpuesto();
-        this.precioFinal = precioProveedor * this.cantidad * (1+impuestoProducto.getPorcentaje());
+    public void calcularPrecioFinal (Integer cuitProveedor) {
+        float precioProveedor = this.producto.get().buscarPrecioProveedor(cuitProveedor);
+        Iva impuestoProducto = this.producto.get().getImpuesto();
+
+        System.out.println("PrecioProveedor es " + precioProveedor);
+        System.out.println("Cantidad es " + this.cantidad);
+        System.out.println("Impuesto es " + impuestoProducto.getPorcentaje()/100);
+
+        this.precioFinal = precioProveedor * this.cantidad * (1+(impuestoProducto.getPorcentaje()/100));
+        System.out.println("Precio Final es " + precioFinal);
         setPrecioFinal(precioFinal);
     }
 
 
     public Iva getTipoImpuesto () {
-        return this.producto.getImpuesto();
+        return this.producto.get().getImpuesto();
     }
 }

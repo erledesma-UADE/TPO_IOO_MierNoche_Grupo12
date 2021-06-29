@@ -10,10 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class Documento extends ID {
     private int idDocumento;
+    private Optional<Proveedor> proveedor;
     private LocalDate fecha;
+    private String fechaString;
     private double montoTotal;
     private TipoDocumento tipoDocumento;
     private boolean pagado;
@@ -21,11 +24,34 @@ public abstract class Documento extends ID {
     private Integer cuitProveedor;
 
     public Documento() {
-        this.fecha = LocalDate.now();
+        //this.fecha = LocalDate.now();
         this.articulos = new ArrayList<>();
         this.pagado = false;
     }
 
+    public Optional<Proveedor> getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Optional<Proveedor> proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public String getFechaString() {
+        return fechaString;
+    }
+
+    public void setFechaString(String fechaString) {
+        this.fechaString = fechaString;
+    }
+
+    public void setMontoTotal(double montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+
+    public void setCuitProveedor(Integer cuitProveedor) {
+        this.cuitProveedor = cuitProveedor;
+    }
 
     public int getIdDocumento() {
         return idDocumento;
@@ -84,8 +110,8 @@ public abstract class Documento extends ID {
         this.cuitProveedor = cuitProveedor;
     }
 
-    public void agregarArticulo(){
-
+    public void agregarArticulo(CantidadPorProducto producto){
+        this.getArticulos().add(producto);
     }
 
     public void setArticulos(List<CantidadPorProducto> articulos) {
@@ -96,10 +122,11 @@ public abstract class Documento extends ID {
         public Integer cuitProveedor;
         public int idDocumento;
         public LocalDate fecha;
+        public String fechaString;
         public double montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
-        public List<String> articulosVista;
+        public String[][] articulosVista;
         public TipoDocumento tipoDocumento;
 
         public void agregarArticulo(CantidadPorProducto articulo){
@@ -117,6 +144,7 @@ public abstract class Documento extends ID {
         dto.pagado          = pagado;
         dto.articulos       = articulos;
         dto.tipoDocumento   = tipoDocumento;
+        dto.fechaString     = this.fechaString;
         return dto;
     }
 

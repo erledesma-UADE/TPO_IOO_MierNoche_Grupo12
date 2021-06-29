@@ -47,16 +47,23 @@ public class Producto extends ID {
         return 0;
     }
 
+    public List<PrecioPorProducto> getPrecioPorProveedor() {
+        return precioPorProveedor;
+    }
 
-    public float buscarPrecioProveedor(Integer idProveedor){
+    public void setPrecioPorProveedor(List<PrecioPorProducto> precioPorProveedor) {
+        this.precioPorProveedor = precioPorProveedor;
+    }
+
+    public float buscarPrecioProveedor(Integer cuitProveedor){
         final float[] monto = {0};
-        this.precioPorProveedor.stream().forEach(precioProveedor ->{
-            if(precioProveedor.getProveedor().getID().equals(idProveedor)){
+        this.getPrecioPorProveedor().stream().forEach(precioProveedor ->{
+            if(precioProveedor.getCuitProveedor()== cuitProveedor){
                 monto[0] = precioProveedor.getMonto();
             }
         });
-            return monto[0];
-        }
+        return monto[0];
+    }
 
 
     public ProductoDTO toDTO () {

@@ -25,30 +25,49 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 
 public class App {
 
     public static void main(String[] args) {
 
-        RepositorioProductos repositorioProductos = new RepositorioProductos();
+        MainController mainController = new MainController();
+        DocumentosController documentosController = new DocumentosController();
+
         CargaJsons cargaJsons = new CargaJsons();
 
-        cargaJsons.cargaArchivos(repositorioProductos);
+        cargaJsons.cargaArchivos(documentosController.getRepositorioProductos());
 
 
-        List<Producto> listaProductos = repositorioProductos.getElementos();
-        for (Producto producto : listaProductos) {
-            System.out.println(producto.getNombre());
+        /************* PRUEBA ALTA DOCUMENTO **************/
+
+        Proveedor.ProveedorDTO proveedorDTO = new Proveedor.ProveedorDTO();
+        Documento.DocumentoDTO documentoDTO = new Documento.DocumentoDTO();
+
+        String[][] pruebaArticulos = new String[1][2];
+        pruebaArticulos[0][0] = "Lapicera";
+        pruebaArticulos[0][1] = "3";
+
+
+        //Buscar cómo hacer una matriz dinámica.
+
+        proveedorDTO.cuit = 1234;
+        documentoDTO.tipoDocumento = TipoDocumento.Factura;
+        documentoDTO.cuitProveedor = 1234;
+        documentoDTO.fechaString = "2020-05-03";
+        documentoDTO.pagado = false;
+        documentoDTO.articulosVista = pruebaArticulos;
+
+        mainController.altaProveedor(proveedorDTO);
+
+        Optional<Proveedor> proveedor = mainController.getRepositorioProveedores().buscarPorCuit(documentoDTO.cuitProveedor);
+        documentosController.altaDocumento(documentoDTO,proveedor);
+
+        List<Documento> listaProductos = documentosController.getRepositorioDocumentos().getElementos();
+        for (Documento documento : listaProductos) {
+            System.out.println(documento.getMontoTotal());
         }
-
-        String[][] nombre = new String[1][2];
-
-
-
-        //Producto p = gson.fromJson(jsonProductos,Producto.class);
-
-        //System.out.println(p);
 
 
         /*Proveedor.ProveedorDTO proveedorDTO = new Proveedor.ProveedorDTO();
@@ -74,19 +93,7 @@ public class App {
 
         LocalDate now = LocalDate.now();
 
-
-
-
-        Documento.DocumentoDTO factura1 = new Documento.DocumentoDTO();
-
-        factura1.fecha = now;
-        factura1.tipoDocumento = TipoDocumento.Factura;
-        factura1.cuitProveedor = 2345;
-
-
-        documentosController.altaDocumento(factura1);*/
-
-
     }
 
-}
+}*/
+    }}

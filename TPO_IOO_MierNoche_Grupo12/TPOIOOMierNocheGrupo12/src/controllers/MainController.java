@@ -1,7 +1,6 @@
 package controllers;
 
 import controllers.exceptions.cuitRepetidoException;
-import models.domain.OrdenPago;
 import models.domain.PrecioPorProducto;
 import models.domain.Proveedor;
 import models.repositories.RepositorioOrdenesDePago;
@@ -87,33 +86,21 @@ public class MainController {
         return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
     }
 
-    public float totalImpuestosRetenidosPorProvedor(int idProveedor){
-        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
-        proveedorActual=this.repositorioProveedores.getPorID(idProveedor);
-        return proveedorActual.get().sumarOrdenesPago();
-
+    public RepositorioProveedores getRepositorioProveedores() {
+        return repositorioProveedores;
     }
 
-    public List<OrdenPago.OrdenPagoDto> ListarOrdenPago(){
-        List<OrdenPago.OrdenPagoDto> ListaOrdenPagoDTO = new ArrayList<>();
-        for (OrdenPago ordenPagoOriginal : this.repositorioOrdenesDePago.getElementos()){
-            OrdenPago.OrdenPagoDto ordenPagoDto = ordenPagoOriginal.toDTO();
-            ListaOrdenPagoDTO.add(ordenPagoDto);
-        }
-        return ListaOrdenPagoDTO;
-
+    public void setRepositorioProveedores(RepositorioProveedores repositorioProveedores) {
+        this.repositorioProveedores = repositorioProveedores;
     }
 
+    public RepositorioOrdenesDePago getRepositorioOrdenesDePago() {
+        return repositorioOrdenesDePago;
+    }
 
-
-
-
-
-
-
-
-
-
+    public void setRepositorioOrdenesDePago(RepositorioOrdenesDePago repositorioOrdenesDePago) {
+        this.repositorioOrdenesDePago = repositorioOrdenesDePago;
+    }
 
     public float totalFacturasRecibidasProveedorDia(int idProveedor, LocalDate fecha) {
         return 0;
