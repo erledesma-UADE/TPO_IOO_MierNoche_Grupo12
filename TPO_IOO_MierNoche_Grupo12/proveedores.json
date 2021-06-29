@@ -10,6 +10,8 @@
     "tope" : "5",
     "certificado":
                     {
+                      "fecha inicio" : "2020-02-17",
+                      "fecha final" : "2020-03-20"
 
                               }
 
@@ -17,6 +19,24 @@
 
 
 
+
+  },
+
+  {
+    "cuit" : "234567",
+    "razon social" : "pepitos company",
+    "nombre" : "pepito",
+    "direccion" : "independencia 321",
+    "telefono" : "1545688694",
+    "mail" : "pepito@hotmail.com",
+    "Ingresos brutos" : "12345",
+    "tope" : "5",
+    "certificado":
+                    {
+                      "fecha inicio" : "2020-02-17",
+                      "fecha final" : "2020-03-20"
+
+                    }
 
   }
 
