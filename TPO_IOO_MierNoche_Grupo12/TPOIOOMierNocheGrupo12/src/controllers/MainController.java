@@ -86,7 +86,21 @@ public class MainController {
         return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
     }
 
+    public RepositorioProveedores getRepositorioProveedores() {
+        return repositorioProveedores;
+    }
 
+    public void setRepositorioProveedores(RepositorioProveedores repositorioProveedores) {
+        this.repositorioProveedores = repositorioProveedores;
+    }
+
+    public RepositorioOrdenesDePago getRepositorioOrdenesDePago() {
+        return repositorioOrdenesDePago;
+    }
+
+    public void setRepositorioOrdenesDePago(RepositorioOrdenesDePago repositorioOrdenesDePago) {
+        this.repositorioOrdenesDePago = repositorioOrdenesDePago;
+    }
 
     public float totalFacturasRecibidasProveedorDia(int idProveedor, LocalDate fecha) {
         return 0;
