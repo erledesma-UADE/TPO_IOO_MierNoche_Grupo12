@@ -5,7 +5,9 @@ import java.time.LocalDate;
 public class Certificado extends ID {
     private int idProveedor;
     private LocalDate fechaInicio;
+    private String fechaInicios;
     private LocalDate fechaVencimiento;
+    private String fechaVencimientos;
     private Impuesto tipoImpuesto;
 
     public Certificado(int idProveedor, LocalDate fechaInicio, LocalDate fechaVencimiento, Impuesto tipoImpuesto) {
