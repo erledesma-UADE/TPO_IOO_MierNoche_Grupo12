@@ -2,6 +2,7 @@ package models.domain;
 
 import models.domain.enums.Iva;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Producto extends ID {
@@ -10,10 +11,8 @@ public class Producto extends ID {
     private Iva impuesto;
     private List<PrecioPorProducto> precioPorProveedor;
 
-    public Producto(String nombre, String tipoUnidad,Iva impuesto) {
-        this.nombre = nombre;
-        this.tipoUnidad = tipoUnidad;
-        this.impuesto = impuesto;
+    public Producto() {
+        this.precioPorProveedor = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -43,13 +42,29 @@ public class Producto extends ID {
         return 0;
     }
 
+    /*public void asignarParametros (ProductoDTO productoDTO) {
+        this.setNombre(productoDTO.nombre);
+        this.setTipoUnidad(productoDTO.tipoUnidad);
+        this.setImpuesto(productoDTO.impuesto);
+        agregarPrecioPorProveedor(productoDTO.precioPorProveedor);
+    }*/
+
+    public void agregarPrecioPorProveedor (List<PrecioPorProducto.PrecioPorProductoDTO> precioPorProductoDTO) {
+        PrecioPorProducto precioPorProducto = new PrecioPorProducto();
+
+        for (PrecioPorProducto.PrecioPorProductoDTO pPProveedor : precioPorProductoDTO) {
+            precioPorProducto.asinarParametros(pPProveedor);
+            this.precioPorProveedor.add(precioPorProducto);
+        }
+    }
+
     public ProductoDTO toDTO () {
         ProductoDTO dto = new ProductoDTO();
         dto.impuesto = this.impuesto;
         dto.nombre = this.nombre;
         dto.tipoUnidad = this.tipoUnidad;
         dto.idProducto = super.getID();
-        //dto.precioPorProveedor = this.precioPorProveedor;
+
         for (PrecioPorProducto pPproveedor : this.precioPorProveedor) {
             PrecioPorProducto.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
             dto.precioPorProveedor.add(pPproveedorDTO);
@@ -64,5 +79,9 @@ public class Producto extends ID {
         public String tipoUnidad;
         public Iva impuesto;
         public List<PrecioPorProducto.PrecioPorProductoDTO> precioPorProveedor;
+
+        public ProductoDTO () {
+            this.precioPorProveedor = new ArrayList<>();
+        }
     }
 }

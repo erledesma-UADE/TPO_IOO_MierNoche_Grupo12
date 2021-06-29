@@ -1,11 +1,8 @@
 package controllers;
 
-import controllers.exceptions.cuitRepetidoException;
-import models.domain.PrecioPorProducto;
+import controllers.exceptions.CuitRepetidoException;
 import models.domain.Proveedor;
-import models.repositories.RepositorioProductos;
 import models.repositories.RepositorioProveedores;
-import models.repositories.RepositorioRubros;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,7 +33,7 @@ public class MainController {
 
     private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
         if(this.validarCuit(proveedorDTO.cuit)){
-            throw new cuitRepetidoException("El proveedor ya existe");
+            throw new CuitRepetidoException("El proveedor ya existe");
         }
     }
 

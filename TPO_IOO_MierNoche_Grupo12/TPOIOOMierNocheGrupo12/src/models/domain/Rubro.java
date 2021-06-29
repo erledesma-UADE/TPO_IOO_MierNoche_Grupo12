@@ -1,26 +1,17 @@
 package models.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Rubro extends ID {
-    private int idRubro;
     private String nombre;
     private List<Producto> productos;
-    private List<Proveedor> proveedor;
+    private List<Proveedor> proveedores;
 
-    public Rubro(int idRubro, String nombre, List<Producto> productos, List<Proveedor> proveedor) {
-        this.idRubro = idRubro;
-        this.nombre = nombre;
-        this.productos = productos;
-        this.proveedor = proveedor;
-    }
-
-    public int getIdRubro() {
-        return idRubro;
-    }
-
-    public void setIdRubro(int idRubro) {
-        this.idRubro = idRubro;
+    public Rubro() {
+        this.proveedores = new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -35,38 +26,58 @@ public class Rubro extends ID {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public List<Proveedor> getProveedores() {
+        return proveedores;
     }
 
-    public List<Proveedor> getProveedor() {
-        return proveedor;
+    /*public void agregarProductos(List<Producto.ProductoDTO> productos) {
+        for (Producto.ProductoDTO productoDTO : productos) {
+            Producto producto = new Producto();
+
+            this.productos.add(producto);
+        }
     }
 
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor.add(proveedor);
-    }
+    public void agregarProveedores(List<Proveedor.ProveedorDTO> proveedores) {
+        for (Proveedor.ProveedorDTO provDTO : proveedores) {
+            Proveedor proveedor = new Proveedor();
 
-    public RubroDTO toDTO (int idRubro) {
+            this.proveedores.add(proveedor);
+        }
+    }*/
+
+    public RubroDTO toDTO () {
         RubroDTO dto = new RubroDTO();
-        dto.idRubro = this.idRubro;
-        dto.nombre = this.nombre;
-        //dto.proveedores -> falta definir ProveedorDTO;
 
-        //dto.productos -> recorro la lista de productos de la clase y las convierte a DTO
-        //luego agerga a la lista del RubroDTO
-        for (Producto p : this.productos) {
-                Producto.ProductoDTO pDTO= p.toDTO();
+        dto.idRubro = super.getID();
+        dto.nombre = this.nombre;
+
+        if (this.proveedores != null) {
+            for (Proveedor proveedor : this.proveedores) {
+                Proveedor.ProveedorDTO proveedorDTO = proveedor.toDTO();
+                dto.proveedores.add(proveedorDTO);
+            }
+        }
+
+        if (this.productos != null) {
+            for (Producto p : this.productos) {
+                Producto.ProductoDTO pDTO = p.toDTO();
                 dto.productos.add(pDTO);
             }
+        }
 
         return dto;
     }
 
     public static class RubroDTO {
-        public int idRubro;
+        public Integer idRubro;
         public String nombre;
         public List<Producto.ProductoDTO> productos;
-        //public List<ProveedorDTO> proveedores;
+        public List<Proveedor.ProveedorDTO> proveedores;
+
+        public RubroDTO () {
+            this.proveedores = new ArrayList<>();
+            this.productos = new ArrayList<>();
+        }
     }
 }
