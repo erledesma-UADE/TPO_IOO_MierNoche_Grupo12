@@ -10,6 +10,8 @@ public class Producto extends ID {
     private Iva impuesto;
     private List<PrecioPorProveedor> precioPorProveedor;
 
+    public Producto () {}
+
     public Producto(String nombre, String tipoUnidad, String impuestoAux) {
         this.nombre = nombre;
         this.tipoUnidad = tipoUnidad;
@@ -55,7 +57,7 @@ public class Producto extends ID {
         final float[] monto = {0};
         this.getPrecioPorProveedor().stream().forEach(precioProveedor ->{
             if(precioProveedor.getCuitProveedor()== cuitProveedor){
-                monto[0] = precioProveedor.getMonto();
+                monto[0] = precioProveedor.getUltimoPrecio().getMonto();
             }
         });
         return monto[0];
@@ -69,7 +71,7 @@ public class Producto extends ID {
         dto.tipoUnidad = this.tipoUnidad;
         dto.idProducto = super.getID();
         for (PrecioPorProveedor pPproveedor : this.precioPorProveedor) {
-            PrecioPorProveedor.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
+            PrecioPorProveedor.PrecioPorProveedorDTO pPproveedorDTO = pPproveedor.toDTO();
             dto.precioPorProveedor.add(pPproveedorDTO);
         }
 
@@ -81,6 +83,6 @@ public class Producto extends ID {
         public String nombre;
         public String tipoUnidad;
         public Iva impuesto;
-        public List<PrecioPorProveedor.PrecioPorProductoDTO> precioPorProveedor;
+        public List<PrecioPorProveedor.PrecioPorProveedorDTO> precioPorProveedor;
     }
 }

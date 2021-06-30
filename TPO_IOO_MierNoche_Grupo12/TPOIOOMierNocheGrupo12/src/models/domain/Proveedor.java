@@ -41,7 +41,7 @@ public class Proveedor extends ID {
         float sumador = 0;
 
         for( int i=0; i<ordenPago.size();i++){
-            sumador+= ordenPago.get(i).calcularTotalRetenciones();
+            sumador += ordenPago.get(i).calcularTotalRetenciones();
         }
         return sumador;
 

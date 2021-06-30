@@ -34,7 +34,6 @@ public class OrdenPago extends ID {
 
     public float calcularTotalRetenciones(){
         return 0;
-
     }
 
     public void setDocumentos(List<Documento> documentos) {

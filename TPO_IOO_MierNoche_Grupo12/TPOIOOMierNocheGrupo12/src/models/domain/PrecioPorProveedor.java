@@ -1,20 +1,22 @@
 package models.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PrecioPorProveedor extends ID {
-    private LocalDate fechaAcuerdo;
-    private float monto;
+    private List<PreciosAcordados> preciosAcordados;
     private Producto producto;
     private Proveedor proveedor;
     private String fecha;
     private String productoString;
     private int cuitProveedor;
 
+    public PrecioPorProveedor() {}
+
     public PrecioPorProveedor(String fecha, String monto, String productoString, String cuitProveedor) {
         //this.fechaAcuerdo = this.stringToLocalDate(fechaAcuerdo);
         this.fecha = fecha;
-        this.monto = Float.parseFloat(monto);
+        //this.monto = Float.parseFloat(monto);
         this.productoString = productoString;
         this.cuitProveedor = Integer.parseInt(cuitProveedor);
     }
@@ -25,11 +27,11 @@ public class PrecioPorProveedor extends ID {
         return dia;
     }
 
-    public LocalDate getFechaAcuerdo() {
+    /*public LocalDate getFechaAcuerdo() {
         return fechaAcuerdo;
-    }
+    }*/
 
-    public void setFechaAcuerdo(LocalDate fechaAcuerdo) {
+    /*public void setFechaAcuerdo(LocalDate fechaAcuerdo) {
         this.fechaAcuerdo = fechaAcuerdo;
     }
 
@@ -39,7 +41,7 @@ public class PrecioPorProveedor extends ID {
 
     public void setMonto(float monto) {
         this.monto = monto;
-    }
+    }*/
 
     public Producto getProducto() {
         return producto;
@@ -57,13 +59,6 @@ public class PrecioPorProveedor extends ID {
         this.proveedor = proveedor;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
 
     public String getProductoString() {
         return productoString;
@@ -81,20 +76,41 @@ public class PrecioPorProveedor extends ID {
         this.cuitProveedor = cuitProveedor;
     }
 
-    public PrecioPorProductoDTO toDTO () {
-        PrecioPorProductoDTO dto = new PrecioPorProductoDTO();
-        dto.fechaAcuerdo = this.fechaAcuerdo;
-        dto.monto = this.monto;
+    public PreciosAcordados getUltimoPrecio () {
+        return this.preciosAcordados.get(0);
+    }
+
+    public PrecioPorProveedorDTO toDTO () {
+        PrecioPorProveedorDTO dto = new PrecioPorProveedorDTO();
+        /*dto.fechaAcuerdo = this.fechaAcuerdo;
+        dto.monto = this.monto;*/
         dto.producto = this.producto.toDTO();
-        //dto.proveedor;
+        dto.proveedor = this.proveedor.toDTO();
 
         return dto;
     }
 
-    public static class PrecioPorProductoDTO {
+    public UltimoPrecioDTO toUltimoPrecioDTO () {
+        UltimoPrecioDTO dto = new UltimoPrecioDTO();
+
+        dto.cuit = this.cuitProveedor;
+        dto.fechaAcuerdo = getUltimoPrecio().getFechaAcuerdo();
+        dto.monto = getUltimoPrecio().getMonto();
+
+        return dto;
+    }
+
+    public static class UltimoPrecioDTO {
         public LocalDate fechaAcuerdo;
         public float monto;
+        public String nombreProveedor;
+        public int cuit;
+    }
+
+    public static class PrecioPorProveedorDTO {
+        //public LocalDate fechaAcuerdo;
+        //public float monto;
         public Producto.ProductoDTO producto;
-        //public ProveedorDTO proveedor;
+        public Proveedor.ProveedorDTO proveedor;
     }
 }
