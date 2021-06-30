@@ -32,9 +32,11 @@ public class App {
         pruebaArticulos[0][1] = "3";
 
 
+
         //Buscar cómo hacer una matriz dinámica.
 
         proveedorDTO.cuit = 1234;
+
         documentoDTO.tipoDocumento = TipoDocumento.Factura;
         documentoDTO.cuitProveedor = 1234;
         documentoDTO.fechaString = "2020-05-03";
@@ -44,6 +46,7 @@ public class App {
         mainController.altaProveedor(proveedorDTO);
 
         Optional<Proveedor> proveedor = mainController.getRepositorioProveedores().buscarPorCuit(documentoDTO.cuitProveedor);
+
         documentosController.altaDocumento(documentoDTO,proveedor);
 
         List<Documento> listaProductos = documentosController.getRepositorioDocumentos().getElementos();

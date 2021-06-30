@@ -1,0 +1,53 @@
+[
+  {
+    "fecha" : "2020-05-19",
+    "monto total" : "750",
+    "tipo documento" : "factura",
+    "pagado" : "true",
+    "cuit proveedor" : "1234",
+    "lista articulos": [
+      ["lapicera","3"],
+      ["cuaderno","4"],
+      ["goma","5"]
+
+    ]},
+
+  {
+    "fecha" : "2020-05-19",
+    "monto total" : "750",
+    "tipo documento" : "nota credito",
+    "pagado" : "true",
+    "cuit proveedor" : "1234",
+    "lista articulos": [
+      ["lapicera","3"],
+      ["cuaderno","4"],
+      ["goma","5"]
+
+    ]
+
+
+  },
+  {
+    "fecha" : "2020-05-19",
+    "monto total" : "750",
+    "tipo documento" : "nota debito",
+    "pagado" : "true",
+    "cuit proveedor" : "1234",
+    "lista articulos": [
+      ["lapicera","3"],
+      ["cuaderno","4"],
+      ["goma","5"]
+
+    ]
+
+
+  }
+
+
+
+
+
+
+
+
+]
