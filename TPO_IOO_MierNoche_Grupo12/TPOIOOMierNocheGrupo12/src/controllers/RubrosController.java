@@ -76,6 +76,16 @@ public class RubrosController {
         return rubro.get().toDTO();
     }
 
+    public List<Rubro.RubroDTO> listarRubros () {
+        List<Rubro.RubroDTO> rubrosDTO = new ArrayList<>();
+
+        for (Rubro rubro : this.repositorioRubros.buscarTodos()) {
+            rubrosDTO.add(rubro.toDTO());
+        }
+
+        return rubrosDTO;
+    }
+
     public Producto.ProductoDTO verProducto (Integer id) {
         Optional<Producto> producto = this.repositorioProductos.getPorID(id);
 
@@ -117,6 +127,4 @@ public class RubrosController {
 
         return precioPorProveedorDTO;
     }
-
-
 }

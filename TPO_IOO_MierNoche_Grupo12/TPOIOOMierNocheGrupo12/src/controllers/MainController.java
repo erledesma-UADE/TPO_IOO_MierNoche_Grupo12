@@ -1,8 +1,9 @@
 package controllers;
 
 import controllers.exceptions.CuitRepetidoException;
-import controllers.exceptions.cuitRepetidoException;
+import controllers.exceptions.CuitRepetidoException;
 import models.domain.Proveedor;
+import models.repositories.RepositorioCuentasCorrientes;
 import models.repositories.RepositorioOrdenesDePago;
 import models.repositories.RepositorioProveedores;
 
@@ -16,6 +17,7 @@ public class MainController {
     private static MainController instancia;
     private RepositorioProveedores repositorioProveedores;
     private RepositorioOrdenesDePago repositorioOrdenesDePago;
+    private RepositorioCuentasCorrientes repositorioCuentasCorrientes;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -118,7 +120,9 @@ public class MainController {
 
     public void /*Proveedor*/ getProveedor (int idProveedor) {} //devuelve un ProveedorDTO
 
-    public void mostrarCuentaCorrienteProveedores () {}
+    public void mostrarCuentaCorrienteProveedores () {
+
+    }
 
     public void getCuentasProveedores () {} //Seria una Lista de CuentaCorrienteDTO ?
 

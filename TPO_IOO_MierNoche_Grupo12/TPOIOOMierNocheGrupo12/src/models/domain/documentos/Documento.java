@@ -83,7 +83,7 @@ public abstract class Documento extends ID {
     }
 
     public boolean isPagado() {
-        return pagado;
+        return this.pagado;
     }
 
     public void setPagado(boolean pagado) {

@@ -49,11 +49,9 @@ public class CuentaCorriente extends ID {
 
     }
 
-    /*public void actualizarMontoDeuda(Documento documento){ // metodo diagrama
-        this.montoDeuda = documento.getMontoTotal();
-    }*/
-
-
+    public void actualizarMontoDeuda(Documento documento){
+        //documento.isPagado() ? this.montoDeuda -= documento.getMontoTotal() : this.montoDeuda += documento.getMontoTotal();
+    }
 
     public int getIDCuentaCorriente() {
         return IDCuentaCorriente;
@@ -90,18 +88,37 @@ public class CuentaCorriente extends ID {
         System.out.print(cadena);
     }*/
 
+    public void pagoImpago (List<Documento> documentosPagos, List<Documento> documentosImpagos) {
+        for (Documento documento: this.documentos) {
+            if (documento.isPagado()) {
+                documentosPagos.add(documento);
+            } else {
+                documentosImpagos.add(documento);
+            }
+        }
+    }
+
+    public VistaCuentasProveedoresDTO toVistaCuentasProveedoresDTO () {
+        VistaCuentasProveedoresDTO dto = new VistaCuentasProveedoresDTO();
+
+        dto.documentos = this.documentos;
+        dto.montoDeuda = this.montoDeuda;
+        pagoImpago(dto.documentosPagos, dto.documentosImpagos);
+
+        return dto;
+    }
+
     public CuentaCorrienteDTO toDTO(){
         CuentaCorrienteDTO dto = new CuentaCorrienteDTO();
+
         dto.IDCuentaCorriente = super.getID();
         dto.proveedor = this.proveedor;
         dto.debito = this.debito;
         dto.credito = this.credito;
         dto.documentos = this.documentos;
         dto.montoDeuda = this.montoDeuda;
+
         return dto;
-
-
-
     }
 
     public class CuentaCorrienteDTO{
@@ -116,4 +133,10 @@ public class CuentaCorriente extends ID {
 
     }
 
+    public static class VistaCuentasProveedoresDTO {
+        public float montoDeuda;
+        public List<Documento> documentos;
+        public List<Documento> documentosImpagos;
+        public List<Documento> documentosPagos;
+    }
 }
