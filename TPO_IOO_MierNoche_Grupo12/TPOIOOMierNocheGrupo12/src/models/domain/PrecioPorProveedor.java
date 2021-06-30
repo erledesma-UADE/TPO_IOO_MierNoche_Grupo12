@@ -1,6 +1,7 @@
 package models.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrecioPorProveedor extends ID {
@@ -14,9 +15,7 @@ public class PrecioPorProveedor extends ID {
     public PrecioPorProveedor() {}
 
     public PrecioPorProveedor(String fecha, String monto, String productoString, String cuitProveedor) {
-        //this.fechaAcuerdo = this.stringToLocalDate(fechaAcuerdo);
-        this.fecha = fecha;
-        //this.monto = Float.parseFloat(monto);
+        this.preciosAcordados = new ArrayList<>();
         this.productoString = productoString;
         this.cuitProveedor = Integer.parseInt(cuitProveedor);
     }
@@ -26,22 +25,6 @@ public class PrecioPorProveedor extends ID {
         LocalDate dia = LocalDate.of(Integer.parseInt(fechas[0]), Integer.parseInt(fechas[1]), Integer.parseInt(fechas[2]));
         return dia;
     }
-
-    /*public LocalDate getFechaAcuerdo() {
-        return fechaAcuerdo;
-    }*/
-
-    /*public void setFechaAcuerdo(LocalDate fechaAcuerdo) {
-        this.fechaAcuerdo = fechaAcuerdo;
-    }
-
-    public float getMonto() {
-        return monto;
-    }
-
-    public void setMonto(float monto) {
-        this.monto = monto;
-    }*/
 
     public Producto getProducto() {
         return producto;
@@ -77,7 +60,8 @@ public class PrecioPorProveedor extends ID {
     }
 
     public PreciosAcordados getUltimoPrecio () {
-        return this.preciosAcordados.get(0);
+
+        return this.preciosAcordados.get(this.preciosAcordados.size()-1);
     }
 
     public PrecioPorProveedorDTO toDTO () {
