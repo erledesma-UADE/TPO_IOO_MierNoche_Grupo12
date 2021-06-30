@@ -1,7 +1,6 @@
 package models.repositories;
 
 import models.domain.OrdenPago;
-import models.domain.PrecioPorProducto;
 
 import java.util.Optional;
 
