@@ -20,6 +20,14 @@ public class PrecioPorProveedor extends ID {
         this.cuitProveedor = Integer.parseInt(cuitProveedor);
     }
 
+    public List<PreciosAcordados> getPreciosAcordados() {
+        return preciosAcordados;
+    }
+
+    public void setPreciosAcordados(List<PreciosAcordados> preciosAcordados) {
+        this.preciosAcordados = preciosAcordados;
+    }
+
     private LocalDate stringToLocalDate(String fecha){
         String[] fechas = fecha.split("-");
         LocalDate dia = LocalDate.of(Integer.parseInt(fechas[0]), Integer.parseInt(fechas[1]), Integer.parseInt(fechas[2]));

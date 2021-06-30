@@ -16,18 +16,31 @@ public abstract class Documento extends ID {
     private int idDocumento;
     private Optional<Proveedor> proveedor;
     private LocalDate fecha;
-    private String fechaString;
     private double montoTotal;
+    private List<CantidadPorProducto> articulos;
+    private String[][] articulosMatriz;
+
+    private String fechaString;
     private TipoDocumento tipoDocumento;
     private boolean pagado;
-    private List<CantidadPorProducto> articulos;
     private Integer cuitProveedor;
 
     public Documento() {
-        //this.fecha = LocalDate.now();
         this.articulos = new ArrayList<>();
-        this.pagado = false;
+        this.articulosMatriz = new String[3][2];
     }
+
+    public Documento(String fechaString, Integer cuitProveedor, boolean pagado, TipoDocumento tipoDocumento, String[][] articulosMatriz) {
+        this.fechaString = fechaString;
+        this.articulos = new ArrayList<>();
+        this.pagado = pagado;
+        this.tipoDocumento = tipoDocumento;
+        this.cuitProveedor = cuitProveedor;
+        this.articulosMatriz = articulosMatriz;
+    }
+
+
+
 
     public Optional<Proveedor> getProveedor() {
         return proveedor;

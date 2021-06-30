@@ -40,12 +40,12 @@ public class RubrosController {
         this.repositorioRubros.agregar(rubro);
     }
 
-    public void altaProducto (Producto.ProductoDTO productoDTO) {
+    /*public void altaProducto (Producto.ProductoDTO productoDTO) {
         Producto producto = new Producto();
         asignarParametrosProducto(producto, productoDTO);
 
         this.repositorioProductos.agregar(producto);
-    }
+    }*/
 
     public void agregarProducto(Integer id) {
         this.repositorioRubros.getPorID(id).get().getProductos().add(this.repositorioProductos.getPorID(id).get());

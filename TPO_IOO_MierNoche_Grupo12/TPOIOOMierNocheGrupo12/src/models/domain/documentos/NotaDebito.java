@@ -11,6 +11,7 @@ public class NotaDebito extends Documento{
     private String emisor;
 
     public NotaDebito() {
+
     }
 
     public String getDescripcion() {

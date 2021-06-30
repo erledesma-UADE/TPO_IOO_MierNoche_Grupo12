@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class PreciosAcordados {
     private LocalDate fechaAcuerdo;
     private float monto;
+    private String fechaAcuerdoString;
 
     public LocalDate getFechaAcuerdo() {
         return fechaAcuerdo;

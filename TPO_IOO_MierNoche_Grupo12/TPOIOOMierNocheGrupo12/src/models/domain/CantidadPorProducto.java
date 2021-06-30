@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public class CantidadPorProducto {
     private Optional<Producto> producto;
+    private String productoString;
     private float cantidad;
     private double precioFinal;
 

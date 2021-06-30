@@ -102,6 +102,7 @@ public class DocumentosController {
                 }
             }
             CantidadPorProducto productoAux = new CantidadPorProducto(producto, cantidad, documentoDto.cuitProveedor);
+            System.out.println(productoAux);
             documento.agregarArticulo(productoAux);
         }
         documento.setMontoTotal();

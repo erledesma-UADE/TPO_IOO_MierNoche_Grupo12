@@ -1,0 +1,34 @@
+[
+  {
+    "fechaString" : "2020-05-19",
+    "tipoDocumento" : "Factura",
+    "pagado" : "true",
+    "cuitProveedor" : "1234",
+    "listaArticulos": [
+      ["lapicera","3,"],
+      ["cuaderno","4"],
+      ["goma","5"]
+
+    ]},
+
+  {
+    "fechaString" : "2020-05-30",
+    "tipoDocumento" : "Factura",
+    "pagado" : "true",
+    "cuitProveedor" : "12345",
+    "listaArticulos": [
+    ["lapicera","3"],
+    ["cuaderno","4"],
+    ["goma","5"]
+
+  ]  },
+  {
+    "fechaString" : "2020-08-20",
+    "tipoDocumento" : "Factura",
+    "pagado" : "false",
+    "cuitProveedor" : "12346",
+    "listaArticulos": [
+      ["cuaderno","4"],
+      ["goma","5"]
+  ]}
+]

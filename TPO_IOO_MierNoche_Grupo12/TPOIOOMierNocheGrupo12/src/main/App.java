@@ -2,10 +2,12 @@ package main;
 
 import controllers.DocumentosController;
 import controllers.MainController;
+import models.domain.CantidadPorProducto;
 import models.domain.Proveedor;
 import models.domain.documentos.Documento;
 import models.domain.enums.TipoDocumento;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,9 @@ public class App {
         MainController mainController = new MainController();
         DocumentosController documentosController = new DocumentosController();
 
-        CargaJsons cargaJsons = new CargaJsons();
+        //CargaJsons cargaJsons = new CargaJsons();
 
-        cargaJsons.cargaArchivos(documentosController.getRepositorioProductos());
+        //cargaJsons.cargaArchivos(documentosController.getRepositorioProductos(), documentosController.getRepositorioDocumentos());
 
 
         /************* PRUEBA ALTA DOCUMENTO **************/
@@ -27,10 +29,14 @@ public class App {
         Proveedor.ProveedorDTO proveedorDTO = new Proveedor.ProveedorDTO();
         Documento.DocumentoDTO documentoDTO = new Documento.DocumentoDTO();
 
+        /*CantidadPorProducto[] arrayArticulosObj = new ArrayList<Object>().toArray();
+        CantidadPorProducto objetoPrueba = {"nombre" : "Lapicera", ""}*/
+
+
+
         String[][] pruebaArticulos = new String[1][2];
         pruebaArticulos[0][0] = "Lapicera";
         pruebaArticulos[0][1] = "3";
-
 
 
         //Buscar cómo hacer una matriz dinámica.
@@ -50,8 +56,13 @@ public class App {
         documentosController.altaDocumento(documentoDTO,proveedor);
 
         List<Documento> listaProductos = documentosController.getRepositorioDocumentos().getElementos();
+
         for (Documento documento : listaProductos) {
-            System.out.println(documento.getMontoTotal());
+            List<CantidadPorProducto> listaProductosPrueba = documento.getArticulos();
+            System.out.print("proveedor " + documento.getCuitProveedor() + "\n");
+            for(CantidadPorProducto cantidad : listaProductosPrueba){
+                System.out.println("productos " + cantidad.getProducto().get().getNombre());
+            }
         }
 
 
