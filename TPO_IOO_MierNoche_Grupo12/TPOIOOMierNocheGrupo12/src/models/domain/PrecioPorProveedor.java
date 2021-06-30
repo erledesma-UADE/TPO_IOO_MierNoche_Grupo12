@@ -7,15 +7,16 @@ public class PrecioPorProveedor extends ID {
     private List<PreciosAcordados> preciosAcordados;
     private Producto producto;
     private Proveedor proveedor;
-    private String fecha;
+
+    //private String fecha;
     private String productoString;
     private int cuitProveedor;
 
     public PrecioPorProveedor() {}
 
-    public PrecioPorProveedor(String fecha, String monto, String productoString, String cuitProveedor) {
+    public PrecioPorProveedor(/*String fecha, */String monto, String productoString, String cuitProveedor) {
         //this.fechaAcuerdo = this.stringToLocalDate(fechaAcuerdo);
-        this.fecha = fecha;
+        //this.fecha = fecha;
         //this.monto = Float.parseFloat(monto);
         this.productoString = productoString;
         this.cuitProveedor = Integer.parseInt(cuitProveedor);

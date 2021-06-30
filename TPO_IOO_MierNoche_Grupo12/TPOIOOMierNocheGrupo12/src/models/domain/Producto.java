@@ -10,7 +10,8 @@ public class Producto extends ID {
     private Iva impuesto;
     private List<PrecioPorProveedor> precioPorProveedor;
 
-    public Producto () {}
+    public Producto() {
+    }
 
     public Producto(String nombre, String tipoUnidad, String impuestoAux) {
         this.nombre = nombre;

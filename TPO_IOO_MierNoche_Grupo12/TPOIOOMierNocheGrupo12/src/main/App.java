@@ -19,7 +19,7 @@ public class App {
 
         CargaJsons cargaJsons = new CargaJsons();
 
-        cargaJsons.cargaArchivos(documentosController.getRepositorioProductos());
+        cargaJsons.cargaArchivos(documentosController.getRepositorioProductos(), documentosController.getRepositorioDocumentos());
 
 
         /************* PRUEBA ALTA DOCUMENTO **************/
@@ -51,7 +51,7 @@ public class App {
 
         List<Documento> listaProductos = documentosController.getRepositorioDocumentos().getElementos();
         for (Documento documento : listaProductos) {
-            System.out.println(documento.getMontoTotal());
+            System.out.println(documento.getCuitProveedor());
         }
 
 
