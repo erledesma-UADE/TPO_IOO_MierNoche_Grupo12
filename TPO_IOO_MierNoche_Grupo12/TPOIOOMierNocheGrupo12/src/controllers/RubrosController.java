@@ -1,14 +1,12 @@
 package controllers;
 
-import models.domain.PrecioPorProducto;
+import models.domain.PrecioPorProveedor;
 import models.domain.Producto;
-import models.domain.Proveedor;
 import models.domain.Rubro;
 import controllers.exceptions.ProductoNoPertenceAlRubroException;
 import controllers.exceptions.RubroNoExisteException;
 import models.repositories.RepositorioPrecioPorProducto;
 import models.repositories.RepositorioProductos;
-import models.repositories.RepositorioProveedores;
 import models.repositories.RepositorioRubros;
 
 import java.util.ArrayList;
@@ -20,6 +18,8 @@ public class RubrosController {
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
     private RepositorioPrecioPorProducto repositorioPrecioPorProducto;
+
+    private MainController mainController = MainController.getInstancia();
 
     public static RubrosController getInstancia () {
         if(RubrosController.instancia == null)
@@ -58,6 +58,11 @@ public class RubrosController {
         //agregarPrecioPorProveedor(productoDTO.precioPorProveedor);
     }
 
+    public void asignarParametrosPrecioPorProducto (PrecioPorProveedor precioPorProveedor,
+                                                    PrecioPorProveedor.PrecioPorProveedorDTO precioPorProductoDTO) {
+
+    }
+
     public void agregarProveedores(Integer id) {
     }
 
@@ -81,24 +86,37 @@ public class RubrosController {
         return producto.get().toDTO();
     }
 
-    /*public void  altaPrecioPorProducto (PrecioPorProducto.PrecioPorProductoDTO precioPorProductoDTO) {
-        PrecioPorProducto precioPorProducto = new PrecioPorProducto();
-        precioPorProducto.asinarParametros(precioPorProductoDTO);
+    public void  altaPrecioPorProducto (PrecioPorProveedor.PrecioPorProveedorDTO precioPorProductoDTO) {
+        PrecioPorProveedor precioPorProveedor = new PrecioPorProveedor();
+        //precioPorProveedor.asignarParametros(precioPorProductoDTO);
 
-        this.repositorioPrecioPorProducto.agregar(precioPorProducto);
-    }*/
+        this.repositorioPrecioPorProducto.agregar(precioPorProveedor);
+    }
 
-    /*public List<PrecioPorProducto.PrecioPorProductoDTO> mostrarCompulsa (int idRubro, int idProducto) {
+    public List<PrecioPorProveedor> getPreciosPorProveedor (int idRubro, int idProducto) {
             Optional<Rubro> rubro = this.repositorioRubros.getPorID(idRubro);
             if (rubro.isPresent()) {
                 if (rubro.get().getProductos().contains(this.repositorioProductos.getPorID(idProducto).get())) {
-                    Optional<Producto> producto = this.repositorioProductos.getPorID(idProducto);
-                    return producto.get().toDTO().precioPorProveedor;
+                    List<PrecioPorProveedor> precioPorProveedor = this.repositorioPrecioPorProducto.buscarPorProducto(idProducto);
+
+                    return precioPorProveedor;
                 } else {
                     throw new ProductoNoPertenceAlRubroException("El Producto " + idProducto + " no pertenece a ese rubro");
                 }
             } else {
                 throw new RubroNoExisteException("El Rubro " + idRubro + "no existe");
             }
-    }*/
+    }
+
+    public List<PrecioPorProveedor.UltimoPrecioDTO> verUltimosPrecios (List<PrecioPorProveedor> precioPorProveedor) {
+        List<PrecioPorProveedor.UltimoPrecioDTO> precioPorProveedorDTO = new ArrayList<>();
+
+        for (PrecioPorProveedor ultimoPrecio : precioPorProveedor) {
+            precioPorProveedorDTO.add(ultimoPrecio.toUltimoPrecioDTO());
+        }
+
+        return precioPorProveedorDTO;
+    }
+
+
 }

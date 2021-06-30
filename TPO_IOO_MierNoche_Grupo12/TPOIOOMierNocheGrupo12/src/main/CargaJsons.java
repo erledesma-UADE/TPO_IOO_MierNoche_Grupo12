@@ -22,8 +22,6 @@ public class CargaJsons {
         for (Producto producto : userArray) {
             repositorioProductos.agregar(producto);
         }
-
-
     }
 
     public String cargarJsonVariable(String nombreArchivo){
