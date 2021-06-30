@@ -9,5 +9,13 @@
     "monto" : "8.0",
     "productoString" : "Goma",
     "cuitProveedor" : "23456"
-  }
+  },{
+  "articulos": [
+    ["lapicera","3"],
+    ["goma","5"]
+
+  ]
+}
 ]
+
+

@@ -2,7 +2,7 @@ package controllers;
 
 import controllers.exceptions.ProductoNoPertenceAlRubroException;
 import controllers.exceptions.RubroNoExisteException;
-import models.domain.PrecioPorProducto;
+import models.domain.PrecioPorProveedor;
 import models.domain.Producto;
 import models.domain.Rubro;
 import models.repositories.RepositorioProductos;
@@ -27,7 +27,7 @@ public class RubrosController {
         this.repositorioRubros = new RepositorioRubros();
     }
 
-    public List<PrecioPorProducto.PrecioPorProductoDTO> mostrarCompulsa (int idRubro, int idProducto) {
+    public List<PrecioPorProveedor.PrecioPorProductoDTO> mostrarCompulsa (int idRubro, int idProducto) {
             Optional<Rubro> rubro = this.repositorioRubros.getPorID(idRubro);
             if (rubro.isPresent()) {
                 if (rubro.get().getProductos().contains(this.repositorioProductos.getPorID(idProducto))) {

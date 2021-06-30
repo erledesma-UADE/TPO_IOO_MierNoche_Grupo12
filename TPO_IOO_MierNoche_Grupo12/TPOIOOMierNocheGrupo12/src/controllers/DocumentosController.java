@@ -81,6 +81,7 @@ public class DocumentosController {
         documento.setFecha(documentoDto.fecha);
         documento.setProveedor(documentoDto.cuitProveedor);
         documento.setProveedor(proveedor);
+
         String[][] articulosVista = documentoDto.articulosVista;
         this.setArticulos(articulosVista,documento,documentoDto);
 

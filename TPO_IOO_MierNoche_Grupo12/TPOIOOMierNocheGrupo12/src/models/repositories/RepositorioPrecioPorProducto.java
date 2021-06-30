@@ -1,13 +1,12 @@
 package models.repositories;
 
-import models.domain.PrecioPorProducto;
-import models.domain.Proveedor;
+import models.domain.PrecioPorProveedor;
 
 import java.util.Optional;
 
-public class RepositorioPrecioPorProducto extends Repositorio<PrecioPorProducto> {
+public class RepositorioPrecioPorProducto extends Repositorio<PrecioPorProveedor> {
 
-    public Optional<PrecioPorProducto> buscarPrecioProveedor(Integer idProveedor) {
+    public Optional<PrecioPorProveedor> buscarPrecioProveedor(Integer idProveedor) {
         return this.getElementos()
                 .stream()
                 .filter(e -> e.getProveedor().equals(idProveedor))

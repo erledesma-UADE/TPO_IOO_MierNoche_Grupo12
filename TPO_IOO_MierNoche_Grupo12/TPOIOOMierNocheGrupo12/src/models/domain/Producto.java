@@ -2,17 +2,13 @@ package models.domain;
 
 import models.domain.enums.Iva;
 
-import javax.swing.text.html.parser.Parser;
-import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Float.parseFloat;
 
 public class Producto extends ID {
     private String nombre;
     private String tipoUnidad;
     private Iva impuesto;
-    private List<PrecioPorProducto> precioPorProveedor;
+    private List<PrecioPorProveedor> precioPorProveedor;
 
     public Producto(String nombre, String tipoUnidad, String impuestoAux) {
         this.nombre = nombre;
@@ -47,11 +43,11 @@ public class Producto extends ID {
         return 0;
     }
 
-    public List<PrecioPorProducto> getPrecioPorProveedor() {
+    public List<PrecioPorProveedor> getPrecioPorProveedor() {
         return precioPorProveedor;
     }
 
-    public void setPrecioPorProveedor(List<PrecioPorProducto> precioPorProveedor) {
+    public void setPrecioPorProveedor(List<PrecioPorProveedor> precioPorProveedor) {
         this.precioPorProveedor = precioPorProveedor;
     }
 
@@ -72,8 +68,8 @@ public class Producto extends ID {
         dto.nombre = this.nombre;
         dto.tipoUnidad = this.tipoUnidad;
         dto.idProducto = super.getID();
-        for (PrecioPorProducto pPproveedor : this.precioPorProveedor) {
-            PrecioPorProducto.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
+        for (PrecioPorProveedor pPproveedor : this.precioPorProveedor) {
+            PrecioPorProveedor.PrecioPorProductoDTO pPproveedorDTO = pPproveedor.toDTO();
             dto.precioPorProveedor.add(pPproveedorDTO);
         }
 
@@ -85,6 +81,6 @@ public class Producto extends ID {
         public String nombre;
         public String tipoUnidad;
         public Iva impuesto;
-        public List<PrecioPorProducto.PrecioPorProductoDTO> precioPorProveedor;
+        public List<PrecioPorProveedor.PrecioPorProductoDTO> precioPorProveedor;
     }
 }
