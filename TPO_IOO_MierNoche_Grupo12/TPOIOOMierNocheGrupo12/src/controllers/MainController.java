@@ -1,6 +1,7 @@
 package controllers;
 
-//import controllers.exceptions.cuitRepetidoException;
+import controllers.exceptions.CuitRepetidoException;
+import controllers.exceptions.cuitRepetidoException;
 import models.domain.Proveedor;
 import models.repositories.RepositorioOrdenesDePago;
 import models.repositories.RepositorioProveedores;
@@ -37,7 +38,7 @@ public class MainController {
 
     private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
         if(this.validarCuit(proveedorDTO.cuit)){
-            //throw new cuitRepetidoException("El proveedor ya existe");
+            throw new CuitRepetidoException("El proveedor ya existe");
         }
     }
 
