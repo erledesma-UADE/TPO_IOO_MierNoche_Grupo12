@@ -4,28 +4,63 @@
         "tipoUnidad" : "Unidad",
         "impuesto": "tipo2",
         "precioPorProveedor":
-                                [{
-                                    "fecha" : "2020-05-05",
-                                    "monto" : "5.0",
-                                    "productoString" : "Lapicera",
-                                    "cuitProveedor" : "1234"
-                                 },
-                                {
-                                    "fecha" : "2020-05-05",
-                                    "monto" : "8.0",
-                                    "productoString" : "Lapicera",
-                                    "cuitProveedor" : "234567"
-                                }]
+        [{
+            "fecha" : "2020-05-05",
+            "monto" : "5.0",
+            "productoString" : "Lapicera",
+            "cuitProveedor" : "1234"
+        },
+            {
+                "fecha" : "2020-05-05",
+                "monto" : "8.0",
+                "productoString" : "Lapicera",
+                "cuitProveedor" : "234567"
+            }]
 
     },{
-        "nombre" : "Goma",
-        "tipoUnidad" : "Unidad",
-        "impuesto": "tipo2"
+    "nombre" : "Goma",
+    "tipoUnidad" : "Unidad",
+    "impuesto": "tipo2"
+    "impuesto": "tipo2",
+    "precioPorProveedor":
+    [{
+        "fecha" : "2020-05-19",
+        "monto" : "15.0",
+        "productoString" : "cuaderno",
+        "cuitProveedor" : "1234"
     },
+        {
+            "fecha" : "2020-05-19",
+            "monto" : "10.0",
+            "productoString" : "cuaderno",
+            "cuitProveedor" : "234567"
+        }]
+
+
+
+
+},
     {
         "nombre" : "Regla",
         "tipoUnidad" : "Unidad",
         "impuesto": "tipo3"
+        "impuesto": "tipo3",
+        "precioPorProveedor":
+        [{
+            "fecha" : "2020-02-07",
+            "monto" : "35.0",
+            "productoString" : "mochila",
+            "cuitProveedor" : "1234"
+        },
+            {
+                "fecha" : "2020-02-07",
+                "monto" : "45.0",
+                "productoString" : "mochila",
+                "cuitProveedor" : "234567"
+            }]
+
+
+
     }
 
 ]
