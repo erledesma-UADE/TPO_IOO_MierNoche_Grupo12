@@ -1,11 +1,9 @@
 package models.domain;
 
-import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
 import models.domain.enums.Responsabilidad;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +23,7 @@ public class Proveedor extends ID {
     private float tope;
     private List<OrdenCompra> ordenDeCompra;
     private List<Factura> facturasEmitidas;
-    private List<PrecioPorProducto> catalogo;
+    private List<PrecioPorProveedor> catalogo;
     private Certificado certificado;
     private List<Impuesto> impuestos;
     private List<OrdenPago> ordenPago;
@@ -71,7 +69,7 @@ public class Proveedor extends ID {
         this.facturasEmitidas = facturasEmitidas;
     }
 
-    public void setCatalogo(List<PrecioPorProducto> catalogo) {
+    public void setCatalogo(List<PrecioPorProveedor> catalogo) {
         this.catalogo = catalogo;
     }
 
@@ -184,7 +182,7 @@ public class Proveedor extends ID {
         return facturasEmitidas;
     }
 
-    public List<PrecioPorProducto> getCatalogo() {
+    public List<PrecioPorProveedor> getCatalogo() {
         return catalogo;
     }
 
@@ -226,7 +224,7 @@ public class Proveedor extends ID {
         public float tope;
         public List<OrdenCompra> ordenDeCompra;
         public List<Factura> facturasEmitidas;
-        public List<PrecioPorProducto> catalogo;
+        public List<PrecioPorProveedor> catalogo;
         public Certificado certificado;
         public List<Impuesto> impuestos;
     }

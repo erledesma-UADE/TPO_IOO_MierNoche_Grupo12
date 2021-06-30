@@ -1,30 +1,12 @@
 package main;
 
-import com.google.gson.Gson;
-import com.sun.jdi.ArrayType;
 import controllers.DocumentosController;
 import controllers.MainController;
-import models.domain.ID;
-import models.domain.PrecioPorProducto;
-import models.domain.Producto;
 import models.domain.Proveedor;
 import models.domain.documentos.Documento;
-import models.domain.documentos.Factura;
-import models.domain.enums.Iva;
 import models.domain.enums.TipoDocumento;
-import models.repositories.Repositorio;
-import models.repositories.RepositorioProductos;
 
-import javax.print.attribute.standard.PrinterURI;
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 
