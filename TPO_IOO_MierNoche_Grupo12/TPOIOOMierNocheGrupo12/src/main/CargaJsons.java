@@ -24,7 +24,7 @@ public class CargaJsons {
             repositorioProductos.agregar(producto);
         }
 
-        json = this.cargarJsonVariable("TPO_IOO_MierNoche_Grupo12/documentos2.json");
+        json = this.cargarJsonVariable("TPO_IOO_MierNoche_Grupo12/Facturas.json");
         Factura[] documentosArray = gson.fromJson(json,Factura[].class);
         for (Factura factura : documentosArray){
             repositorioDocumentos.agregar(factura);

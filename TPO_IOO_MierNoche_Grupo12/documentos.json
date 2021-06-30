@@ -5,7 +5,6 @@
     "pagado" : "true",
     "cuitProveedor" : "1234",
     "listaArticulos": [
-      ["lapicera","3"],
       ["cuaderno","4"],
       ["goma","5"]
 
