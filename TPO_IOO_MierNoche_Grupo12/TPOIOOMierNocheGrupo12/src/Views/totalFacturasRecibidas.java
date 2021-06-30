@@ -56,15 +56,15 @@ public class totalFacturasRecibidas extends JFrame{
                     prov2 = Integer.parseInt(prov);
                 }
 
-                //Faltan metodos --- agregar  por prov y fecha
+                //Faltan metodos
                 if((!date.isEmpty() || !date.isBlank()) && (prov.isBlank() || prov.isEmpty())){
                     int totalF = DocumentosController.getInstancia().facturasEmitidasElDia(fechaFact2);
                     txtTotalFact.setText(String.valueOf(totalF));
                 }else if ((!prov.isBlank() || !prov.isEmpty()) && (date.isEmpty() ||date.isBlank())){
                     int totalP = MainController.getInstancia().totalFacturasRecibidas(prov2);
                     txtTotalFact.setText(String.valueOf(totalP));
-                }else{
-                    int total = DocumentosController.getInstancia().totalFacturasRecibidas();
+                }else if((!prov.isBlank() || !prov.isEmpty()) && (!date.isEmpty() || !date.isBlank())){
+                    int total = MainController.getInstancia().totalFacturasRecibidasEldia(prov2,fechaFact2);
                     txtTotalFact.setText(Integer.toString(total));
                 }
 

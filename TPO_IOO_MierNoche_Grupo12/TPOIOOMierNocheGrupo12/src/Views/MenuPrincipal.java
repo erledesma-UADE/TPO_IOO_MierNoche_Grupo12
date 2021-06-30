@@ -1,4 +1,4 @@
-/*package Views;
+package Views;
 
 import controllers.MainController;
 import models.domain.Proveedor;
@@ -258,7 +258,6 @@ public class MenuPrincipal{
 
                 List<Proveedor.ProveedorDTO> prov = new ArrayList<>();
                 prov = MainController.getInstancia().listarProveedores();
-                System.out.println(prov.size());
 
                 Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < prov.size(); i++){
@@ -269,7 +268,7 @@ public class MenuPrincipal{
                     x.addElement(String.valueOf(prov.get(i).direccion));
                     x.addElement(String.valueOf(prov.get(i).telefono));
                     x.addElement(String.valueOf(prov.get(i).email));
-                    x.addElement(String.valueOf(prov.get(i).rubros.get(i).getNombre()));
+                    x.addElement(String.valueOf(prov.get(i).rubros.get(0).getNombre()));//solo un rubro
                     x.addElement(String.valueOf(prov.get(i).responsabilidad));
                     x.addElement(String.valueOf(prov.get(i).numeroIngresosBrutos));
                     x.addElement(String.valueOf(prov.get(i).inicioActividades));
@@ -277,11 +276,11 @@ public class MenuPrincipal{
 
                     tableModel.addRow(x);
 
-                    System.out.println(rows2.size());
                 }
                 JTable tableProv = new JTable();
                 tableProv.setModel(tableModel);
                 tableProv.setBounds(10, 0, 457, 103);
+                tableProv.setEnabled(false);
                 frmLista.add(new JScrollPane(tableProv));
             }
         });
@@ -293,7 +292,7 @@ public class MenuPrincipal{
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.framePpal.setVisible(true);
         //System.exit(0);
-    }
+    }*/
 
 
-}*/
+}
