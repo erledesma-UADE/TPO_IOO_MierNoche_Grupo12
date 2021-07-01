@@ -200,6 +200,10 @@ public class Proveedor extends ID {
         this.ordenPago = ordenPago;
     }
 
+    public void agregarCatalogo(PrecioPorProveedor precioProveedor){
+        this.getCatalogo().add(precioProveedor);
+    }
+
     public int cantidadFacturasEmitasElDia(LocalDate unDia){
         List<Factura> facturasEmitidasElDia = new ArrayList<>();
         getFacturasEmitidas().forEach(factura ->{

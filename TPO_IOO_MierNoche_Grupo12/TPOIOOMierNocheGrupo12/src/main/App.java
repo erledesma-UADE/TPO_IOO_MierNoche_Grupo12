@@ -2,10 +2,10 @@ package main;
 
 import controllers.DocumentosController;
 import controllers.MainController;
-import models.domain.CantidadPorProducto;
-import models.domain.Proveedor;
+import models.domain.*;
 import models.domain.documentos.Documento;
 import models.domain.enums.TipoDocumento;
+import models.repositories.RepositorioProductos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +16,27 @@ public class App {
 
     public static void main(String[] args) {
 
-        MainController mainController = new MainController();
         DocumentosController documentosController = new DocumentosController();
+
+
+        //MainController mainController = new MainController();
+
+    }
+}
 
         //CargaJsons cargaJsons = new CargaJsons();
 
         //cargaJsons.cargaArchivos(documentosController.getRepositorioProductos(), documentosController.getRepositorioDocumentos());
 
 
-        /************* PRUEBA ALTA DOCUMENTO **************/
+        /*
+        ************ PRUEBA ALTA DOCUMENTO **************
 
         Proveedor.ProveedorDTO proveedorDTO = new Proveedor.ProveedorDTO();
         Documento.DocumentoDTO documentoDTO = new Documento.DocumentoDTO();
 
         /*CantidadPorProducto[] arrayArticulosObj = new ArrayList<Object>().toArray();
-        CantidadPorProducto objetoPrueba = {"nombre" : "Lapicera", ""}*/
-
+        CantidadPorProducto objetoPrueba = {"nombre" : "Lapicera", ""}*
 
 
         String[][] pruebaArticulos = new String[1][2];
@@ -53,20 +58,22 @@ public class App {
 
         Optional<Proveedor> proveedor = mainController.getRepositorioProveedores().buscarPorCuit(documentoDTO.cuitProveedor);
 
-        documentosController.altaDocumento(documentoDTO,proveedor);
+        documentosController.altaDocumento(documentoDTO, proveedor);
 
         List<Documento> listaProductos = documentosController.getRepositorioDocumentos().getElementos();
 
         for (Documento documento : listaProductos) {
             List<CantidadPorProducto> listaProductosPrueba = documento.getArticulos();
             System.out.print("proveedor " + documento.getCuitProveedor() + "\n");
-            for(CantidadPorProducto cantidad : listaProductosPrueba){
+            for (CantidadPorProducto cantidad : listaProductosPrueba) {
                 System.out.println("productos " + cantidad.getProducto().get().getNombre());
             }
         }
+    }
+}
 
 
-        /*Proveedor.ProveedorDTO proveedorDTO = new Proveedor.ProveedorDTO();
+        Proveedor.ProveedorDTO proveedorDTO = new Proveedor.ProveedorDTO();
         Proveedor.ProveedorDTO proveedorDTO2 = new Proveedor.ProveedorDTO();
         Proveedor.ProveedorDTO proveedorDTO3 = new Proveedor.ProveedorDTO();
         proveedorDTO.cuit = 1234569;
@@ -92,7 +99,7 @@ public class App {
     }
 
 }*/
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -122,3 +129,4 @@ import java.util.List;
             }
         }
     }}
+*/

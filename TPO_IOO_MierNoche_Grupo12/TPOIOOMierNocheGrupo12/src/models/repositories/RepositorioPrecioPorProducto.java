@@ -1,6 +1,7 @@
 package models.repositories;
 
 import models.domain.PrecioPorProveedor;
+import models.repositories.Datos.DatosPrecioPorProveedor;
 import models.repositories.Datos.DatosProveedores;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class RepositorioPrecioPorProducto extends Repositorio<PrecioPorProveedor
 
     public RepositorioPrecioPorProducto(){
         super();
-        //super.elementos = DatosProveedores.getProveedores();
+        super.elementos = DatosPrecioPorProveedor.getPreciosPorProveedor();
     }
 
     public Optional<PrecioPorProveedor> buscarPrecioProveedor(Integer idProveedor) {
@@ -35,3 +36,4 @@ public class RepositorioPrecioPorProducto extends Repositorio<PrecioPorProveedor
                 .filter(e -> e.getProducto().getID().equals(idProducto)).collect(Collectors.toList());
     }
 }
+

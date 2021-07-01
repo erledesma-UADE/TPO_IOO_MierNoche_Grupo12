@@ -25,16 +25,16 @@ public class DatosProductos {
         producto2.setImpuesto(Iva.tipo4);
 
         Producto producto3 = new Producto();
-        producto2.setID(3);
-        producto2.setNombre("Reparacion");
-        producto2.setTipoUnidad("Horas");
-        producto2.setImpuesto(Iva.tipo3);
+        producto3.setID(3);
+        producto3.setNombre("Reparacion");
+        producto3.setTipoUnidad("Horas");
+        producto3.setImpuesto(Iva.tipo3);
 
         Producto producto4 = new Producto();
-        producto2.setID(4);
-        producto2.setNombre("Galletitas");
-        producto2.setTipoUnidad("Unidad");
-        producto2.setImpuesto(Iva.tipo2);
+        producto4.setID(4);
+        producto4.setNombre("Galletitas");
+        producto4.setTipoUnidad("Unidad");
+        producto4.setImpuesto(Iva.tipo2);
 
         productos.add(producto1);
         productos.add(producto2);
