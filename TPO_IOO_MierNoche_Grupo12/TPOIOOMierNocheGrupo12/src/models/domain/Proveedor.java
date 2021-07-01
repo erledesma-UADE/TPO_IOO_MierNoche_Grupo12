@@ -27,6 +27,7 @@ public class Proveedor extends ID {
     private Certificado certificado;
     private List<Impuesto> impuestos;
     private List<OrdenPago> ordenPago;
+    private int idCuentaCorriente;
 
     public Proveedor() {
         this.rubros = new ArrayList<>();

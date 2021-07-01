@@ -2,6 +2,8 @@ package controllers;
 
 import controllers.exceptions.CuitRepetidoException;
 import controllers.exceptions.CuitRepetidoException;
+import models.domain.CuentaCorriente;
+import models.domain.OrdenPago;
 import models.domain.Proveedor;
 import models.repositories.RepositorioCuentasCorrientes;
 import models.repositories.RepositorioOrdenesDePago;
@@ -120,8 +122,34 @@ public class MainController {
 
     public void /*Proveedor*/ getProveedor (int idProveedor) {} //devuelve un ProveedorDTO
 
-    public void mostrarCuentaCorrienteProveedores () {
+    public List<CuentaCorriente.VistaCuentasProveedoresDTO> mostrarCuentaCorrienteProveedores () {
+        List<CuentaCorriente.VistaCuentasProveedoresDTO>  cuentasDTO = new ArrayList<>();
 
+        this.repositorioCuentasCorrientes.getElementos().forEach(documento -> {
+            cuentasDTO.add(documento.toVistaCuentasProveedoresDTO());
+        });
+        /*cuentasDTO.forEach(cuenta -> {
+            cuenta.montoDeuda;
+            cuenta.documentos.forEach(doc -> {
+                doc.cuitProveedor;
+                doc.idDocumento;
+            });
+        });*/
+        return cuentasDTO;
+    }
+
+    public List<OrdenPago.OrdenPagoDTO> verOrdenesPago () {
+        List<OrdenPago.OrdenPagoDTO> ordenes = new ArrayList<>();
+
+        this.repositorioOrdenesDePago.getElementos().forEach(orden -> {
+            ordenes.add(orden.toDTO());
+        });
+
+        return ordenes;
+    }
+
+    public float deudaPorProveedor (int cuit) {
+        return this.repositorioCuentasCorrientes.buscarPorCuitProveedor(cuit).get().getMontoDeuda();
     }
 
     public void getCuentasProveedores () {} //Seria una Lista de CuentaCorrienteDTO ?

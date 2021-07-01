@@ -113,7 +113,7 @@ public class OrdenPago extends ID {
     }
 
 
-    public static class OrdenPagoDto{
+    public static class OrdenPagoDTO{
         public List<Documento> documentos;
         public String tipoPago;
         public Proveedor proveedor;
@@ -125,8 +125,8 @@ public class OrdenPago extends ID {
         public boolean pagado;
     }
 
-    public OrdenPagoDto toDTO() {
-        OrdenPagoDto dto = new OrdenPagoDto();
+    public OrdenPagoDTO toDTO() {
+        OrdenPagoDTO dto = new OrdenPagoDTO();
         dto.fecha = this.fecha;
         dto.montoTotal = this.montoTotal;
         dto.pagado = this.pagado;

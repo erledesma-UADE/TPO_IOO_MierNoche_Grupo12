@@ -131,7 +131,7 @@ public abstract class Documento extends ID {
         this.articulos = articulos;
     }
 
-    public static class DocumentoDTO{
+    public static class DocumentoDTO {
         public Integer cuitProveedor;
         public int idDocumento;
         public LocalDate fecha;

@@ -13,15 +13,16 @@ public class CuentaCorriente extends ID {
     private List<Documento> documentos;
     private float montoDeuda;
 
-
     public CuentaCorriente(int IDCuentaCorriente, Proveedor proveedor, float debito, float credito,
-                           List<Documento> documentos, float montoDeuda) {
+                           List<Documento> documentos) {
         this.IDCuentaCorriente = IDCuentaCorriente;
         this.proveedor = proveedor;
         this.debito = debito;
         this.credito = credito;
-        this.documentos = documentos;
-        this.montoDeuda = montoDeuda;
+        this.documentos = new ArrayList<>();
+        documentos.forEach(documento -> {
+            agregarDocumento(documento);
+        });
     }
 
     public void setIDCuentaCorriente(int IDCuentaCorriente) {
@@ -49,8 +50,17 @@ public class CuentaCorriente extends ID {
 
     }
 
-    public void actualizarMontoDeuda(Documento documento){
-        //documento.isPagado() ? this.montoDeuda -= documento.getMontoTotal() : this.montoDeuda += documento.getMontoTotal();
+    public void agregarDocumento (Documento documento) {
+        this.documentos.add(documento);
+        actualizarMontoDeuda(documento);
+    }
+
+    public void actualizarMontoDeuda(Documento documento) {
+        if (documento.isPagado()) {
+            this.montoDeuda -= documento.getMontoTotal();
+        } else {
+            this.montoDeuda += documento.getMontoTotal();
+        }
     }
 
     public int getIDCuentaCorriente() {
@@ -73,7 +83,7 @@ public class CuentaCorriente extends ID {
         return documentos;
     }
 
-    public float getMontoDeuda() { // metodo devuelve monto deuda
+    public float getMontoDeuda() {
         return montoDeuda;
     }
 
@@ -88,12 +98,13 @@ public class CuentaCorriente extends ID {
         System.out.print(cadena);
     }*/
 
-    public void pagoImpago (List<Documento> documentosPagos, List<Documento> documentosImpagos) {
+    public void pagoImpago (List<Documento.DocumentoDTO> documentosPagos,
+                            List<Documento.DocumentoDTO> documentosImpagos) {
         for (Documento documento: this.documentos) {
             if (documento.isPagado()) {
-                documentosPagos.add(documento);
+                documentosPagos.add(documento.toDTO());
             } else {
-                documentosImpagos.add(documento);
+                documentosImpagos.add(documento.toDTO());
             }
         }
     }
@@ -101,7 +112,9 @@ public class CuentaCorriente extends ID {
     public VistaCuentasProveedoresDTO toVistaCuentasProveedoresDTO () {
         VistaCuentasProveedoresDTO dto = new VistaCuentasProveedoresDTO();
 
-        dto.documentos = this.documentos;
+        this.documentos.forEach(documento -> {
+            dto.documentos.add(documento.toDTO());
+        });
         dto.montoDeuda = this.montoDeuda;
         pagoImpago(dto.documentosPagos, dto.documentosImpagos);
 
@@ -135,8 +148,8 @@ public class CuentaCorriente extends ID {
 
     public static class VistaCuentasProveedoresDTO {
         public float montoDeuda;
-        public List<Documento> documentos;
-        public List<Documento> documentosImpagos;
-        public List<Documento> documentosPagos;
+        public List<Documento.DocumentoDTO> documentos;
+        public List<Documento.DocumentoDTO> documentosImpagos;
+        public List<Documento.DocumentoDTO> documentosPagos;
     }
 }
