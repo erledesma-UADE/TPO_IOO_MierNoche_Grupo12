@@ -29,53 +29,95 @@ public class DatosPrecioPorProveedor {
         preciosPorProveedor.add(precioPorProveedor1);
         producto1.agregarPrecioProveedor(precioPorProveedor1);
 
-        precioPorProveedor1.setID(2);
-        precioPorProveedor1.setCuitProveedor(123456);
-
-        preciosPorProveedor.add(precioPorProveedor1);
-        producto1.agregarPrecioProveedor(precioPorProveedor1);
-
 
         PrecioPorProveedor precioPorProveedor2 = new PrecioPorProveedor();
-        precioPorProveedor2.setID(3);
-        precioPorProveedor2.setCuitProveedor(1234);
-        precioPorProveedor2.setProducto(repositorioProductos.getPorID(2).get());
-        precioPorProveedor2.setPreciosAcordados(cargarPreciosAcordados(50,"2020-05-10","2020-10-19"));
 
-        preciosPorProveedor.add(precioPorProveedor2);
-
-        precioPorProveedor2.setID(4);
+        precioPorProveedor2.setID(2);
         precioPorProveedor2.setCuitProveedor(123456);
+        precioPorProveedor2.setProducto(producto1);
+        precioPorProveedor2.setPreciosAcordados(cargarPreciosAcordados(40,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor2);
+        producto1.agregarPrecioProveedor(precioPorProveedor2);
 
 
         PrecioPorProveedor precioPorProveedor3 = new PrecioPorProveedor();
-        precioPorProveedor3.setID(5);
+
+        precioPorProveedor3.setID(3);
         precioPorProveedor3.setCuitProveedor(1234);
-        precioPorProveedor3.setProducto(repositorioProductos.getPorID(3).get());
-        precioPorProveedor3.setPreciosAcordados(cargarPreciosAcordados(100,"2020-05-10","2020-10-19"));
+        Producto producto2 = repositorioProductos.getPorID(2).get();
+        precioPorProveedor3.setProducto(producto2);
+        precioPorProveedor3.setPreciosAcordados(cargarPreciosAcordados(50,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor3);
-
-        precioPorProveedor3.setID(6);
-        precioPorProveedor3.setCuitProveedor(123456);
-
-        preciosPorProveedor.add(precioPorProveedor3);
+        producto2.agregarPrecioProveedor(precioPorProveedor3);
 
 
         PrecioPorProveedor precioPorProveedor4 = new PrecioPorProveedor();
-        precioPorProveedor4.setID(7);
-        precioPorProveedor4.setCuitProveedor(1234);
-        precioPorProveedor4.setProducto(repositorioProductos.getPorID(4).get());
-        precioPorProveedor4.setPreciosAcordados(cargarPreciosAcordados(150,"2020-05-10","2020-10-19"));
-
-        preciosPorProveedor.add(precioPorProveedor4);
-
-        precioPorProveedor4.setID(8);
+        precioPorProveedor4.setID(4);
         precioPorProveedor4.setCuitProveedor(123456);
+        precioPorProveedor4.setProducto(producto2);
+        precioPorProveedor4.setPreciosAcordados(cargarPreciosAcordados(50,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor4);
+        producto2.agregarPrecioProveedor(precioPorProveedor4);
+
+
+        PrecioPorProveedor precioPorProveedor5 = new PrecioPorProveedor();
+
+        precioPorProveedor5.setID(5);
+        precioPorProveedor5.setCuitProveedor(1234);
+        Producto producto3 = repositorioProductos.getPorID(3).get();
+        precioPorProveedor5.setProducto(producto3);
+        precioPorProveedor5.setPreciosAcordados(cargarPreciosAcordados(100,"2020-05-10","2020-10-19"));
+
+        preciosPorProveedor.add(precioPorProveedor5);
+        producto3.agregarPrecioProveedor(precioPorProveedor5);
+
+
+        PrecioPorProveedor precioPorProveedor6 = new PrecioPorProveedor();
+        precioPorProveedor6.setID(6);
+        precioPorProveedor6.setCuitProveedor(123456);
+        precioPorProveedor6.setProducto(producto3);
+        precioPorProveedor6.setPreciosAcordados(cargarPreciosAcordados(100,"2020-05-10","2020-10-19"));
+
+        preciosPorProveedor.add(precioPorProveedor6);
+        producto3.agregarPrecioProveedor(precioPorProveedor6);
+
+
+        PrecioPorProveedor precioPorProveedor7 = new PrecioPorProveedor();
+        precioPorProveedor7.setID(7);
+        precioPorProveedor7.setCuitProveedor(1234);
+        Producto producto4 = repositorioProductos.getPorID(4).get();
+        precioPorProveedor7.setProducto(producto4);
+        precioPorProveedor7.setPreciosAcordados(cargarPreciosAcordados(150,"2020-05-10","2020-10-19"));
+
+        preciosPorProveedor.add(precioPorProveedor7);
+        producto4.agregarPrecioProveedor(precioPorProveedor7);
+
+
+        PrecioPorProveedor precioPorProveedor8 = new PrecioPorProveedor();
+        precioPorProveedor8.setID(8);
+        precioPorProveedor8.setCuitProveedor(123456);
+        precioPorProveedor8.setProducto(producto4);
+        precioPorProveedor8.setPreciosAcordados(cargarPreciosAcordados(150,"2020-05-10","2020-10-19"));
+
+        preciosPorProveedor.add(precioPorProveedor8);
+        producto4.agregarPrecioProveedor(precioPorProveedor8);
+
+
+        for (Producto producto : repositorioProductos.getElementos()) {
+            System.out.println("\nProducto id: " + producto.getID() + " Nombre: " + producto.getNombre());
+            List<PrecioPorProveedor> precioPorProducto = producto.getPrecioPorProveedor();
+            for(PrecioPorProveedor precioPorProveedor : precioPorProducto){
+                System.out.println("\nCuit proveedor: " + precioPorProveedor.getCuitProveedor() + " - Producto: " + precioPorProveedor.getProducto().getNombre());
+                List<PreciosAcordados> preciosAcordados = precioPorProveedor.getPreciosAcordados();
+                for(PreciosAcordados precioAcordado : preciosAcordados){
+                    System.out.println("Fecha acuerdo " + precioAcordado.getFechaAcuerdo() + " - Monto: " + precioAcordado.getMonto());
+                }
+            }
+        }
+
 
         return preciosPorProveedor;
     }

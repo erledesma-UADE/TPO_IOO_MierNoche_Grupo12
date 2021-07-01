@@ -11,6 +11,7 @@ import models.domain.documentos.NotaCredito;
 import models.domain.documentos.NotaDebito;
 import models.domain.enums.TipoDocumento;
 import models.repositories.RepositorioDocumentos;
+import models.repositories.RepositorioPrecioPorProducto;
 import models.repositories.RepositorioProductos;
 
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ public class DocumentosController {
     private static DocumentosController instancia;
     private RepositorioDocumentos repositorioDocumentos;
     private RepositorioProductos  repositorioProductos;
+    private RepositorioPrecioPorProducto repositorioPrecioPorProducto;
 
     public static DocumentosController getInstancia(){
         if(DocumentosController.instancia == null)
@@ -33,8 +35,9 @@ public class DocumentosController {
     }
 
     public DocumentosController(){
-        this.repositorioDocumentos = new RepositorioDocumentos();
         this.repositorioProductos = new RepositorioProductos();
+        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProducto();
+        this.repositorioDocumentos = new RepositorioDocumentos();
     };
 
     public RepositorioProductos getRepositorioProductos() {
