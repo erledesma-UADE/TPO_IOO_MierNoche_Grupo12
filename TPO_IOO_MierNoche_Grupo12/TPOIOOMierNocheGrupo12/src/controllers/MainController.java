@@ -27,7 +27,7 @@ public class MainController {
         return instancia;
     }
 
-    public MainController(){
+    private MainController(){
 
         this.repositorioProveedores = new RepositorioProveedores();
         this.repositorioOrdenesDePago  = new RepositorioOrdenesDePago();

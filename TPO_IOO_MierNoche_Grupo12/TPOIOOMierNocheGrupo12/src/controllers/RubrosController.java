@@ -27,7 +27,7 @@ public class RubrosController {
         return instancia;
     }
 
-    public RubrosController () {
+    private RubrosController () {
         this.repositorioRubros = new RepositorioRubros();
         this.repositorioProductos = new RepositorioProductos();
         this.repositorioPrecioPorProducto = new RepositorioPrecioPorProducto();

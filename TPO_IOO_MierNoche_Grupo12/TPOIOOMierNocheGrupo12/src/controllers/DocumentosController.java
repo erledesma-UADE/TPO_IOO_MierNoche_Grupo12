@@ -34,7 +34,7 @@ public class DocumentosController {
         return instancia;
     }
 
-    public DocumentosController(){
+    private DocumentosController(){
         this.repositorioProductos = new RepositorioProductos();
         this.repositorioPrecioPorProducto = new RepositorioPrecioPorProducto();
         this.repositorioDocumentos = new RepositorioDocumentos();

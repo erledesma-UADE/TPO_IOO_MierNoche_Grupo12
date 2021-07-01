@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.tools.javac.Main;
 import controllers.DocumentosController;
 import controllers.MainController;
 import models.domain.*;
@@ -16,10 +17,9 @@ public class App {
 
     public static void main(String[] args) {
 
-        DocumentosController documentosController = new DocumentosController();
+        DocumentosController documentosController = DocumentosController.getInstancia();
 
-
-        //MainController mainController = new MainController();
+        //MainController mainController = MainController.getInstancia();
 
     }
 }

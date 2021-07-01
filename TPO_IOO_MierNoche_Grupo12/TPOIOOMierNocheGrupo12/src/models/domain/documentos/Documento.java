@@ -39,9 +39,6 @@ public abstract class Documento extends ID {
         this.articulosMatriz = articulosMatriz;
     }
 
-
-
-
     public Optional<Proveedor> getProveedor() {
         return proveedor;
     }
@@ -129,6 +126,20 @@ public abstract class Documento extends ID {
 
     public void setArticulos(List<CantidadPorProducto> articulos) {
         this.articulos = articulos;
+    }
+
+    public void cambiarEstado () {
+        this.setPagado(true);
+        double montoActualizar = 0;
+
+        if (this.getTipoDocumento().equals(TipoDocumento.Factura) ||
+                this.getTipoDocumento().equals(TipoDocumento.NotaCredito)) {
+            montoActualizar = this.getMontoTotal() * -1;
+        } else {
+            montoActualizar = this.getMontoTotal();
+        }
+
+        this.proveedor.get().getCuentaCorriente().actualizarMontoDeuda(montoActualizar);
     }
 
     public static class DocumentoDTO {

@@ -52,15 +52,11 @@ public class CuentaCorriente extends ID {
 
     public void agregarDocumento (Documento documento) {
         this.documentos.add(documento);
-        actualizarMontoDeuda(documento);
+        actualizarMontoDeuda(documento.getMontoTotal());
     }
 
-    public void actualizarMontoDeuda(Documento documento) {
-        if (documento.isPagado()) {
-            this.montoDeuda -= documento.getMontoTotal();
-        } else {
-            this.montoDeuda += documento.getMontoTotal();
-        }
+    public void actualizarMontoDeuda(double monto) {
+        this.montoDeuda += monto;
     }
 
     public int getIDCuentaCorriente() {

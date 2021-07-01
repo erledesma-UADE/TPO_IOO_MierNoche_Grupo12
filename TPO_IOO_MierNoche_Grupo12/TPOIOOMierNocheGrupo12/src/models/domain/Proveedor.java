@@ -27,7 +27,7 @@ public class Proveedor extends ID {
     private Certificado certificado;
     private List<Impuesto> impuestos;
     private List<OrdenPago> ordenPago;
-    private int idCuentaCorriente;
+    private CuentaCorriente cuentaCorriente;
 
     public Proveedor() {
         this.rubros = new ArrayList<>();
@@ -116,6 +116,14 @@ public class Proveedor extends ID {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public CuentaCorriente getCuentaCorriente() {
+        return this.cuentaCorriente;
+    }
+
+    public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
+        this.cuentaCorriente = cuentaCorriente;
     }
 
     public String getDireccion() {
