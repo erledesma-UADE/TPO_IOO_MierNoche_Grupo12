@@ -28,5 +28,19 @@ public class Retencion extends ID {
     public float calcularRetencion (float montoTotal) {
         return this.monto  = montoTotal * (impuesto.getPorcentaje() / 100);
     }
+
+    public RetencionDTO toDTO () {
+        RetencionDTO dto = new RetencionDTO();
+
+        dto.impuesto = this.impuesto.toDTO();
+        dto.monto = this.monto;
+
+        return dto;
+    }
+
+    public static class RetencionDTO {
+        public Impuesto.ImpuestoDTO impuesto;
+        public float monto;
+    }
 }
 

@@ -5,7 +5,7 @@ import models.domain.Producto;
 import models.domain.Rubro;
 import controllers.exceptions.ProductoNoPertenceAlRubroException;
 import controllers.exceptions.RubroNoExisteException;
-import models.repositories.RepositorioPrecioPorProducto;
+import models.repositories.RepositorioPrecioPorProveedor;
 import models.repositories.RepositorioProductos;
 import models.repositories.RepositorioRubros;
 
@@ -17,7 +17,7 @@ public class RubrosController {
     private static RubrosController instancia;
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
-    private RepositorioPrecioPorProducto repositorioPrecioPorProducto;
+    private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
 
     private MainController mainController = MainController.getInstancia();
 
@@ -30,7 +30,7 @@ public class RubrosController {
     private RubrosController () {
         this.repositorioRubros = new RepositorioRubros();
         this.repositorioProductos = new RepositorioProductos();
-        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProducto();
+        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProveedor();
     }
 
     public RepositorioRubros getRepositorioRubros() {
@@ -41,7 +41,7 @@ public class RubrosController {
         return repositorioProductos;
     }
 
-    public RepositorioPrecioPorProducto getRepositorioPrecioPorProducto() {
+    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
         return repositorioPrecioPorProducto;
     }
 

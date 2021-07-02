@@ -1,7 +1,7 @@
 package models.repositories.Datos;
 
 import models.domain.PrecioPorProveedor;
-import models.domain.PreciosAcordados;
+import models.domain.PrecioAcordado;
 import models.domain.Producto;
 import models.repositories.RepositorioProductos;
 
@@ -111,8 +111,8 @@ public class DatosPrecioPorProveedor {
             List<PrecioPorProveedor> precioPorProducto = producto.getPrecioPorProveedor();
             for(PrecioPorProveedor precioPorProveedor : precioPorProducto){
                 System.out.println("\nCuit proveedor: " + precioPorProveedor.getCuitProveedor() + " - Producto: " + precioPorProveedor.getProducto().getNombre());
-                List<PreciosAcordados> preciosAcordados = precioPorProveedor.getPreciosAcordados();
-                for(PreciosAcordados precioAcordado : preciosAcordados){
+                List<PrecioAcordado> preciosAcordados = precioPorProveedor.getPreciosAcordados();
+                for(PrecioAcordado precioAcordado : preciosAcordados){
                     System.out.println("Fecha acuerdo " + precioAcordado.getFechaAcuerdo() + " - Monto: " + precioAcordado.getMonto());
                 }
             }
@@ -122,10 +122,10 @@ public class DatosPrecioPorProveedor {
         return preciosPorProveedor;
     }
 
-    public static List<PreciosAcordados> cargarPreciosAcordados(float monto, String fecha1, String fecha2){
-        List<PreciosAcordados> preciosAcordados = new ArrayList<>();
+    public static List<PrecioAcordado> cargarPreciosAcordados(float monto, String fecha1, String fecha2){
+        List<PrecioAcordado> preciosAcordados = new ArrayList<>();
 
-        PreciosAcordados precioAcordado = new PreciosAcordados();
+        PrecioAcordado precioAcordado = new PrecioAcordado();
         precioAcordado.setFechaAcuerdo(LocalDate.parse(fecha1));
         precioAcordado.setMonto(monto);
 

@@ -3,7 +3,7 @@ package controllers;
 import controllers.exceptions.CuitRepetidoException;
 import models.domain.CuentaCorriente;
 import models.domain.OrdenPago;
-import models.domain.PreciosAcordados;
+import models.domain.PrecioAcordado;
 import models.domain.Proveedor;
 import models.repositories.RepositorioCuentasCorrientes;
 import models.repositories.RepositorioOrdenesDePago;
@@ -43,7 +43,8 @@ public class MainController {
     public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
         validarDatosProveedor(ordenPagoDTO.proveedor);
         OrdenPago ordenPago = new OrdenPago();
-        //asignarParametrosOrdenPago()
+        asignarParametrosOrdenPago(ordenPago, ordenPagoDTO);
+        this.repositorioOrdenesDePago.agregar(ordenPago);
     }
 
     private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
@@ -57,8 +58,12 @@ public class MainController {
         return proveedor.isPresent();
     }
 
-    public void agregarPrecioAcordado (PreciosAcordados.PrecioAcordadoDTO precioAcordadoDTO) {
-        PreciosAcordados precioAcordado = new PreciosAcordados();
+    public void agregarPrecioAcordado (PrecioAcordado.PrecioAcordadoDTO precioAcordadoDTO) {
+        PrecioAcordado precioAcordado = new PrecioAcordado();
+    }
+
+    public void asignarParametrosOrdenPago (OrdenPago ordenPago, OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+
     }
 
     private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
