@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class PreciosAcordados {
     private LocalDate fechaAcuerdo;
     private float monto;
-    private String fechaAcuerdoString;
+    private int cuitProveedor;
 
     public LocalDate getFechaAcuerdo() {
         return fechaAcuerdo;
@@ -21,5 +21,23 @@ public class PreciosAcordados {
 
     public void setMonto(float monto) {
         this.monto = monto;
+    }
+
+    public void setCuitProveedor (int cuitProveedor) { this.cuitProveedor = cuitProveedor; }
+
+    public PrecioAcordadoDTO toDTO () {
+        PrecioAcordadoDTO dto = new PrecioAcordadoDTO();
+
+        dto.cuitProveedor = this.cuitProveedor;
+        dto.fechaAcuerdo = this.fechaAcuerdo;
+        dto.monto = this.monto;
+
+        return dto;
+    }
+
+    public static class PrecioAcordadoDTO {
+        public LocalDate fechaAcuerdo;
+        public float  monto;
+        public int cuitProveedor;
     }
 }

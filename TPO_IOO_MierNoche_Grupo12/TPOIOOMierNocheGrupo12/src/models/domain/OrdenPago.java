@@ -32,8 +32,14 @@ public class OrdenPago extends ID {
         this.retenciones.add(retencion);
     }
 
-    public float calcularTotalRetenciones(){
-        return 0;
+    public float calcularTotalRetenciones () {
+        float totalRetenciones = 0;
+
+        for (Retencion retencion : this.retenciones) {
+            totalRetenciones += retencion.getMonto();
+        };
+
+        return totalRetenciones;
     }
 
     public void setDocumentos(List<Documento> documentos) {

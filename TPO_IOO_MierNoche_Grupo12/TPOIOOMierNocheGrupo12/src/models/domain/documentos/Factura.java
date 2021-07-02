@@ -25,12 +25,27 @@ public class Factura extends Documento {
         this.ordenDeCompra = ordenDeCompra;
     }
 
-
     public List<Impuesto> getImpuestos() {
         return impuestos;
     }
 
     public void setImpuestos(List<Impuesto> impuestos) {
         this.impuestos = impuestos;
+    }
+
+    public FacturaDTO facturaDTO () {
+        FacturaDTO dto = new FacturaDTO();
+
+        dto.ordenCompraDTO = this.ordenDeCompra.toDTO();
+        this.impuestos.forEach(impuesto -> {
+            dto.impuestosDTO.add(impuesto.toDTO());
+        });
+
+        return dto;
+    }
+
+    public static class FacturaDTO {
+        public OrdenCompra.OrdenCompraDTO ordenCompraDTO;
+        public List<Impuesto.ImpuestoDTO> impuestosDTO;
     }
 }

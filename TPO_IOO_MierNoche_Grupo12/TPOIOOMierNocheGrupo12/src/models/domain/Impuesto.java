@@ -1,8 +1,8 @@
 package models.domain;
 
 public class Impuesto {
-    String tipo;
-    float porcentaje;
+    private String tipo;
+    private float porcentaje;
 
     public Impuesto(String tipo, float porcentaje) {
         this.tipo = tipo;
@@ -23,5 +23,19 @@ public class Impuesto {
 
     public void setPorcentaje(float porcentaje) {
         this.porcentaje = porcentaje;
+    }
+
+    public ImpuestoDTO toDTO () {
+        ImpuestoDTO dto = new ImpuestoDTO();
+
+        dto.porcentaje = this.porcentaje;
+        dto.tipo = this.tipo;
+
+        return dto;
+    }
+
+    public static class ImpuestoDTO {
+        public String tipo;
+        public float porcentaje;
     }
 }

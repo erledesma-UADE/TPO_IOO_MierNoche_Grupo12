@@ -33,6 +33,18 @@ public class RubrosController {
         this.repositorioPrecioPorProducto = new RepositorioPrecioPorProducto();
     }
 
+    public RepositorioRubros getRepositorioRubros() {
+        return repositorioRubros;
+    }
+
+    public RepositorioProductos getRepositorioProductos() {
+        return repositorioProductos;
+    }
+
+    public RepositorioPrecioPorProducto getRepositorioPrecioPorProducto() {
+        return repositorioPrecioPorProducto;
+    }
+
     public void altaRubro (Rubro.RubroDTO rubroDTO) {
         Rubro rubro = new Rubro();
         rubro.setNombre(rubroDTO.nombre);
@@ -46,6 +58,13 @@ public class RubrosController {
 
         this.repositorioProductos.agregar(producto);
     }*/
+
+    public void asignarParametroRubro (Rubro rubro, Rubro.RubroDTO rubroDTO) {
+        rubro.setNombre(rubroDTO.nombre);
+        rubroDTO.productos.forEach(productoDTO -> {
+            agregarProducto(productoDTO.idProducto);
+        });
+    }
 
     public void agregarProducto(Integer id) {
         this.repositorioRubros.getPorID(id).get().getProductos().add(this.repositorioProductos.getPorID(id).get());

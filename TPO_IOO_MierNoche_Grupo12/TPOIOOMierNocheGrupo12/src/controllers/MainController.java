@@ -1,9 +1,9 @@
 package controllers;
 
 import controllers.exceptions.CuitRepetidoException;
-import controllers.exceptions.CuitRepetidoException;
 import models.domain.CuentaCorriente;
 import models.domain.OrdenPago;
+import models.domain.PreciosAcordados;
 import models.domain.Proveedor;
 import models.repositories.RepositorioCuentasCorrientes;
 import models.repositories.RepositorioOrdenesDePago;
@@ -40,6 +40,12 @@ public class MainController {
         this.repositorioProveedores.agregar(proveedor);
     }
 
+    public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+        validarDatosProveedor(ordenPagoDTO.proveedor);
+        OrdenPago ordenPago = new OrdenPago();
+        //asignarParametrosOrdenPago()
+    }
+
     private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
         if(this.validarCuit(proveedorDTO.cuit)){
             throw new CuitRepetidoException("El proveedor ya existe");
@@ -49,6 +55,10 @@ public class MainController {
     private boolean validarCuit(int cuit){
         Optional<Proveedor> proveedor = this.repositorioProveedores.buscarPorCuit(cuit);
         return proveedor.isPresent();
+    }
+
+    public void agregarPrecioAcordado (PreciosAcordados.PrecioAcordadoDTO precioAcordadoDTO) {
+        PreciosAcordados precioAcordado = new PreciosAcordados();
     }
 
     private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
@@ -62,9 +72,9 @@ public class MainController {
         proveedor.setNumeroIngresosBrutos(proveedorDto.numeroIngresosBrutos);
         proveedor.setTope(proveedorDto.tope);
         proveedor.setCertificado(proveedorDto.certificado);
-        proveedor.setCatalogo(proveedorDto.catalogo);
+        //proveedor.setCatalogo(proveedorDto.catalogo);
         proveedor.setRubros(proveedorDto.rubros);
-        proveedor.setImpuestos(proveedorDto.impuestos);
+        //proveedor.setImpuestos(proveedorDto.impuestos);
     }
 
     public List<Proveedor.ProveedorDTO> listarProveedores(){
@@ -150,6 +160,16 @@ public class MainController {
 
     public float deudaPorProveedor (int cuit) {
         return this.repositorioCuentasCorrientes.buscarPorCuitProveedor(cuit).get().getMontoDeuda();
+    }
+
+    public float totalImpuestosRetenidos () {
+        float totalImpuestosRetenidos = 0;
+
+        for (OrdenPago orden : this.repositorioOrdenesDePago.getElementos()) {
+            totalImpuestosRetenidos += orden.calcularTotalRetenciones();
+        }
+
+        return totalImpuestosRetenidos;
     }
 
     public void getCuentasProveedores () {} //Seria una Lista de CuentaCorrienteDTO ?

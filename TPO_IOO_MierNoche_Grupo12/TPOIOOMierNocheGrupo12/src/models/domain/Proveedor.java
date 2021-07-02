@@ -1,5 +1,6 @@
 package models.domain;
 
+import controllers.RubrosController;
 import models.domain.documentos.Factura;
 import models.domain.enums.Responsabilidad;
 
@@ -38,16 +39,15 @@ public class Proveedor extends ID {
 
     }
 
-    public float sumarOrdenesPago(){
+    public float sumarOrdenesPago(){//////////////////////////////////////////////
         float sumador = 0;
 
         for( int i=0; i<ordenPago.size();i++){
             sumador += ordenPago.get(i).calcularTotalRetenciones();
         }
+
         return sumador;
-
-
-    }
+    }//Verificar si se usa en algun lado
 
 
     public void agregarRubro(Rubro... rubros){
@@ -58,8 +58,14 @@ public class Proveedor extends ID {
         return cuit;
     }
 
-    public void setRubros(List<Rubro> rubros) {
-        this.rubros = rubros;
+    public void setRubros(List<Rubro.RubroDTO> rubrosDTO) {
+        RubrosController rubroController = RubrosController.getInstancia();
+
+        rubrosDTO.forEach(rubroDTO -> {
+            if (rubroController.getRepositorioRubros().getPorID(rubroDTO.idRubro).isPresent()) {
+                this.rubros.add(rubroController.getRepositorioRubros().getPorID(rubroDTO.idRubro).get());
+            }
+        });
     }
 
     public void setOrdenDeCompra(List<OrdenCompra> ordenDeCompra) {
@@ -224,6 +230,7 @@ public class Proveedor extends ID {
     }
 
     public static class ProveedorDTO{
+        public int idProveedor;
         public int cuit;
         public Responsabilidad responsabilidad;
         public String razonSocial;
@@ -233,17 +240,18 @@ public class Proveedor extends ID {
         public String email;
         public int numeroIngresosBrutos;
         public LocalDate inicioActividades;
-        public List<Rubro> rubros;
+        public List<Rubro.RubroDTO> rubros;
         public float tope;
-        public List<OrdenCompra> ordenDeCompra;
-        public List<Factura> facturasEmitidas;
-        public List<PrecioPorProveedor> catalogo;
+        public List<OrdenCompra.OrdenCompraDTO> ordenDeCompra;
+        public List<Factura.FacturaDTO> facturasEmitidas;
+        public List<PrecioPorProveedor.PrecioPorProveedorDTO> catalogo;
         public Certificado certificado;
-        public List<Impuesto> impuestos;
+        public List<Impuesto.ImpuestoDTO> impuestos;
     }
 
     public ProveedorDTO toDTO() {
         Proveedor.ProveedorDTO dto    = new Proveedor.ProveedorDTO();
+        dto.idProveedor = super.getID();
         dto.cuit = this.cuit;
         dto.responsabilidad = this.responsabilidad;
         dto.razonSocial = this.razonSocial;
@@ -253,13 +261,28 @@ public class Proveedor extends ID {
         dto.email = this.email;
         dto.numeroIngresosBrutos = this.numeroIngresosBrutos;
         dto.inicioActividades = this.inicioActividades;
-        dto.rubros = this.rubros;
         dto.tope = this.tope;
-        dto.ordenDeCompra = this.ordenDeCompra;
-        dto.facturasEmitidas = this.facturasEmitidas;
-        dto.catalogo = this.catalogo;
         dto.certificado = this.certificado;
-        dto.impuestos = this.impuestos;
+
+        this.impuestos.forEach(impuesto -> {
+            dto.impuestos.add(impuesto.toDTO());
+        });
+
+        this.ordenDeCompra.forEach(ordenCompra -> {
+            dto.ordenDeCompra.add(ordenCompra.toDTO());
+        });
+
+        this.rubros.forEach(rubro -> {
+            dto.rubros.add(rubro.toDTO());
+        });
+
+        this.catalogo.forEach(precioPorProveedor -> {
+            dto.catalogo.add(precioPorProveedor.toDTO());
+        });
+
+        this.impuestos.forEach(impuesto -> {
+            dto.impuestos.add(impuesto.toDTO());
+        });
 
         return dto;
     }
