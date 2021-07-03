@@ -23,12 +23,11 @@ public class DocumentosController {
     private static DocumentosController instancia;
     private RepositorioDocumentos repositorioDocumentos;
     private RepositorioProductos  repositorioProductos;
-<<<<<<< HEAD
+
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
-=======
-    private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
+
     private MainController mainController = MainController.getInstancia();
->>>>>>> erledesma
+
 
     public static DocumentosController getInstancia(){
         if(DocumentosController.instancia == null)
@@ -37,15 +36,10 @@ public class DocumentosController {
     }
 
     private DocumentosController(){
-<<<<<<< HEAD
         this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
         this.repositorioProductos = RepositorioProductos.getInstancia();
         this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
-=======
-        this.repositorioProductos = new RepositorioProductos();
-        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProveedor();
-        this.repositorioDocumentos = new RepositorioDocumentos();
->>>>>>> erledesma
+
     };
 
     //=================================================================================================================
@@ -134,12 +128,12 @@ public class DocumentosController {
         documento.setMontoTotal();
 <<<<<<< HEAD
     }*/
-=======
-    }
+
+
     //=================================================================================================================
     //FIN DOCUMENTOS
     //=================================================================================================================
->>>>>>> erledesma
+
 
     //=================================================================================================================
     //INICIO CONSULTAS GENERALES
