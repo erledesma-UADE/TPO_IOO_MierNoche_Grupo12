@@ -23,21 +23,8 @@ public class OrdenPago extends ID {
     private boolean pagado;
 
     public OrdenPago() {
+        this.retenciones = new ArrayList<>();
         this.documentos =new ArrayList<>();
-    }
-
-    public void agregarRetencion(Retencion retencion){
-        this.retenciones.add(retencion);
-    }
-
-    public float calcularTotalRetenciones () {
-        float totalRetenciones = 0;
-
-        for (Retencion retencion : this.retenciones) {
-            totalRetenciones += retencion.getMonto();
-        };
-
-        return totalRetenciones;
     }
 
     public void setDocumentos(List<Documento> documentos) {
@@ -116,6 +103,19 @@ public class OrdenPago extends ID {
         return formaPago;
     }
 
+    public void agregarRetencion(Retencion retencion){
+        this.retenciones.add(retencion);
+    }
+
+    public float calcularTotalRetenciones () {
+        float totalRetenciones = 0;
+
+        for (Retencion retencion : this.retenciones) {
+            totalRetenciones += retencion.getMonto();
+        };
+
+        return totalRetenciones;
+    }
 
     public void asignarFactura (Factura.FacturaDTO facturaDTO) {
         DocumentosController documentosController = DocumentosController.getInstancia();
