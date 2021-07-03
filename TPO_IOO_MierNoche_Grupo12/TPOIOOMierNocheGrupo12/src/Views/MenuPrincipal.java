@@ -1,10 +1,17 @@
 /*package Views;
 
+import controllers.MainController;
+import models.domain.Proveedor;
+
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 public class MenuPrincipal{
 
@@ -70,7 +77,7 @@ public class MenuPrincipal{
         JMenuItem totFactRec = new JMenuItem("Total Facturas Recibidas");
         jmConsultas.add(totFactRec);
 
-        JMenuItem ctaCtaProv = new JMenuItem("Cuenta Cliente Proveedores");
+        JMenuItem ctaCtaProv = new JMenuItem("Cuenta Corriente Proveedores");
         jmConsultas.add(ctaCtaProv);
 
         JMenuItem compPrecio = new JMenuItem("Compulsas de Precios");
@@ -105,6 +112,9 @@ public class MenuPrincipal{
 
         JMenuItem modifProv = new JMenuItem("Modificar Proveedor");
         jmProv.add(modifProv);
+
+        JMenuItem listarProv = new JMenuItem("Listar Proveedor");
+        jmProv.add(listarProv);
 
         JMenuItem agregarCetf = new JMenuItem("Nuevo Certificado");
         jmProv.add(agregarCetf);
@@ -157,6 +167,122 @@ public class MenuPrincipal{
             @Override
             public void menuCanceled(MenuEvent e) {
 
+            }
+        });
+
+        totFactRec.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                totalFacturasRecibidas totalFact = new totalFacturasRecibidas();
+                totalFact.setVisible(true);
+            }
+        });
+
+        totImpReten.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                totalRetenciones totalRet = new totalRetenciones();
+                totalRet.setVisible(true);
+            }
+        });
+
+        ctaCtaProv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ctaCteProveedores ctaCtaProv = new ctaCteProveedores();
+                ctaCtaProv.setVisible(true);
+            }
+        });
+
+        nFactura.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                altaFactura altaFact = new altaFactura();
+                altaFact.setVisible(true);
+            }
+        });
+
+        ordPagoEmit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ordenPagoEmitidas ordenPago = new ordenPagoEmitidas();
+                ordenPago.setVisible(true);
+            }
+        });
+
+        totDeudaProv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                totalDeudaProv totalDeudaProveedor = new totalDeudaProv();
+                totalDeudaProveedor.setVisible(true);
+            }
+        });
+
+        emitirOP.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                altaOrdenPago altaOP = new altaOrdenPago();
+                altaOP.setVisible(true);
+            }
+        });
+
+        compPrecio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                compulsaDePrecios compDePrecio = new compulsaDePrecios();
+                compDePrecio.setVisible(true);
+            }
+        });
+
+        listarProv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frmLista = new JFrame();
+                frmLista.setBounds(100,100,850,500);
+                frmLista.setTitle("Listado de Proveedores");
+                frmLista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frmLista.setVisible(true);
+
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.addColumn("Nombre");
+                tableModel.addColumn("Razon Social");
+                tableModel.addColumn("Cuit");
+                tableModel.addColumn("Direccion");
+                tableModel.addColumn("Telefono");
+                tableModel.addColumn("Email");
+                tableModel.addColumn("Rubro");
+                tableModel.addColumn("Responsabilidad");
+                tableModel.addColumn("Nro IIBB");
+                tableModel.addColumn("Inicio Act.");
+                tableModel.addColumn("Tope");
+
+                List<Proveedor.ProveedorDTO> prov = new ArrayList<>();
+                prov = MainController.getInstancia().listarProveedores();
+                System.out.println(prov.size());
+
+                Vector<Vector> rows2 = new Vector<Vector>();
+                for(int i=0; i < prov.size(); i++){
+                    Vector<String> x = new Vector<String>();
+                    x.addElement(String.valueOf(prov.get(i).nombre));
+                    x.addElement(String.valueOf(prov.get(i).razonSocial));
+                    x.addElement(String.valueOf(prov.get(i).cuit));
+                    x.addElement(String.valueOf(prov.get(i).direccion));
+                    x.addElement(String.valueOf(prov.get(i).telefono));
+                    x.addElement(String.valueOf(prov.get(i).email));
+                    x.addElement(String.valueOf(prov.get(i).rubros.get(i).getNombre()));
+                    x.addElement(String.valueOf(prov.get(i).responsabilidad));
+                    x.addElement(String.valueOf(prov.get(i).numeroIngresosBrutos));
+                    x.addElement(String.valueOf(prov.get(i).inicioActividades));
+                    x.addElement(String.valueOf(prov.get(i).tope));
+
+                    tableModel.addRow(x);
+
+                    System.out.println(rows2.size());
+                }
+                JTable tableProv = new JTable();
+                tableProv.setModel(tableModel);
+                tableProv.setBounds(10, 0, 457, 103);
+                frmLista.add(new JScrollPane(tableProv));
             }
         });
 
