@@ -17,11 +17,7 @@ public class RepositorioPrecioPorProveedor extends Repositorio<PrecioPorProveedo
         return instancia;
     }
 
-<<<<<<< HEAD:TPO_IOO_MierNoche_Grupo12/TPOIOOMierNocheGrupo12/src/models/repositories/RepositorioPrecioPorProveedor.java
     private RepositorioPrecioPorProveedor(){
-=======
-    public RepositorioPrecioPorProveedor(){
->>>>>>> erledesma:TPO_IOO_MierNoche_Grupo12/TPOIOOMierNocheGrupo12/src/models/repositories/RepositorioPrecioPorProducto.java
         super();
         super.elementos = DatosPrecioPorProveedor.getPreciosPorProveedor();
     }

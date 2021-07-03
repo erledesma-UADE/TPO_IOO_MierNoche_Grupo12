@@ -13,11 +13,9 @@ import java.util.List;
 public class DatosProveedores {
 
     public static List<Proveedor> getProveedores(){
-<<<<<<< HEAD
+
         RepositorioPrecioPorProveedor repositorioPreciosPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
-=======
-        RepositorioPrecioPorProveedor repositorioPreciosPorProveedor = new RepositorioPrecioPorProveedor();
->>>>>>> erledesma
+
         List<Proveedor> proveedores = new ArrayList<>();
         Proveedor proveedor1 = new Proveedor();
 

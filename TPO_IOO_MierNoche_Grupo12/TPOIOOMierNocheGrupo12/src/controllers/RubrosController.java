@@ -17,13 +17,11 @@ public class RubrosController {
     private static RubrosController instancia;
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
-<<<<<<< HEAD
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
 
-=======
     private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
->>>>>>> erledesma
-    private MainController mainController = MainController.getInstancia();
+
+    public MainController mainController = MainController.getInstancia();
 
     public static RubrosController getInstancia () {
         if(RubrosController.instancia == null)
@@ -33,13 +31,9 @@ public class RubrosController {
 
     private RubrosController () {
         this.repositorioRubros = new RepositorioRubros();
-<<<<<<< HEAD
         this.repositorioProductos = RepositorioProductos.getInstancia();
         this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
-=======
-        this.repositorioProductos = new RepositorioProductos();
-        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProveedor();
->>>>>>> erledesma
+
     }
 
     //=================================================================================================================
@@ -58,17 +52,12 @@ public class RubrosController {
         return repositorioProductos;
     }
 
-<<<<<<< HEAD
-    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
-        return repositorioPrecioPorProveedor;
-=======
     public void setRepositorioProductos(RepositorioProductos repositorioProductos) {
         this.repositorioProductos = repositorioProductos;
     }
 
     public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
         return repositorioPrecioPorProducto;
->>>>>>> erledesma
     }
 
     public void setRepositorioPrecioPorProducto(RepositorioPrecioPorProveedor repositorioPrecioPorProducto) {

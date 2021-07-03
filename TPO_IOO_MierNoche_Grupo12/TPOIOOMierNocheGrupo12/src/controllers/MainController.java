@@ -54,13 +54,12 @@ public class MainController {
         this.repositorioOrdenesDePago = repositorioOrdenesDePago;
     }
 
-<<<<<<< HEAD
    /* public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
         validarDatosProveedor(ordenPagoDTO.proveedor);
         OrdenPago ordenPago = new OrdenPago();
         //asignarParametrosOrdenPago()
     }*/
-=======
+
     public RepositorioCuentasCorrientes getRepositorioCuentasCorrientes() {
         return repositorioCuentasCorrientes;
     }
@@ -90,7 +89,6 @@ public class MainController {
         asignarParametrosOrdenPago(ordenPago, ordenPagoDTO);
         this.repositorioOrdenesDePago.agregar(ordenPago);
     }
->>>>>>> erledesma
 
     public void validarDatosOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
         if (!this.validarCuit(ordenPagoDTO.proveedor.cuit)) {

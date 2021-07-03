@@ -36,7 +36,7 @@ public class Factura extends Documento {
     public FacturaDTO facturaDTO () {
         FacturaDTO dto = new FacturaDTO();
 
-        dto.idFactura = super.getIdDocumento();
+        dto.idFactura = super.getID();
         dto.ordenCompraDTO = this.ordenDeCompra.toDTO();
         this.impuestos.forEach(impuesto -> {
             dto.impuestosDTO.add(impuesto.toDTO());
