@@ -68,6 +68,10 @@ public class Proveedor extends ID {
         });
     }
 
+    public void agregarDocumentoEmitido(Factura factura){
+        this.getFacturasEmitidas().add(factura);
+    }
+
     public void setOrdenDeCompra(List<OrdenCompra> ordenDeCompra) {
         this.ordenDeCompra = ordenDeCompra;
     }
@@ -187,6 +191,10 @@ public class Proveedor extends ID {
     public List<OrdenCompra> getOrdenDeCompra() { // no estoy seguro si el size de orde de compra lo tengo que pedir aca
         //y luego abajo armar otro metodo o que.
         return ordenDeCompra;
+    }
+
+    public void agregarImpuesto(Impuesto impuesto){
+        this.getImpuestos().add(impuesto);
     }
 
     public int cantidadOrdenCompraEmitidas(){ // no estoy seguro si el metodo va aca?

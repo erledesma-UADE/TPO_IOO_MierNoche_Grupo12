@@ -80,15 +80,15 @@ public class DocumentosController {
     private void asignarParametrosDocumento(Documento documento, Documento.DocumentoDTO documentoDto,Optional<Proveedor> proveedor) {
         documento.setTipoDocumento(documentoDto.tipoDocumento);
         documento.setFecha(documentoDto.fecha);
-        documento.setProveedor(documentoDto.cuitProveedor);
+        documento.setCuitProveedor(documentoDto.cuitProveedor);
         documento.setProveedor(proveedor);
 
-        String[][] articulosVista = documentoDto.articulosVista;
-        this.setArticulos(articulosVista,documento,documentoDto);
+        /*String[][] articulosVista = documentoDto.articulosVista;
+        this.setArticulos(articulosVista,documento,documentoDto);*/
 
     }
 
-    public void setArticulos(String[][] articulosVista,Documento documento,Documento.DocumentoDTO documentoDto){
+    /*public void setArticulos(String[][] articulosVista,Documento documento,Documento.DocumentoDTO documentoDto){
         for (int i = 0; i < articulosVista.length; i++) {
             Optional<Producto> producto = null;
             float cantidad = 0;
@@ -107,7 +107,7 @@ public class DocumentosController {
             documento.agregarArticulo(productoAux);
         }
         documento.setMontoTotal();
-    }
+    }*/
 
 
 

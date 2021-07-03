@@ -6,6 +6,7 @@ import controllers.MainController;
 import models.domain.*;
 import models.domain.documentos.Documento;
 import models.domain.enums.TipoDocumento;
+import models.repositories.RepositorioDocumentos;
 import models.repositories.RepositorioProductos;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class App {
 
         DocumentosController documentosController = DocumentosController.getInstancia();
         RepositorioProductos repositorioProductos = RepositorioProductos.getInstancia();
+        RepositorioDocumentos repositorioDocumentos = RepositorioDocumentos.getInstancia();
 
         for (Producto producto : repositorioProductos.getElementos()) {
             System.out.println("\nProducto id: " + producto.getID() + " Nombre: " + producto.getNombre());
@@ -31,6 +33,21 @@ public class App {
                 }
             }
         }
+
+
+        for(Documento documento : repositorioDocumentos.getElementos()){
+            System.out.println("\nFactura: " + documento.getID() + " - Proveedor: " + documento.getProveedor().get().getCuit() + " - Tipo: " + documento.getTipoDocumento().name()+
+                    " - fecha " + documento.getFecha());
+            System.out.println("Articulos ");
+            List<CantidadPorProducto> cantPorProd = documento.getArticulos();
+            for (CantidadPorProducto cant : cantPorProd){
+                System.out.print(" Articulo: " + cant.getProducto().getNombre() + " cantidad: " + cant.getCantidad() + " IVA: " + cant.getTipoImpuesto().getPorcentaje() + " precio total: " + cant.getPrecioFinal()+"\n");
+            }
+
+           System.out.print("Monto total " + documento.getMontoTotal() + "\n");
+        }
+
+
 
         //MainController mainController = MainController.getInstancia();
 

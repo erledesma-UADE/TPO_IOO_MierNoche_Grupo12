@@ -3,6 +3,7 @@ package models.domain.documentos;
 import controllers.MainController;
 import models.domain.CantidadPorProducto;
 import models.domain.ID;
+import models.domain.Impuesto;
 import models.domain.Proveedor;
 import models.domain.enums.TipoDocumento;
 
@@ -19,7 +20,7 @@ public abstract class Documento extends ID {
     private List<CantidadPorProducto> articulos;
     private TipoDocumento tipoDocumento;
     private boolean pagado;
-    //private Integer cuitProveedor;
+    private Integer cuitProveedor;
 
     public Documento() {
         this.articulos = new ArrayList<>();
@@ -37,6 +38,10 @@ public abstract class Documento extends ID {
 
     public void setProveedor(Optional<Proveedor> proveedor) {
         this.proveedor = proveedor;
+    }
+
+    public void setCuitProveedor(Integer cuitProveedor){
+        this.cuitProveedor = cuitProveedor;
     }
 
     public LocalDate getFecha() {
@@ -57,7 +62,12 @@ public abstract class Documento extends ID {
         for (int i = 0; i<articulosAux.size(); i++){
             sumaTotal += articulosAux.get(i).getPrecioFinal();
         }
-        this.montoTotal = sumaTotal;
+        double sumatotalAux = 0;
+        for(Impuesto impuesto : proveedor.get().getImpuestos()){
+            sumatotalAux += sumaTotal * impuesto.getPorcentaje();
+        }
+
+        this.montoTotal = sumaTotal + sumatotalAux;
     }
 
     public boolean isPagado() {
@@ -109,6 +119,8 @@ public abstract class Documento extends ID {
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
         public TipoDocumento tipoDocumento;
+        public Integer cuitProveedor;
+
 
         public void agregarArticulo(CantidadPorProducto articulo){
             this.articulos.add(articulo);
@@ -124,6 +136,9 @@ public abstract class Documento extends ID {
         dto.pagado          = pagado;
         dto.articulos       = articulos;
         dto.tipoDocumento   = tipoDocumento;
+        dto.cuitProveedor   = cuitProveedor;
+
+
         return dto;
     }
 

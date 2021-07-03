@@ -1,13 +1,11 @@
 package models.repositories;
 
-import models.domain.Proveedor;
 import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
 import models.repositories.Datos.DatosDocumentos;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public class RepositorioDocumentos extends Repositorio<Documento>{
 
