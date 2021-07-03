@@ -17,8 +17,12 @@ public class RubrosController {
     private static RubrosController instancia;
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
+<<<<<<< HEAD
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
 
+=======
+    private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
+>>>>>>> erledesma
     private MainController mainController = MainController.getInstancia();
 
     public static RubrosController getInstancia () {
@@ -29,21 +33,54 @@ public class RubrosController {
 
     private RubrosController () {
         this.repositorioRubros = new RepositorioRubros();
+<<<<<<< HEAD
         this.repositorioProductos = RepositorioProductos.getInstancia();
         this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
+=======
+        this.repositorioProductos = new RepositorioProductos();
+        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProveedor();
+>>>>>>> erledesma
     }
+
+    //=================================================================================================================
+    //INICIO GETTERS / SETTERS
+    //=================================================================================================================
 
     public RepositorioRubros getRepositorioRubros() {
         return repositorioRubros;
+    }
+
+    public void setRepositorioRubros(RepositorioRubros repositorioRubros) {
+        this.repositorioRubros = repositorioRubros;
     }
 
     public RepositorioProductos getRepositorioProductos() {
         return repositorioProductos;
     }
 
+<<<<<<< HEAD
     public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
         return repositorioPrecioPorProveedor;
+=======
+    public void setRepositorioProductos(RepositorioProductos repositorioProductos) {
+        this.repositorioProductos = repositorioProductos;
     }
+
+    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
+        return repositorioPrecioPorProducto;
+>>>>>>> erledesma
+    }
+
+    public void setRepositorioPrecioPorProducto(RepositorioPrecioPorProveedor repositorioPrecioPorProducto) {
+        this.repositorioPrecioPorProducto = repositorioPrecioPorProducto;
+    }
+    //=================================================================================================================
+    //FIN GETTERS / SETTERS
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO RUBRO
+    //=================================================================================================================
 
     public void altaRubro (Rubro.RubroDTO rubroDTO) {
         Rubro rubro = new Rubro();
@@ -52,14 +89,7 @@ public class RubrosController {
         this.repositorioRubros.agregar(rubro);
     }
 
-    /*public void altaProducto (Producto.ProductoDTO productoDTO) {
-        Producto producto = new Producto();
-        asignarParametrosProducto(producto, productoDTO);
-
-        this.repositorioProductos.agregar(producto);
-    }*/
-
-    public void asignarParametroRubro (Rubro rubro, Rubro.RubroDTO rubroDTO) {
+    public void asignarParametrosRubro (Rubro rubro, Rubro.RubroDTO rubroDTO) {
         rubro.setNombre(rubroDTO.nombre);
         rubroDTO.productos.forEach(productoDTO -> {
             agregarProducto(productoDTO.idProducto);
@@ -68,21 +98,6 @@ public class RubrosController {
 
     public void agregarProducto(Integer id) {
         this.repositorioRubros.getPorID(id).get().getProductos().add(this.repositorioProductos.getPorID(id).get());
-    }
-
-    public void asignarParametrosProducto (Producto producto, Producto.ProductoDTO productoDTO) {
-        producto.setNombre(productoDTO.nombre);
-        producto.setTipoUnidad(productoDTO.tipoUnidad);
-        producto.setImpuesto(productoDTO.impuesto);
-        //agregarPrecioPorProveedor(productoDTO.precioPorProveedor);
-    }
-
-    public void asignarParametrosPrecioPorProducto (PrecioPorProveedor precioPorProveedor,
-                                                    PrecioPorProveedor.PrecioPorProveedorDTO precioPorProductoDTO) {
-
-    }
-
-    public void agregarProveedores(Integer id) {
     }
 
     public Rubro.RubroDTO verRubro (Integer id) {
@@ -104,6 +119,27 @@ public class RubrosController {
 
         return rubrosDTO;
     }
+    //=================================================================================================================
+    //FIN RUBRO
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO PRODUCTO
+    //=================================================================================================================
+
+    public void asignarParametrosProducto (Producto producto, Producto.ProductoDTO productoDTO) {
+        producto.setNombre(productoDTO.nombre);
+        producto.setTipoUnidad(productoDTO.tipoUnidad);
+        producto.setImpuesto(productoDTO.impuesto);
+        //agregarPrecioPorProveedor(productoDTO.precioPorProveedor);
+    }
+
+    public void altaProducto (Producto.ProductoDTO productoDTO) {
+        Producto producto = new Producto();
+        asignarParametrosProducto(producto, productoDTO);
+
+        this.repositorioProductos.agregar(producto);
+    }
 
     public Producto.ProductoDTO verProducto (Integer id) {
         Optional<Producto> producto = this.repositorioProductos.getPorID(id);
@@ -114,13 +150,33 @@ public class RubrosController {
 
         return producto.get().toDTO();
     }
+    //=================================================================================================================
+    //FIN PRODUCTO
+    //=================================================================================================================
 
-    public void  altaPrecioPorProducto (PrecioPorProveedor.PrecioPorProveedorDTO precioPorProductoDTO) {
+    //=================================================================================================================
+    //INICIO PRECIO POR PROVEEDOR
+    //=================================================================================================================
+
+    public void asignarParametrosPrecioPorProveedor (PrecioPorProveedor precioPorProveedor,
+                                                     PrecioPorProveedor.PrecioPorProveedorDTO precioPorProductoDTO) {
+    }
+
+    public void  altaPrecioPorProveedor (PrecioPorProveedor.PrecioPorProveedorDTO precioPorProductoDTO) {
         PrecioPorProveedor precioPorProveedor = new PrecioPorProveedor();
         //precioPorProveedor.asignarParametros(precioPorProductoDTO);
 
         this.repositorioPrecioPorProveedor.agregar(precioPorProveedor);
     }
+    //=================================================================================================================
+    //FIN PRECIO POR PROVEEDOR
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO CONSULTAS GENERALES
+    //=================================================================================================================
+    //Copmulsa De Precios
+    //=================================================================================================================
 
     public List<PrecioPorProveedor> getPreciosPorProveedor (int idRubro, int idProducto) {
             Optional<Rubro> rubro = this.repositorioRubros.getPorID(idRubro);
@@ -146,4 +202,7 @@ public class RubrosController {
 
         return precioPorProveedorDTO;
     }
+    //=================================================================================================================
+    //FIN CONSULTAS GENERALES
+    //=================================================================================================================
 }

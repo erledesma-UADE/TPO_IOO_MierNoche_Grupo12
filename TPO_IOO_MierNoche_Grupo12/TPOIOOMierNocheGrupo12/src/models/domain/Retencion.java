@@ -13,8 +13,8 @@ public class Retencion extends ID {
         this.impuesto = impuesto;
     }
 
-    public void setMonto(float monto) {
-        this.monto = monto;
+    public void setMonto(float montoTotal) {
+        this.monto  = montoTotal * (impuesto.getPorcentaje() / 100);
     }
 
     public Impuesto getImpuesto() {
@@ -25,8 +25,24 @@ public class Retencion extends ID {
         return monto;
     }
 
-    public float calcularRetencion (float montoTotal) {
+    /*public float calcularRetencion (float montoTotal) {
         return this.monto  = montoTotal * (impuesto.getPorcentaje() / 100);
+    }*/
+
+    public RetencionDTO toDTO () {
+        RetencionDTO dto = new RetencionDTO();
+
+        dto.idRetencion = super.getID();
+        dto.impuesto = this.impuesto.toDTO();
+        dto.monto = this.monto;
+
+        return dto;
+    }
+
+    public static class RetencionDTO {
+        public int idRetencion;
+        public Impuesto.ImpuestoDTO impuesto;
+        public float monto;
     }
 }
 

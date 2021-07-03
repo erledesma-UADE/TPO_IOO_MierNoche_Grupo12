@@ -2,6 +2,7 @@ package controllers;
 
 
 
+import controllers.exceptions.ProveedorInexistenteException;
 import models.domain.CantidadPorProducto;
 import models.domain.Producto;
 import models.domain.Proveedor;
@@ -22,7 +23,12 @@ public class DocumentosController {
     private static DocumentosController instancia;
     private RepositorioDocumentos repositorioDocumentos;
     private RepositorioProductos  repositorioProductos;
+<<<<<<< HEAD
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
+=======
+    private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
+    private MainController mainController = MainController.getInstancia();
+>>>>>>> erledesma
 
     public static DocumentosController getInstancia(){
         if(DocumentosController.instancia == null)
@@ -31,10 +37,20 @@ public class DocumentosController {
     }
 
     private DocumentosController(){
+<<<<<<< HEAD
         this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
         this.repositorioProductos = RepositorioProductos.getInstancia();
         this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
+=======
+        this.repositorioProductos = new RepositorioProductos();
+        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProveedor();
+        this.repositorioDocumentos = new RepositorioDocumentos();
+>>>>>>> erledesma
     };
+
+    //=================================================================================================================
+    //INICIO GETTERS / SETTERS
+    //=================================================================================================================
 
     public RepositorioProductos getRepositorioProductos() {
         return this.repositorioProductos;
@@ -53,6 +69,13 @@ public class DocumentosController {
     public void setRepositorioProductos(RepositorioProductos repositorioProductos) {
         this.repositorioProductos = repositorioProductos;
     }
+    //=================================================================================================================
+    //FIN GETTERS / SETTERS
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO DOCUMENTOS
+    //=================================================================================================================
 
     public void altaDocumento(Documento.DocumentoDTO documentoDTO, Optional<Proveedor> proveedor){
         this.validarDatosDocumento(documentoDTO);
@@ -74,7 +97,9 @@ public class DocumentosController {
     }
 
     private void validarDatosDocumento(Documento.DocumentoDTO documentoDto){
-        //validarExistenciaProveedor
+        if (!mainController.validarCuit(documentoDto.cuitProveedor)) {
+            throw new ProveedorInexistenteException ("No se encontro el Proveedor");
+        }
     }
 
     private void asignarParametrosDocumento(Documento documento, Documento.DocumentoDTO documentoDto,Optional<Proveedor> proveedor) {
@@ -107,15 +132,21 @@ public class DocumentosController {
             documento.agregarArticulo(productoAux);
         }
         documento.setMontoTotal();
+<<<<<<< HEAD
     }*/
+=======
+    }
+    //=================================================================================================================
+    //FIN DOCUMENTOS
+    //=================================================================================================================
+>>>>>>> erledesma
 
-
-
+    //=================================================================================================================
+    //INICIO CONSULTAS GENERALES
+    //=================================================================================================================
     public int facturasEmitidasElDia(LocalDate unDia){
         return this.repositorioDocumentos.facturasEmitdasElDia(unDia).size();
     }
-
-
 
     /*public int totalFacturasRecibidas () {
         List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
@@ -145,6 +176,7 @@ public class DocumentosController {
     public void getLibroIVACompras () {}
 
 */
-
-
+    //=================================================================================================================
+    //INICIO CONSULTAS GENERALES
+    //=================================================================================================================
 }
