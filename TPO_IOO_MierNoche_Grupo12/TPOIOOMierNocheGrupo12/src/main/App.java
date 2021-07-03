@@ -27,8 +27,8 @@ public class App {
             List<PrecioPorProveedor> precioPorProducto = producto.getPrecioPorProveedor();
             for(PrecioPorProveedor precioPorProveedor : precioPorProducto){
                 System.out.println("\nCuit proveedor: " + precioPorProveedor.getCuitProveedor() + " - Producto: " + precioPorProveedor.getProducto().getNombre());
-                List<PreciosAcordados> preciosAcordados = precioPorProveedor.getPreciosAcordados();
-                for(PreciosAcordados precioAcordado : preciosAcordados){
+                List<PrecioAcordado> preciosAcordados = precioPorProveedor.getPreciosAcordados();
+                for(PrecioAcordado precioAcordado : preciosAcordados){
                     System.out.println("Fecha acuerdo " + precioAcordado.getFechaAcuerdo() + " - Monto: " + precioAcordado.getMonto());
                 }
             }

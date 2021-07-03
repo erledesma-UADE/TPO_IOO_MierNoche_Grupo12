@@ -64,7 +64,7 @@ public class totalFacturasRecibidas extends JFrame{
                     int totalP = MainController.getInstancia().totalFacturasRecibidas(prov2);
                     txtTotalFact.setText(String.valueOf(totalP));
                 }else{
-                    int total = DocumentosController.getInstancia().totalFacturasRecibidas();
+                    int total = MainController.getInstancia().totalFacturasRecibidasEldia(prov2,fechaFact2);
                     txtTotalFact.setText(Integer.toString(total));
                 }
 

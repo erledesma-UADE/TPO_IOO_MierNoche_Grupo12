@@ -38,9 +38,9 @@ public class compulsaDePrecios extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String prod = txtProd.getText();
-                RubrosController.getInstancia().getRubroPorID(Integer.parseInt(prod));
+                RubrosController.getInstancia().getRepositorioRubros().getPorID((Integer.parseInt(prod)));
 
-                RubrosController.getInstancia().mostrarCompulsa(Integer.parseInt(prod),Integer.parseInt(prod));
+                //RubrosController.getInstancia().mostrarCompulsa(Integer.parseInt(prod),Integer.parseInt(prod));
             }
         });
 
