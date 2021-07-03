@@ -6,28 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuentaCorriente extends ID {
-    private int IDCuentaCorriente;
     private Proveedor proveedor;
     private float debito;
     private float credito;
     private List<Documento> documentos;
     private float montoDeuda;
 
-    public CuentaCorriente(int IDCuentaCorriente, Proveedor proveedor, float debito, float credito,
-                           List<Documento> documentos) {
-        this.IDCuentaCorriente = IDCuentaCorriente;
+    public CuentaCorriente() {
+       /* this.IDCuentaCorriente = IDCuentaCorriente;
         this.proveedor = proveedor;
         this.debito = debito;
-        this.credito = credito;
+        this.credito = credito;*/
         this.documentos = new ArrayList<>();
-        documentos.forEach(documento -> {
+        /*documentos.forEach(documento -> {
             agregarDocumento(documento);
-        });
+        });*/
     }
 
-    public void setIDCuentaCorriente(int IDCuentaCorriente) {
-        this.IDCuentaCorriente = IDCuentaCorriente;
-    }
 
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
@@ -52,15 +47,13 @@ public class CuentaCorriente extends ID {
 
     public void agregarDocumento (Documento documento) {
         this.documentos.add(documento);
-        actualizarMontoDeuda(documento.getMontoTotal());
+        if(!documento.isPagado()){
+            actualizarMontoDeuda(documento.getMontoTotal());
+        }
     }
 
     public void actualizarMontoDeuda(double monto) {
         this.montoDeuda += monto;
-    }
-
-    public int getIDCuentaCorriente() {
-        return IDCuentaCorriente;
     }
 
     public Proveedor getProveedor() {
@@ -107,10 +100,13 @@ public class CuentaCorriente extends ID {
 
     public VistaCuentasProveedoresDTO toVistaCuentasProveedoresDTO () {
         VistaCuentasProveedoresDTO dto = new VistaCuentasProveedoresDTO();
-
+        dto.documentos = new ArrayList<>();
+        dto.documentosPagos = new ArrayList<>();
+        dto.documentosImpagos = new ArrayList<>();
         this.documentos.forEach(documento -> {
             dto.documentos.add(documento.toDTO());
         });
+        dto.idProveedor = this.proveedor.getID();
         dto.montoDeuda = this.montoDeuda;
         pagoImpago(dto.documentosPagos, dto.documentosImpagos);
 
@@ -143,6 +139,7 @@ public class CuentaCorriente extends ID {
     }
 
     public static class VistaCuentasProveedoresDTO {
+        public Integer idProveedor;
         public float montoDeuda;
         public List<Documento.DocumentoDTO> documentos;
         public List<Documento.DocumentoDTO> documentosImpagos;

@@ -14,7 +14,7 @@ public class RepositorioOrdenesDePago extends Repositorio<OrdenPago> {
         return instancia;
     }
 
-    public RepositorioOrdenesDePago(){
+    private RepositorioOrdenesDePago(){
         super();
         //super.elementos = DatosProveedores.getProveedores();
     }

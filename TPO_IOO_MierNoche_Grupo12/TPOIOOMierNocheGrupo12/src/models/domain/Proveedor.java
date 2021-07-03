@@ -36,7 +36,7 @@ public class Proveedor extends ID {
         this.facturasEmitidas = new ArrayList<>();
         this.catalogo = new ArrayList<>();
         this.impuestos = new ArrayList<>();
-
+        this.cuentaCorriente = new CuentaCorriente();
     }
 
     public float sumarOrdenesPago(){//////////////////////////////////////////////
@@ -70,6 +70,7 @@ public class Proveedor extends ID {
 
     public void agregarDocumentoEmitido(Factura factura){
         this.getFacturasEmitidas().add(factura);
+
     }
 
     public void setOrdenDeCompra(List<OrdenCompra> ordenDeCompra) {
@@ -202,7 +203,7 @@ public class Proveedor extends ID {
     }
 
     public List<Factura> getFacturasEmitidas() {
-        return facturasEmitidas;
+        return this.facturasEmitidas;
     }
 
     public List<PrecioPorProveedor> getCatalogo() {
@@ -212,7 +213,7 @@ public class Proveedor extends ID {
     public void emitirDocumento () {}
 
     public int cantidadFacturasEmitidas(){
-        return getFacturasEmitidas().size();
+        return this.getFacturasEmitidas().size();
     }
 
     public List<OrdenPago> getOrdenPago() {  // hay que acordarse de agregar orden de pago .

@@ -1,6 +1,7 @@
 package models.repositories.Datos;
 
 import models.domain.CantidadPorProducto;
+import models.domain.Impuesto;
 import models.domain.Proveedor;
 import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
@@ -22,7 +23,7 @@ public class DatosDocumentos {
 
         Factura factura1 = new Factura();
         factura1.setID(1);
-        factura1.setFecha(LocalDate.parse("2020-10-05"));
+        factura1.setFecha(LocalDate.parse("2020-12-06"));
         factura1.setPagado(false);
         Optional<Proveedor> proveedor1 = repositorioProveedores.buscarPorCuit(1234);
         factura1.setProveedor(proveedor1);
@@ -56,6 +57,9 @@ public class DatosDocumentos {
         proveedor1.get().agregarDocumentoEmitido(factura1);
         proveedor1.get().agregarDocumentoEmitido(factura2);
 
+        proveedor1.get().getCuentaCorriente().agregarDocumento(factura1);
+        proveedor1.get().getCuentaCorriente().agregarDocumento(factura2);
+
 
         Factura factura3 = new Factura();
         factura3.setID(3);
@@ -68,7 +72,7 @@ public class DatosDocumentos {
         CantidadPorProducto cant6 = new CantidadPorProducto(proveedor1.get().getCatalogo().get(2).getProducto(),10,123456);
         factura3.agregarArticulo(cant5);
         factura3.agregarArticulo(cant6);
-        factura1.setImpuestos(proveedor2.get().getImpuestos());
+        factura3.setImpuestos(proveedor2.get().getImpuestos());
         //factura1.setOrdenDeCompra();
         factura3.setMontoTotal();
 
@@ -77,14 +81,14 @@ public class DatosDocumentos {
         Factura factura4 = new Factura();
         factura4.setID(4);
         factura4.setFecha(LocalDate.parse("2020-05-20"));
-        factura4.setPagado(false);
+        factura4.setPagado(true);
         factura4.setProveedor(proveedor2);
         factura4.setTipoDocumento(TipoDocumento.Factura);
         CantidadPorProducto cant7 = new CantidadPorProducto(proveedor1.get().getCatalogo().get(0).getProducto(),1,123456);
         CantidadPorProducto cant8 = new CantidadPorProducto(proveedor1.get().getCatalogo().get(3).getProducto(),3,123456);
         factura4.agregarArticulo(cant7);
         factura4.agregarArticulo(cant8);
-        factura1.setImpuestos(proveedor2.get().getImpuestos());
+        factura4.setImpuestos(proveedor2.get().getImpuestos());
         //factura1.setOrdenDeCompra();
         factura4.setMontoTotal();
 
@@ -92,6 +96,9 @@ public class DatosDocumentos {
 
         proveedor2.get().agregarDocumentoEmitido(factura3);
         proveedor2.get().agregarDocumentoEmitido(factura4);
+
+        proveedor2.get().getCuentaCorriente().agregarDocumento(factura3);
+        proveedor2.get().getCuentaCorriente().agregarDocumento(factura4);
 
         return listaDocumentos;
     }
