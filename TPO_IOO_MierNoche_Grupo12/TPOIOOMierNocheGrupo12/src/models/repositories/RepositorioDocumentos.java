@@ -3,6 +3,7 @@ package models.repositories;
 import models.domain.Proveedor;
 import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
+import models.repositories.Datos.DatosDocumentos;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,9 +19,9 @@ public class RepositorioDocumentos extends Repositorio<Documento>{
         return instancia;
     }
 
-    public RepositorioDocumentos(){
+    private RepositorioDocumentos(){
         super();
-        //super.elementos = DatosProveedores.getProveedores();
+        super.elementos = DatosDocumentos.getDocumentos();
     }
 
     public List<Factura> facturasEmitdasElDia(LocalDate unDia) {

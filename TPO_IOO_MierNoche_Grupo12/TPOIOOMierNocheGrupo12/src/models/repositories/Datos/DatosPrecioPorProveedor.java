@@ -15,7 +15,7 @@ public class DatosPrecioPorProveedor {
 
         //Agrego 2 PreciosPorProveedor para un mismo proveedor con distinta fecha y distinto precio
 
-        RepositorioProductos repositorioProductos = new RepositorioProductos();
+        RepositorioProductos repositorioProductos = RepositorioProductos.getInstancia();
         List<PrecioPorProveedor> preciosPorProveedor = new ArrayList<>();
 
         PrecioPorProveedor precioPorProveedor1 = new PrecioPorProveedor();
@@ -106,7 +106,7 @@ public class DatosPrecioPorProveedor {
         producto4.agregarPrecioProveedor(precioPorProveedor8);
 
 
-        for (Producto producto : repositorioProductos.getElementos()) {
+        /*for (Producto producto : repositorioProductos.getElementos()) {
             System.out.println("\nProducto id: " + producto.getID() + " Nombre: " + producto.getNombre());
             List<PrecioPorProveedor> precioPorProducto = producto.getPrecioPorProveedor();
             for(PrecioPorProveedor precioPorProveedor : precioPorProducto){
@@ -116,9 +116,7 @@ public class DatosPrecioPorProveedor {
                     System.out.println("Fecha acuerdo " + precioAcordado.getFechaAcuerdo() + " - Monto: " + precioAcordado.getMonto());
                 }
             }
-        }
-
-
+        }*/
         return preciosPorProveedor;
     }
 
@@ -138,5 +136,4 @@ public class DatosPrecioPorProveedor {
 
         return preciosAcordados;
     }
-
 }

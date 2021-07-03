@@ -15,7 +15,7 @@ public class RepositorioProductos extends Repositorio<Producto> {
         return instancia;
     }
 
-    public RepositorioProductos(){
+    private RepositorioProductos(){
         super();
         super.elementos = DatosProductos.getProductos();
     }

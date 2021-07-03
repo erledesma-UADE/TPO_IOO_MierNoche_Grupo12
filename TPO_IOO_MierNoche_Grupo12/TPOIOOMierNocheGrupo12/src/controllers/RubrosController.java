@@ -5,7 +5,7 @@ import models.domain.Producto;
 import models.domain.Rubro;
 import controllers.exceptions.ProductoNoPertenceAlRubroException;
 import controllers.exceptions.RubroNoExisteException;
-import models.repositories.RepositorioPrecioPorProducto;
+import models.repositories.RepositorioPrecioPorProveedor;
 import models.repositories.RepositorioProductos;
 import models.repositories.RepositorioRubros;
 
@@ -17,7 +17,7 @@ public class RubrosController {
     private static RubrosController instancia;
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
-    private RepositorioPrecioPorProducto repositorioPrecioPorProducto;
+    private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
 
     private MainController mainController = MainController.getInstancia();
 
@@ -29,8 +29,8 @@ public class RubrosController {
 
     private RubrosController () {
         this.repositorioRubros = new RepositorioRubros();
-        this.repositorioProductos = new RepositorioProductos();
-        this.repositorioPrecioPorProducto = new RepositorioPrecioPorProducto();
+        this.repositorioProductos = RepositorioProductos.getInstancia();
+        this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
     }
 
     public RepositorioRubros getRepositorioRubros() {
@@ -41,8 +41,8 @@ public class RubrosController {
         return repositorioProductos;
     }
 
-    public RepositorioPrecioPorProducto getRepositorioPrecioPorProducto() {
-        return repositorioPrecioPorProducto;
+    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
+        return repositorioPrecioPorProveedor;
     }
 
     public void altaRubro (Rubro.RubroDTO rubroDTO) {
@@ -119,14 +119,14 @@ public class RubrosController {
         PrecioPorProveedor precioPorProveedor = new PrecioPorProveedor();
         //precioPorProveedor.asignarParametros(precioPorProductoDTO);
 
-        this.repositorioPrecioPorProducto.agregar(precioPorProveedor);
+        this.repositorioPrecioPorProveedor.agregar(precioPorProveedor);
     }
 
     public List<PrecioPorProveedor> getPreciosPorProveedor (int idRubro, int idProducto) {
             Optional<Rubro> rubro = this.repositorioRubros.getPorID(idRubro);
             if (rubro.isPresent()) {
                 if (rubro.get().getProductos().contains(this.repositorioProductos.getPorID(idProducto).get())) {
-                    List<PrecioPorProveedor> precioPorProveedor = this.repositorioPrecioPorProducto.buscarPorProducto(idProducto);
+                    List<PrecioPorProveedor> precioPorProveedor = this.repositorioPrecioPorProveedor.buscarPorProducto(idProducto);
 
                     return precioPorProveedor;
                 } else {

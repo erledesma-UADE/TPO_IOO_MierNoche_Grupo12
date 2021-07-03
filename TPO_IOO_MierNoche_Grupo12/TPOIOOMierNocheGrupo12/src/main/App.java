@@ -18,15 +18,25 @@ public class App {
     public static void main(String[] args) {
 
         DocumentosController documentosController = DocumentosController.getInstancia();
+        RepositorioProductos repositorioProductos = RepositorioProductos.getInstancia();
+
+        for (Producto producto : repositorioProductos.getElementos()) {
+            System.out.println("\nProducto id: " + producto.getID() + " Nombre: " + producto.getNombre());
+            List<PrecioPorProveedor> precioPorProducto = producto.getPrecioPorProveedor();
+            for(PrecioPorProveedor precioPorProveedor : precioPorProducto){
+                System.out.println("\nCuit proveedor: " + precioPorProveedor.getCuitProveedor() + " - Producto: " + precioPorProveedor.getProducto().getNombre());
+                List<PreciosAcordados> preciosAcordados = precioPorProveedor.getPreciosAcordados();
+                for(PreciosAcordados precioAcordado : preciosAcordados){
+                    System.out.println("Fecha acuerdo " + precioAcordado.getFechaAcuerdo() + " - Monto: " + precioAcordado.getMonto());
+                }
+            }
+        }
 
         //MainController mainController = MainController.getInstancia();
 
     }
 }
 
-        //CargaJsons cargaJsons = new CargaJsons();
-
-        //cargaJsons.cargaArchivos(documentosController.getRepositorioProductos(), documentosController.getRepositorioDocumentos());
 
 
         /*

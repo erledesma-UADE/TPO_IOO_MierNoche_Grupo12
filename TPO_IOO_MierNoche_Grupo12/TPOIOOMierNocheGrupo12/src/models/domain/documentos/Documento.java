@@ -13,30 +13,22 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class Documento extends ID {
-    private int idDocumento;
     private Optional<Proveedor> proveedor;
     private LocalDate fecha;
     private double montoTotal;
     private List<CantidadPorProducto> articulos;
-    private String[][] articulosMatriz;
-
-    private String fechaString;
     private TipoDocumento tipoDocumento;
     private boolean pagado;
-    private Integer cuitProveedor;
+    //private Integer cuitProveedor;
 
     public Documento() {
         this.articulos = new ArrayList<>();
-        this.articulosMatriz = new String[3][2];
     }
 
-    public Documento(String fechaString, Integer cuitProveedor, boolean pagado, TipoDocumento tipoDocumento, String[][] articulosMatriz) {
-        this.fechaString = fechaString;
+    public Documento(String fechaString, Integer cuitProveedor, boolean pagado, TipoDocumento tipoDocumento) {
         this.articulos = new ArrayList<>();
         this.pagado = pagado;
         this.tipoDocumento = tipoDocumento;
-        this.cuitProveedor = cuitProveedor;
-        this.articulosMatriz = articulosMatriz;
     }
 
     public Optional<Proveedor> getProveedor() {
@@ -45,30 +37,6 @@ public abstract class Documento extends ID {
 
     public void setProveedor(Optional<Proveedor> proveedor) {
         this.proveedor = proveedor;
-    }
-
-    public String getFechaString() {
-        return fechaString;
-    }
-
-    public void setFechaString(String fechaString) {
-        this.fechaString = fechaString;
-    }
-
-    public void setMontoTotal(double montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    public void setCuitProveedor(Integer cuitProveedor) {
-        this.cuitProveedor = cuitProveedor;
-    }
-
-    public int getIdDocumento() {
-        return idDocumento;
-    }
-
-    public void setIdDocumento(int idDocumento) {
-        this.idDocumento = idDocumento;
     }
 
     public LocalDate getFecha() {
@@ -112,14 +80,6 @@ public abstract class Documento extends ID {
         return articulos;
     }
 
-    public Integer getCuitProveedor() {
-        return cuitProveedor;
-    }
-
-    public void setProveedor(Integer cuitProveedor) {
-        this.cuitProveedor = cuitProveedor;
-    }
-
     public void agregarArticulo(CantidadPorProducto producto){
         this.getArticulos().add(producto);
     }
@@ -143,14 +103,11 @@ public abstract class Documento extends ID {
     }
 
     public static class DocumentoDTO {
-        public Integer cuitProveedor;
         public int idDocumento;
         public LocalDate fecha;
-        public String fechaString;
         public double montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
-        public String[][] articulosVista;
         public TipoDocumento tipoDocumento;
 
         public void agregarArticulo(CantidadPorProducto articulo){
@@ -161,14 +118,12 @@ public abstract class Documento extends ID {
 
     public DocumentoDTO toDTO() {
         DocumentoDTO dto    = new DocumentoDTO();
-        dto.cuitProveedor   = this.cuitProveedor;
-        dto.idDocumento     = this.idDocumento;
+        dto.idDocumento     = this.getID();
         dto.fecha           = this.fecha;
         dto.montoTotal      = this.montoTotal;
         dto.pagado          = pagado;
         dto.articulos       = articulos;
         dto.tipoDocumento   = tipoDocumento;
-        dto.fechaString     = this.fechaString;
         return dto;
     }
 

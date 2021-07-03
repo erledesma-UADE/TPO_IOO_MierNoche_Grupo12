@@ -2,10 +2,9 @@ package models.repositories.Datos;
 
 import models.domain.Certificado;
 import models.domain.Impuesto;
-import models.domain.PrecioPorProveedor;
 import models.domain.Proveedor;
 import models.domain.enums.Responsabilidad;
-import models.repositories.RepositorioPrecioPorProducto;
+import models.repositories.RepositorioPrecioPorProveedor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.List;
 public class DatosProveedores {
 
     public static List<Proveedor> getProveedores(){
-        RepositorioPrecioPorProducto repositorioPreciosPorProveedor = new RepositorioPrecioPorProducto();
+        RepositorioPrecioPorProveedor repositorioPreciosPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
         List<Proveedor> proveedores = new ArrayList<>();
         Proveedor proveedor1 = new Proveedor();
 

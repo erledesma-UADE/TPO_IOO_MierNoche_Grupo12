@@ -2,23 +2,22 @@ package models.repositories;
 
 import models.domain.PrecioPorProveedor;
 import models.repositories.Datos.DatosPrecioPorProveedor;
-import models.repositories.Datos.DatosProveedores;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class RepositorioPrecioPorProducto extends Repositorio<PrecioPorProveedor> {
+public class RepositorioPrecioPorProveedor extends Repositorio<PrecioPorProveedor> {
 
-    private static RepositorioPrecioPorProducto instancia;
+    private static RepositorioPrecioPorProveedor instancia;
 
-    public static RepositorioPrecioPorProducto getInstancia(){
-        if(RepositorioPrecioPorProducto.instancia == null)
-            instancia = new RepositorioPrecioPorProducto();
+    public static RepositorioPrecioPorProveedor getInstancia(){
+        if(RepositorioPrecioPorProveedor.instancia == null)
+            instancia = new RepositorioPrecioPorProveedor();
         return instancia;
     }
 
-    public RepositorioPrecioPorProducto(){
+    private RepositorioPrecioPorProveedor(){
         super();
         super.elementos = DatosPrecioPorProveedor.getPreciosPorProveedor();
     }

@@ -40,11 +40,11 @@ public class MainController {
         this.repositorioProveedores.agregar(proveedor);
     }
 
-    public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+   /* public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
         validarDatosProveedor(ordenPagoDTO.proveedor);
         OrdenPago ordenPago = new OrdenPago();
         //asignarParametrosOrdenPago()
-    }
+    }*/
 
     private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
         if(this.validarCuit(proveedorDTO.cuit)){
