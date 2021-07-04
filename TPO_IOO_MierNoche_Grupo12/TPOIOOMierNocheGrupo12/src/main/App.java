@@ -7,9 +7,7 @@ import models.domain.*;
 import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
 import models.domain.enums.TipoDocumento;
-import models.repositories.RepositorioDocumentos;
-import models.repositories.RepositorioProductos;
-import models.repositories.RepositorioProveedores;
+import models.repositories.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,11 +23,19 @@ public class App {
         RepositorioProductos repositorioProductos = RepositorioProductos.getInstancia();
         RepositorioDocumentos repositorioDocumentos = RepositorioDocumentos.getInstancia();
         RepositorioProveedores repositorioProveedores = RepositorioProveedores.getInstancia();
+        RepositorioOrdenesDePago repositorioOrdenesDePago = RepositorioOrdenesDePago.getInstancia();
+        RepositorioRetenciones repositorioRetenciones = RepositorioRetenciones.getInstancia();
 
         MainController mainController = MainController.getInstancia();
 
         List<CuentaCorriente.VistaCuentasProveedoresDTO> cuentaCorriente = mainController.mostrarCuentaCorrienteProveedores();
-        for(CuentaCorriente.VistaCuentasProveedoresDTO ctaCorriente : cuentaCorriente){
+
+        System.out.println(mainController.totalImpuestosRetenidos());
+
+       // System.out.println(mainController.totalImpuestosRetenidos());
+
+
+        /*for(CuentaCorriente.VistaCuentasProveedoresDTO ctaCorriente : cuentaCorriente){
             System.out.println("cantidad Docs: " + ctaCorriente.documentos.size());
             System.out.println("\nProveedor : " + ctaCorriente.idProveedor + " monto deuda: " + ctaCorriente.montoDeuda );
             List<Documento.DocumentoDTO> facturasPagas = ctaCorriente.documentosPagos;
@@ -42,8 +48,7 @@ public class App {
             for(Documento.DocumentoDTO docimPago : facturasimPagas){
                 System.out.println(docimPago.idDocumento + " monto: " + docimPago.montoTotal);
             }
-
-        }
+        }*/
 
 
         /*for (Producto producto : repositorioProductos.getElementos()) {
@@ -57,7 +62,8 @@ public class App {
                 }
             }
         }*/
-        for(Documento documento : repositorioDocumentos.getElementos()) {
+
+        /*for(Documento documento : repositorioDocumentos.getElementos()) {
                 Factura factura = (Factura) documento;
 
                 System.out.println("\nFactura: " + documento.getID() + " - Proveedor: " + documento.getProveedor().get().getCuit() + " - Tipo: " + documento.getTipoDocumento().name() +

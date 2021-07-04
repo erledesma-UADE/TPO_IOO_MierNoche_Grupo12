@@ -3,10 +3,8 @@ package controllers;
 import controllers.exceptions.CuitRepetidoException;
 import controllers.exceptions.ProveedorInexistenteException;
 import models.domain.*;
-import models.repositories.RepositorioCuentasCorrientes;
-import models.repositories.RepositorioOrdenesDePago;
-import models.repositories.RepositorioProveedores;
-import models.repositories.RepositorioRetenciones;
+import models.domain.enums.TipoPago;
+import models.repositories.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +17,8 @@ public class MainController {
     private RepositorioProveedores repositorioProveedores;
     private RepositorioOrdenesDePago repositorioOrdenesDePago;
     private RepositorioCuentasCorrientes repositorioCuentasCorrientes;
-    public RepositorioRetenciones repositorioRetenciones;
+    private RepositorioRetenciones repositorioRetenciones;
+    private RepositorioDocumentos repositorioDocumentos;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -31,7 +30,8 @@ public class MainController {
         this.repositorioProveedores = RepositorioProveedores.getInstancia();
         this.repositorioOrdenesDePago  = RepositorioOrdenesDePago.getInstancia();
         this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
-        //this.repositorioRetenciones = new RepositorioRetenciones();
+        this.repositorioRetenciones = RepositorioRetenciones.getInstancia();
+        this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
     }
 
     //=================================================================================================================
@@ -53,12 +53,6 @@ public class MainController {
     public void setRepositorioOrdenesDePago(RepositorioOrdenesDePago repositorioOrdenesDePago) {
         this.repositorioOrdenesDePago = repositorioOrdenesDePago;
     }
-
-   /* public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
-        validarDatosProveedor(ordenPagoDTO.proveedor);
-        OrdenPago ordenPago = new OrdenPago();
-        //asignarParametrosOrdenPago()
-    }*/
 
     public RepositorioCuentasCorrientes getRepositorioCuentasCorrientes() {
         return repositorioCuentasCorrientes;
@@ -103,15 +97,23 @@ public class MainController {
             throw new ProveedorInexistenteException("No se encontro el Proveedor");
         }
 
-        ordenPago.setFormaPago(ordenPagoDTO.formaPago);
+        ordenPago.setFormaPago(ordenPagoDTO.tipoPago);
         ordenPago.setFecha(ordenPagoDTO.fecha);
-        ordenPago.setTipoPago(ordenPagoDTO.tipoPago);
-        ordenPago.setPagado(ordenPagoDTO.pagado);
+        ordenPago.setPagado(false);
         ordenPago.setMontoTotal(ordenPagoDTO.montoTotal);
+        Proveedor proveedor = repositorioProveedores.buscarPorCuit(ordenPagoDTO.cuitProveedor).get();
+        ordenPago.setProveedor(proveedor);
+        List<Integer> idsDocumentos = ordenPagoDTO.idsDocumentos;
+        for(Integer id : idsDocumentos){
+            ordenPago.agregarDocumento(this.repositorioDocumentos.getPorID(id).get());
+        }
+        ordenPago.calcularSubtotal();
+        ordenPago.agregarRetenciones();
+        ordenPago.calcularTotalRetenciones();
+        ordenPago.calcularMontoTotal();
 
-        ordenPagoDTO.retenciones.forEach(retencion -> {
-            ordenPago.agregarRetencion(this.repositorioRetenciones.getPorID(retencion.idRetencion).get());
-        });
+        this.repositorioOrdenesDePago.agregar(ordenPago);
+
     }
     //=================================================================================================================
     //FIN ORDEN DE PAGO

@@ -1,6 +1,7 @@
 package models.repositories;
 
 import models.domain.OrdenPago;
+import models.repositories.Datos.DatosOrdenPago;
 
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class RepositorioOrdenesDePago extends Repositorio<OrdenPago> {
 
     private RepositorioOrdenesDePago(){
         super();
-        //super.elementos = DatosProveedores.getProveedores();
+        super.elementos = DatosOrdenPago.getOrdenesPago();
     }
 
     public Optional<OrdenPago> buscarOrdenProveedor(Integer idProveedor) {
