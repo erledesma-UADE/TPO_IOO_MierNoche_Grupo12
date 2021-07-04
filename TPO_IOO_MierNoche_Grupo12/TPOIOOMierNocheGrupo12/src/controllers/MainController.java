@@ -3,6 +3,9 @@ package controllers;
 import controllers.exceptions.CuitRepetidoException;
 import controllers.exceptions.ProveedorInexistenteException;
 import models.domain.*;
+import models.domain.documentos.Documento;
+import models.domain.enums.Iva;
+import models.domain.enums.TipoDocumento;
 import models.domain.enums.TipoPago;
 import models.repositories.*;
 
@@ -232,6 +235,35 @@ public class MainController {
         }
 
         return totalImpuestosRetenidos;
+    }
+
+    public List<LibroIVADTO> libroIVA () {
+        List<LibroIVADTO> librosIVADTO = new ArrayList<>();
+
+        for (Documento documento :this.repositorioDocumentos.getElementos()) {
+            List<CantidadPorProducto> cantidades = documento.getArticulos();
+            cantidades.forEach(producto -> {
+                LibroIVADTO libroIVADTO = new LibroIVADTO();
+                libroIVADTO.cuitProveedor = documento.getProveedor().get().getCuit();
+                libroIVADTO.nombreProveedor = documento.getProveedor().get().getNombre();
+                libroIVADTO.tipoDocumento = documento.getTipoDocumento();
+                libroIVADTO.fecha = documento.getFecha();
+                libroIVADTO.iva = producto.getTipoImpuesto();
+                libroIVADTO.total = producto.getMontoImpuesto();
+                librosIVADTO.add(libroIVADTO);
+            });
+        }
+
+        return librosIVADTO;
+    }
+
+    public static class LibroIVADTO {
+        public Integer cuitProveedor;
+        public String nombreProveedor;
+        public LocalDate fecha;
+        public TipoDocumento tipoDocumento;
+        public Iva iva;
+        public double total;
     }
     //=================================================================================================================
     //FIN CONSULTAS GENERALES

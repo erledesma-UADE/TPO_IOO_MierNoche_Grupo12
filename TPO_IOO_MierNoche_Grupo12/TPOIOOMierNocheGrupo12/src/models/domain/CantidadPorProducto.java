@@ -8,6 +8,7 @@ public class CantidadPorProducto {
     private Producto producto;
     private String productoString;
     private float cantidad;
+    private double montoImpuesto;
     private double precioFinal;
 
 
@@ -32,6 +33,13 @@ public class CantidadPorProducto {
         this.precioFinal = precioFinal;
     }
 
+    public double getMontoImpuesto() {
+        return montoImpuesto;
+    }
+
+    public void setMontoImpuesto(double montoImpuesto) {
+        this.montoImpuesto = montoImpuesto;
+    }
 
     public Producto getProducto() {
         return this.producto;
@@ -52,8 +60,9 @@ public class CantidadPorProducto {
         float precioProveedor = this.producto.buscarPrecioProveedor(cuitProveedor);
         Iva impuestoProducto = this.producto.getImpuesto();
 
-        this.precioFinal = precioProveedor * this.cantidad * (1+(impuestoProducto.getPorcentaje()/100));
-
+        double montoImpuesto = precioProveedor * this.cantidad *  (impuestoProducto.getPorcentaje()/100);
+        setMontoImpuesto(montoImpuesto);
+        this.precioFinal = (precioProveedor * this.cantidad) + montoImpuesto;
         setPrecioFinal(precioFinal);
     }
 
