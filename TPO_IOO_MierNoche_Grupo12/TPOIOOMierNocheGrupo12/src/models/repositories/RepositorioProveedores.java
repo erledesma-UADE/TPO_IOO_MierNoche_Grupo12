@@ -14,7 +14,7 @@ public class RepositorioProveedores extends Repositorio<Proveedor> {
         return instancia;
     }
 
-    public RepositorioProveedores(){
+    private RepositorioProveedores(){
         super();
         super.elementos = DatosProveedores.getProveedores();
     }

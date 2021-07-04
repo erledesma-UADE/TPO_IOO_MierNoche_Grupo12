@@ -52,12 +52,8 @@ public class CantidadPorProducto {
         float precioProveedor = this.producto.buscarPrecioProveedor(cuitProveedor);
         Iva impuestoProducto = this.producto.getImpuesto();
 
-        System.out.println("PrecioProveedor es " + precioProveedor);
-        System.out.println("Cantidad es " + this.cantidad);
-        System.out.println("Impuesto es " + impuestoProducto.getPorcentaje()/100);
-
         this.precioFinal = precioProveedor * this.cantidad * (1+(impuestoProducto.getPorcentaje()/100));
-        System.out.println("Precio Final es " + precioFinal);
+
         setPrecioFinal(precioFinal);
     }
 

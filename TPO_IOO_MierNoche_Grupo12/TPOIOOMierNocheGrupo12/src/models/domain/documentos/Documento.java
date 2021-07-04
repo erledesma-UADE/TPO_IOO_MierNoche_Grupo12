@@ -45,7 +45,7 @@ public abstract class Documento extends ID {
     }
 
     public LocalDate getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     public void setFecha(LocalDate fecha) {
@@ -62,9 +62,11 @@ public abstract class Documento extends ID {
         for (int i = 0; i<articulosAux.size(); i++){
             sumaTotal += articulosAux.get(i).getPrecioFinal();
         }
+
         double sumatotalAux = 0;
+
         for(Impuesto impuesto : proveedor.get().getImpuestos()){
-            sumatotalAux += sumaTotal * impuesto.getPorcentaje();
+            sumatotalAux += sumaTotal * (impuesto.getPorcentaje()/100);
         }
 
         this.montoTotal = sumaTotal + sumatotalAux;

@@ -28,10 +28,10 @@ public class MainController {
     }
 
     private MainController(){
-        this.repositorioProveedores = new RepositorioProveedores();
-        this.repositorioOrdenesDePago  = new RepositorioOrdenesDePago();
-        this.repositorioCuentasCorrientes = new RepositorioCuentasCorrientes();
-        this.repositorioRetenciones = new RepositorioRetenciones();
+        this.repositorioProveedores = RepositorioProveedores.getInstancia();
+        this.repositorioOrdenesDePago  = RepositorioOrdenesDePago.getInstancia();
+        this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
+        //this.repositorioRetenciones = new RepositorioRetenciones();
     }
 
     //=================================================================================================================
@@ -179,22 +179,20 @@ public class MainController {
     //=================================================================================================================
 
     public int totalFacturasRecibidas(int idProveedor) {
-        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
-        proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        Optional<Proveedor> proveedorActual = this.repositorioProveedores.getPorID(idProveedor);
         return proveedorActual.get().cantidadFacturasEmitidas();
     }
 
     public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
-        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
-        proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
+        Optional<Proveedor> proveedorActual = this.repositorioProveedores.getPorID(idProveedor);
         return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
     }
 
     public List<CuentaCorriente.VistaCuentasProveedoresDTO> mostrarCuentaCorrienteProveedores () {
         List<CuentaCorriente.VistaCuentasProveedoresDTO>  cuentasDTO = new ArrayList<>();
 
-        this.repositorioCuentasCorrientes.getElementos().forEach(documento -> {
-            cuentasDTO.add(documento.toVistaCuentasProveedoresDTO());
+        this.repositorioCuentasCorrientes.getElementos().forEach(cuentaCorriente -> {
+            cuentasDTO.add(cuentaCorriente.toVistaCuentasProveedoresDTO());
         });
         /*cuentasDTO.forEach(cuenta -> {
             cuenta.montoDeuda;
