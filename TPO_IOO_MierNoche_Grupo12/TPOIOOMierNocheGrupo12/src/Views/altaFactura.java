@@ -1,6 +1,5 @@
 package Views;
 
-import controllers.MainController;
 import models.domain.OrdenCompra;
 
 import javax.swing.*;
@@ -65,7 +64,7 @@ public class altaFactura extends JFrame{
                 tableModel.addColumn("Producto");
 
                 List<OrdenCompra> oOC = new ArrayList<>();
-                oOC = MainController.getInstancia().getRepositorioOrdenDeCompra().buscarTodos();
+                //oOC = MainController.getInstancia().getRepositorioOrdenDeCompra().buscarTodos();
 
                 Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < oOC.size(); i++){
