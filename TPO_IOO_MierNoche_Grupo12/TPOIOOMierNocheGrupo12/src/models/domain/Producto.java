@@ -2,6 +2,7 @@ package models.domain;
 
 import models.domain.enums.Iva;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Producto extends ID {
@@ -10,7 +11,9 @@ public class Producto extends ID {
     private Iva impuesto;
     private List<PrecioPorProveedor> precioPorProveedor;
 
-    public Producto () {}
+    public Producto() {
+        this.precioPorProveedor = new ArrayList<>();
+    }
 
     public Producto(String nombre, String tipoUnidad, String impuestoAux) {
         this.nombre = nombre;
@@ -20,6 +23,10 @@ public class Producto extends ID {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void agregarPrecioProveedor(PrecioPorProveedor precioPorProveedor){
+        this.precioPorProveedor.add(precioPorProveedor);
     }
 
     public void setNombre(String nombre) {

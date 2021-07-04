@@ -27,7 +27,7 @@ public class totalDeudaProv extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 int cuitP = Integer.parseInt(textCuit.getText());
 
-                float monto = MainController.getInstancia().totalDeudaProveedor(cuitP);
+                float monto = MainController.getInstancia().deudaPorProveedor(cuitP);
                 textMontoDeuda.setText(String.valueOf(monto));
             }
         });

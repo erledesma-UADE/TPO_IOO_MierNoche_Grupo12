@@ -1,0 +1,23 @@
+[
+  {
+    "fechaString" : "2020-05-19",
+    "tipoDocumento" : "Factura",
+    "pagado" : "true",
+    "cuitProveedor" : "1234"
+  },
+
+  {
+    "fechaString" : "2020-05-30",
+    "tipoDocumento" : "Factura",
+    "pagado" : "true",
+    "cuitProveedor" : "1234"
+
+  },
+  {
+    "fechaString" : "2020-08-20",
+    "tipoDocumento" : "Factura",
+    "pagado" : "true",
+    "cuitProveedor" : "1234"
+  }
+
+]

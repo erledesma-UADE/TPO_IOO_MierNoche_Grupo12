@@ -6,12 +6,12 @@ import java.util.List;
 
 public class OrdenCompra extends ID {
     private LocalDate fecha;
-    private List<Producto> producto;
+    private List<Producto> productos;
     private Proveedor proveedor;
 
     public OrdenCompra(LocalDate fecha, Proveedor proveedor) {
         this.fecha = fecha;
-        this.producto = new ArrayList<>();
+        this.productos = new ArrayList<>();
         this.proveedor = proveedor;
     }
 
@@ -20,7 +20,7 @@ public class OrdenCompra extends ID {
     }
 
     public List<Producto> getProducto() {
-        return producto;
+        return productos;
     }
 
     public Proveedor getProveedor() {
@@ -32,11 +32,11 @@ public class OrdenCompra extends ID {
     }
 
     public void setProducto(List<Producto> producto) {
-        this.producto = this.producto;
+        this.productos = this.productos;
     }
 
     public void agregarProducto (Producto producto) {
-        this.producto.add(producto);
+        this.productos.add(producto);
     }
 
     public void setProveedor(Proveedor proveedor) {
@@ -45,5 +45,23 @@ public class OrdenCompra extends ID {
 
     public boolean verificarTope(Proveedor proveedor){
         return false;
+    }
+
+    public OrdenCompraDTO toDTO () {
+        OrdenCompraDTO dto = new OrdenCompraDTO();
+
+        dto.fecha = this.fecha;
+        this.productos.forEach(producto -> {
+            dto.productos.add(producto.toDTO());
+        });
+        dto.proveedor = this.proveedor.toDTO();
+
+        return dto;
+    }
+
+    public static class OrdenCompraDTO {
+        public LocalDate fecha;
+        public List<Producto.ProductoDTO> productos;
+        public Proveedor.ProveedorDTO proveedor;
     }
 }

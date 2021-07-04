@@ -1,5 +1,6 @@
 package models.repositories;
 
+import controllers.DocumentosController;
 import models.domain.ID;
 
 import java.util.ArrayList;
@@ -7,7 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class Repositorio<T extends ID> {
-    private List<T> elementos;
+    protected List<T> elementos;
+
+
 
     public Repositorio() {
         this.elementos = new ArrayList<>();

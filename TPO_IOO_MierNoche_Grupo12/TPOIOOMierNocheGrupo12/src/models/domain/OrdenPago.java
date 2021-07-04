@@ -1,10 +1,14 @@
 package models.domain;
 
+import controllers.DocumentosController;
+import controllers.exceptions.DocumentoInexistenteException;
 import models.domain.documentos.Documento;
+import models.domain.documentos.Factura;
 import models.domain.enums.TipoDocumento;
 import models.domain.enums.TipoPago;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrdenPago extends ID {
@@ -18,22 +22,9 @@ public class OrdenPago extends ID {
     private TipoPago formaPago;
     private boolean pagado;
 
-    public OrdenPago(List<Documento> documentos, String tipoPago, Proveedor proveedor,
-                     LocalDateTime fecha, TipoPago formaPago,boolean pagado) {
-        this.documentos = documentos;
-        this.tipoPago = tipoPago;
-        this.proveedor = proveedor;
-        this.fecha = fecha;
-        this.formaPago = formaPago;
-        this.pagado = pagado;
-    }
-
-    public void agregarRetencion(Retencion retencion){
-        this.retenciones.add(retencion);
-    }
-
-    public float calcularTotalRetenciones(){
-        return 0;
+    public OrdenPago() {
+        this.retenciones = new ArrayList<>();
+        this.documentos =new ArrayList<>();
     }
 
     public void setDocumentos(List<Documento> documentos) {
@@ -112,34 +103,62 @@ public class OrdenPago extends ID {
         return formaPago;
     }
 
+    public void agregarRetencion(Retencion retencion){
+        this.retenciones.add(retencion);
+    }
 
-    public static class OrdenPagoDto{
-        public List<Documento> documentos;
+    public float calcularTotalRetenciones () {
+        float totalRetenciones = 0;
+
+        for (Retencion retencion : this.retenciones) {
+            totalRetenciones += retencion.getMonto();
+        };
+
+        return totalRetenciones;
+    }
+
+    public void asignarFactura (Factura.FacturaDTO facturaDTO) {
+        DocumentosController documentosController = DocumentosController.getInstancia();
+
+        if (documentosController.getRepositorioDocumentos().getPorID(facturaDTO.idFactura).isPresent()) {
+            this.documentos.add(documentosController.getRepositorioDocumentos().getPorID(facturaDTO.idFactura).get());
+        } else {
+            throw new DocumentoInexistenteException("No se encontro el documento");
+        }
+    }
+
+    public static class OrdenPagoDTO {
+        public List<Documento.DocumentoDTO> documentos;
         public String tipoPago;
-        public Proveedor proveedor;
+        public Proveedor.ProveedorDTO proveedor;
         public float totalRetenciones;
-        public List<Retencion> retenciones;
+        public List<Retencion.RetencionDTO> retenciones;
         public LocalDateTime fecha;
         public float montoTotal;
         public TipoPago formaPago;
         public boolean pagado;
     }
 
-    public OrdenPagoDto toDTO() {
-        OrdenPagoDto dto = new OrdenPagoDto();
+    public OrdenPagoDTO toDTO() {
+        OrdenPagoDTO dto = new OrdenPagoDTO();
         dto.fecha = this.fecha;
         dto.montoTotal = this.montoTotal;
         dto.pagado = this.pagado;
-        dto.proveedor = this.proveedor;
+        dto.proveedor = this.proveedor.toDTO();
         dto.formaPago = this.formaPago;
-        dto.retenciones = this.retenciones;
         dto.tipoPago = this.tipoPago;
         dto.totalRetenciones = this.totalRetenciones;
-        dto.documentos = this.documentos;
+
+        this.documentos.forEach(documento -> {
+            dto.documentos.add(documento.toDTO());
+        });
+
+        this.retenciones.forEach(retencion -> {
+            dto.retenciones.add(retencion.toDTO());
+        });
+
         return dto;
     }
-
-
 
     /*public float getTotalRetencionesPorProveedor(){  //reconoce que habla de proveedor por eso no lo paso como parametros
         int mainController = 0; //reemplazar por getProveedorPorid(proveedorid);

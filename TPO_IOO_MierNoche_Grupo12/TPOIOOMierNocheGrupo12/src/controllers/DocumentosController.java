@@ -2,6 +2,7 @@ package controllers;
 
 
 
+import controllers.exceptions.ProveedorInexistenteException;
 import models.domain.CantidadPorProducto;
 import models.domain.Producto;
 import models.domain.Proveedor;
@@ -11,13 +12,10 @@ import models.domain.documentos.NotaCredito;
 import models.domain.documentos.NotaDebito;
 import models.domain.enums.TipoDocumento;
 import models.repositories.RepositorioDocumentos;
+import models.repositories.RepositorioPrecioPorProveedor;
 import models.repositories.RepositorioProductos;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 public class DocumentosController {
@@ -26,23 +24,36 @@ public class DocumentosController {
     private RepositorioDocumentos repositorioDocumentos;
     private RepositorioProductos  repositorioProductos;
 
+    private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
+
+    private MainController mainController = MainController.getInstancia();
+
+
     public static DocumentosController getInstancia(){
         if(DocumentosController.instancia == null)
             instancia = new DocumentosController();
         return instancia;
     }
 
-    public DocumentosController(){
-        this.repositorioDocumentos = new RepositorioDocumentos();
-        this.repositorioProductos = new RepositorioProductos();
+    private DocumentosController(){
+        this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
+        this.repositorioProductos = RepositorioProductos.getInstancia();
+        this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
+
     };
+
+    //=================================================================================================================
+    //INICIO GETTERS / SETTERS
+    //=================================================================================================================
 
     public RepositorioProductos getRepositorioProductos() {
         return this.repositorioProductos;
     }
 
+    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProveedor() { return this.repositorioPrecioPorProveedor;}
+
     public RepositorioDocumentos getRepositorioDocumentos() {
-        return repositorioDocumentos;
+        return this.repositorioDocumentos;
     }
 
     public void setRepositorioDocumentos(RepositorioDocumentos repositorioDocumentos) {
@@ -52,6 +63,13 @@ public class DocumentosController {
     public void setRepositorioProductos(RepositorioProductos repositorioProductos) {
         this.repositorioProductos = repositorioProductos;
     }
+    //=================================================================================================================
+    //FIN GETTERS / SETTERS
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO DOCUMENTOS
+    //=================================================================================================================
 
     public void altaDocumento(Documento.DocumentoDTO documentoDTO, Optional<Proveedor> proveedor){
         this.validarDatosDocumento(documentoDTO);
@@ -73,21 +91,23 @@ public class DocumentosController {
     }
 
     private void validarDatosDocumento(Documento.DocumentoDTO documentoDto){
-        //validarExistenciaProveedor
+        if (!mainController.validarCuit(documentoDto.cuitProveedor)) {
+            throw new ProveedorInexistenteException ("No se encontro el Proveedor");
+        }
     }
 
     private void asignarParametrosDocumento(Documento documento, Documento.DocumentoDTO documentoDto,Optional<Proveedor> proveedor) {
         documento.setTipoDocumento(documentoDto.tipoDocumento);
         documento.setFecha(documentoDto.fecha);
-        documento.setProveedor(documentoDto.cuitProveedor);
+        documento.setCuitProveedor(documentoDto.cuitProveedor);
         documento.setProveedor(proveedor);
 
-        String[][] articulosVista = documentoDto.articulosVista;
-        this.setArticulos(articulosVista,documento,documentoDto);
+        /*String[][] articulosVista = documentoDto.articulosVista;
+        this.setArticulos(articulosVista,documento,documentoDto);*/
 
     }
 
-    public void setArticulos(String[][] articulosVista,Documento documento,Documento.DocumentoDTO documentoDto){
+    /*public void setArticulos(String[][] articulosVista,Documento documento,Documento.DocumentoDTO documentoDto){
         for (int i = 0; i < articulosVista.length; i++) {
             Optional<Producto> producto = null;
             float cantidad = 0;
@@ -102,18 +122,25 @@ public class DocumentosController {
                 }
             }
             CantidadPorProducto productoAux = new CantidadPorProducto(producto, cantidad, documentoDto.cuitProveedor);
+            System.out.println(productoAux);
             documento.agregarArticulo(productoAux);
         }
         documento.setMontoTotal();
-    }
+<<<<<<< HEAD
+    }*/
 
 
+    //=================================================================================================================
+    //FIN DOCUMENTOS
+    //=================================================================================================================
 
+
+    //=================================================================================================================
+    //INICIO CONSULTAS GENERALES
+    //=================================================================================================================
     public int facturasEmitidasElDia(LocalDate unDia){
         return this.repositorioDocumentos.facturasEmitdasElDia(unDia).size();
     }
-
-
 
     /*public int totalFacturasRecibidas () {
         List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
@@ -143,6 +170,7 @@ public class DocumentosController {
     public void getLibroIVACompras () {}
 
 */
-
-
+    //=================================================================================================================
+    //INICIO CONSULTAS GENERALES
+    //=================================================================================================================
 }

@@ -1,10 +1,12 @@
 package controllers;
 
 import controllers.exceptions.CuitRepetidoException;
-import controllers.exceptions.cuitRepetidoException;
-import models.domain.Proveedor;
+import controllers.exceptions.ProveedorInexistenteException;
+import models.domain.*;
+import models.repositories.RepositorioCuentasCorrientes;
 import models.repositories.RepositorioOrdenesDePago;
 import models.repositories.RepositorioProveedores;
+import models.repositories.RepositorioRetenciones;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class MainController {
     private static MainController instancia;
     private RepositorioProveedores repositorioProveedores;
     private RepositorioOrdenesDePago repositorioOrdenesDePago;
+    private RepositorioCuentasCorrientes repositorioCuentasCorrientes;
+    public RepositorioRetenciones repositorioRetenciones;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -23,66 +27,16 @@ public class MainController {
         return instancia;
     }
 
-    public MainController(){
-
-        this.repositorioProveedores = new RepositorioProveedores();
-        this.repositorioOrdenesDePago  = new RepositorioOrdenesDePago();
+    private MainController(){
+        this.repositorioProveedores = RepositorioProveedores.getInstancia();
+        this.repositorioOrdenesDePago  = RepositorioOrdenesDePago.getInstancia();
+        this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
+        //this.repositorioRetenciones = new RepositorioRetenciones();
     }
 
-    public void altaProveedor(Proveedor.ProveedorDTO proveedorDTO){
-        this.validarDatosProveedor(proveedorDTO);
-        Proveedor proveedor = new Proveedor();
-        asignarParametrosProveedor(proveedor,proveedorDTO);
-        this.repositorioProveedores.agregar(proveedor);
-    }
-
-    private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
-        if(this.validarCuit(proveedorDTO.cuit)){
-            throw new CuitRepetidoException("El proveedor ya existe");
-        }
-    }
-
-    private boolean validarCuit(int cuit){
-        Optional<Proveedor> proveedor = this.repositorioProveedores.buscarPorCuit(cuit);
-        return proveedor.isPresent();
-    }
-
-    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
-        proveedor.setCuit(proveedorDto.cuit);
-        proveedor.setDireccion(proveedorDto.direccion);
-        proveedor.setEmail(proveedorDto.email);
-        proveedor.setNombre(proveedorDto.nombre);
-        proveedor.setInicioActividades(proveedorDto.inicioActividades);
-        proveedor.setRazonSocial(proveedorDto.razonSocial);
-        proveedor.setResponsabilidad(proveedorDto.responsabilidad);
-        proveedor.setNumeroIngresosBrutos(proveedorDto.numeroIngresosBrutos);
-        proveedor.setTope(proveedorDto.tope);
-        proveedor.setCertificado(proveedorDto.certificado);
-        proveedor.setCatalogo(proveedorDto.catalogo);
-        proveedor.setRubros(proveedorDto.rubros);
-        proveedor.setImpuestos(proveedorDto.impuestos);
-    }
-
-    public List<Proveedor.ProveedorDTO> listarProveedores(){
-        List<Proveedor.ProveedorDTO> listaProveedoresDto = new ArrayList<>();
-        for (Proveedor proveedorOriginal : this.repositorioProveedores.getElementos()) {
-            Proveedor.ProveedorDTO proveedorDto = proveedorOriginal.toDTO();
-            listaProveedoresDto.add(proveedorDto);
-        }
-        return listaProveedoresDto;
-    }
-
-    public int totalFacturasRecibidas(int idProveedor) {
-        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
-         proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
-        return proveedorActual.get().cantidadFacturasEmitidas();
-    }
-
-    public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
-        Optional<Proveedor> proveedorActual = Optional.of(new Proveedor());
-        proveedorActual= this.repositorioProveedores.getPorID(idProveedor);
-        return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
-    }
+    //=================================================================================================================
+    //INICIO GETTERS / SETTERS
+    //=================================================================================================================
 
     public RepositorioProveedores getRepositorioProveedores() {
         return repositorioProveedores;
@@ -100,29 +54,184 @@ public class MainController {
         this.repositorioOrdenesDePago = repositorioOrdenesDePago;
     }
 
-    public float totalFacturasRecibidasProveedorDia(int idProveedor, LocalDate fecha) {
-        return 0;
+   /* public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+        validarDatosProveedor(ordenPagoDTO.proveedor);
+        OrdenPago ordenPago = new OrdenPago();
+        //asignarParametrosOrdenPago()
+    }*/
+
+    public RepositorioCuentasCorrientes getRepositorioCuentasCorrientes() {
+        return repositorioCuentasCorrientes;
     }
 
-    public void detalleCuentaCorriente(int idProveedor) {}
-
-    public float totalDeudaProveedor(int idProveedor) {
-        return 0;
+    public void setRepositorioCuentasCorrientes(RepositorioCuentasCorrientes repositorioCuentasCorrientes) {
+        this.repositorioCuentasCorrientes = repositorioCuentasCorrientes;
     }
 
-    public void mostrarLibroIVACompras () {}
+    public RepositorioRetenciones getRepositorioRetenciones() {
+        return repositorioRetenciones;
+    }
 
-    public void ordenesPagoEmitidas () {}
+    public void setRepositorioRetenciones(RepositorioRetenciones repositorioRetenciones) {
+        this.repositorioRetenciones = repositorioRetenciones;
+    }
+    //=================================================================================================================
+    //FIN GETTERS / SETTERS
+    //=================================================================================================================
 
-    public void getOrdenesDePago () {}
+    //=================================================================================================================
+    //INICIO ORDEN DE PAGO
+    //=================================================================================================================
 
-    public void /*Proveedor*/ getProveedor (int idProveedor) {} //devuelve un ProveedorDTO
+    public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+        validarDatosProveedor(ordenPagoDTO.proveedor);
+        OrdenPago ordenPago = new OrdenPago();
+        asignarParametrosOrdenPago(ordenPago, ordenPagoDTO);
+        this.repositorioOrdenesDePago.agregar(ordenPago);
+    }
 
-    public void mostrarCuentaCorrienteProveedores () {}
+    public void validarDatosOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+        if (!this.validarCuit(ordenPagoDTO.proveedor.cuit)) {
+            throw new ProveedorInexistenteException ("No se encontro el Proveedor");
+        }
+    }
 
-    public void getCuentasProveedores () {} //Seria una Lista de CuentaCorrienteDTO ?
+    public void asignarParametrosOrdenPago (OrdenPago ordenPago, OrdenPago.OrdenPagoDTO ordenPagoDTO) {
+        if (validarCuit(ordenPagoDTO.proveedor.cuit)) {
+            ordenPago.setProveedor(this.repositorioProveedores.buscarPorCuit(ordenPagoDTO.proveedor.cuit).get());
+        } else {
+            throw new ProveedorInexistenteException("No se encontro el Proveedor");
+        }
 
-    public float getTotalRetencionesPorProveedor (int idProveedor) { return 0; }
+        ordenPago.setFormaPago(ordenPagoDTO.formaPago);
+        ordenPago.setFecha(ordenPagoDTO.fecha);
+        ordenPago.setTipoPago(ordenPagoDTO.tipoPago);
+        ordenPago.setPagado(ordenPagoDTO.pagado);
+        ordenPago.setMontoTotal(ordenPagoDTO.montoTotal);
 
-    public void /*ProveedorDTO*/getProveedorPorId (int idProveedor) {}
+        ordenPagoDTO.retenciones.forEach(retencion -> {
+            ordenPago.agregarRetencion(this.repositorioRetenciones.getPorID(retencion.idRetencion).get());
+        });
+    }
+    //=================================================================================================================
+    //FIN ORDEN DE PAGO
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO PROVEEDORES
+    //=================================================================================================================
+
+    public void altaProveedor(Proveedor.ProveedorDTO proveedorDTO){
+        this.validarDatosProveedor(proveedorDTO);
+        Proveedor proveedor = new Proveedor();
+        asignarParametrosProveedor(proveedor,proveedorDTO);
+        this.repositorioProveedores.agregar(proveedor);
+    }
+
+    public boolean validarCuit(int cuit){
+        Optional<Proveedor> proveedor = this.repositorioProveedores.buscarPorCuit(cuit);
+        return proveedor.isPresent();
+    }
+
+    private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
+        if (this.validarCuit(proveedorDTO.cuit)) {
+            throw new CuitRepetidoException("El proveedor ya existe");
+        }
+    }
+
+    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
+        proveedor.setCuit(proveedorDto.cuit);
+        proveedor.setDireccion(proveedorDto.direccion);
+        proveedor.setEmail(proveedorDto.email);
+        proveedor.setNombre(proveedorDto.nombre);
+        proveedor.setInicioActividades(proveedorDto.inicioActividades);
+        proveedor.setRazonSocial(proveedorDto.razonSocial);
+        proveedor.setResponsabilidad(proveedorDto.responsabilidad);
+        proveedor.setNumeroIngresosBrutos(proveedorDto.numeroIngresosBrutos);
+        proveedor.setTope(proveedorDto.tope);
+        proveedor.setCertificado(proveedorDto.certificado);
+        //proveedor.setCatalogo(proveedorDto.catalogo);
+        proveedor.setRubros(proveedorDto.rubros);
+        //proveedor.setImpuestos(proveedorDto.impuestos);
+    }
+
+    public Proveedor.ProveedorDTO verProveedorPorCuit (int cuitProveedor) {
+        return this.repositorioProveedores.buscarPorCuit(cuitProveedor).get().toDTO();
+    }
+
+    public List<Proveedor.ProveedorDTO> listarProveedores(){
+        List<Proveedor.ProveedorDTO> listaProveedoresDto = new ArrayList<>();
+        for (Proveedor proveedorOriginal : this.repositorioProveedores.getElementos()) {
+            Proveedor.ProveedorDTO proveedorDto = proveedorOriginal.toDTO();
+            listaProveedoresDto.add(proveedorDto);
+        }
+        return listaProveedoresDto;
+    }
+    //=================================================================================================================
+    //FIN PROVEEDORES
+    //=================================================================================================================
+
+    //=================================================================================================================
+    //INICIO CONSULTAS GENERALES
+    //=================================================================================================================
+    //-Total Facturas Recibidas / Cuenta Corriente Proveedores / Ordenes de Pago Emitidas /
+    //-Total Deuda Por Proveedor / Total De Impuestos Retenidos
+    //=================================================================================================================
+
+    public int totalFacturasRecibidas(int idProveedor) {
+        Optional<Proveedor> proveedorActual = this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitidas();
+    }
+
+    public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
+        Optional<Proveedor> proveedorActual = this.repositorioProveedores.getPorID(idProveedor);
+        return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
+    }
+
+    public List<CuentaCorriente.VistaCuentasProveedoresDTO> mostrarCuentaCorrienteProveedores () {
+        List<CuentaCorriente.VistaCuentasProveedoresDTO>  cuentasDTO = new ArrayList<>();
+
+        this.repositorioCuentasCorrientes.getElementos().forEach(cuentaCorriente -> {
+            cuentasDTO.add(cuentaCorriente.toVistaCuentasProveedoresDTO());
+        });
+        /*cuentasDTO.forEach(cuenta -> {
+            cuenta.montoDeuda;
+            cuenta.documentos.forEach(doc -> {
+                doc.cuitProveedor;
+                doc.idDocumento;
+            });
+        });*/
+        return cuentasDTO;
+    }
+
+    public List<OrdenPago.OrdenPagoDTO> ordenesPagoEmitidas () {
+        List<OrdenPago.OrdenPagoDTO> ordenes = new ArrayList<>();
+
+        this.repositorioOrdenesDePago.getElementos().forEach(orden -> {
+            ordenes.add(orden.toDTO());
+        });
+
+        return ordenes;
+    }
+
+    public float deudaPorProveedor (int cuit) {
+        return this.repositorioCuentasCorrientes.buscarPorCuitProveedor(cuit).get().getMontoDeuda();
+    }
+
+    public float totalImpuestosRetenidos () {
+        float totalImpuestosRetenidos = 0;
+
+        /*for (OrdenPago orden : this.repositorioOrdenesDePago.getElementos()) {
+            totalImpuestosRetenidos += orden.calcularTotalRetenciones();
+        }*/
+
+        for (Retencion retencion : this.repositorioRetenciones.getElementos()) {
+            totalImpuestosRetenidos += retencion.getMonto();
+        }
+
+        return totalImpuestosRetenidos;
+    }
+    //=================================================================================================================
+    //FIN CONSULTAS GENERALES
+    //=================================================================================================================
 }

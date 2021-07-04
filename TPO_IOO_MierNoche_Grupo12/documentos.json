@@ -1,24 +1,21 @@
 [
   {
-    "fecha" : "2020-05-19",
-    "monto total" : "750",
-    "tipo documento" : "factura",
+    "fechaString" : "2020-05-19",
+    "tipoDocumento" : "Factura",
     "pagado" : "true",
-    "cuit proveedor" : "1234",
-    "lista articulos": [
-      ["lapicera","3"],
+    "cuitProveedor" : "1234",
+    "listaArticulos": [
       ["cuaderno","4"],
       ["goma","5"]
 
     ]},
 
   {
-    "fecha" : "2020-05-19",
-    "monto total" : "750",
-    "tipo documento" : "nota credito",
+    "fechaString" : "2020-05-19",
+    "tipoDocumento" : "notaCredito",
     "pagado" : "true",
-    "cuit proveedor" : "1234",
-    "lista articulos": [
+    "cuitProveedor" : "1234",
+    "listArticulos": [
       ["lapicera","3"],
       ["cuaderno","4"],
       ["goma","5"]
@@ -28,12 +25,11 @@
 
   },
   {
-    "fecha" : "2020-05-19",
-    "monto total" : "750",
-    "tipo documento" : "nota debito",
+    "fechaString" : "2020-05-19",
+    "tipoDocumento" : "notaDebito",
     "pagado" : "true",
-    "cuit proveedor" : "1234",
-    "lista articulos": [
+    "cuitProveedor" : "1234",
+    "listarticulos": [
       ["lapicera","3"],
       ["cuaderno","4"],
       ["goma","5"]

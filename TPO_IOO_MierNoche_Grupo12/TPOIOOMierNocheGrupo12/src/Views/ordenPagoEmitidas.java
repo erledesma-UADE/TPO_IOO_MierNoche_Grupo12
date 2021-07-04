@@ -19,7 +19,7 @@ public class ordenPagoEmitidas extends JFrame{
         this.setTitle("Ordenes de Pago Emitidas");
 
         ArrayList<OrdenPago> rows = new ArrayList<OrdenPago>();
-        OrdenPago.OrdenPagoDto ordenPago = new OrdenPago.OrdenPagoDto();
+        OrdenPago.OrdenPagoDTO ordenPago = new OrdenPago.OrdenPagoDTO();
         //rows = ordenPago.; traer todas las ordenes de pago
         Vector<Vector> rows2 = new Vector<Vector>();
 

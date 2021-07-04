@@ -3,6 +3,7 @@ package models.domain.documentos;
 import controllers.MainController;
 import models.domain.CantidadPorProducto;
 import models.domain.ID;
+import models.domain.Impuesto;
 import models.domain.Proveedor;
 import models.domain.enums.TipoDocumento;
 
@@ -13,20 +14,22 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class Documento extends ID {
-    private int idDocumento;
     private Optional<Proveedor> proveedor;
     private LocalDate fecha;
-    private String fechaString;
     private double montoTotal;
+    private List<CantidadPorProducto> articulos;
     private TipoDocumento tipoDocumento;
     private boolean pagado;
-    private List<CantidadPorProducto> articulos;
     private Integer cuitProveedor;
 
     public Documento() {
-        //this.fecha = LocalDate.now();
         this.articulos = new ArrayList<>();
-        this.pagado = false;
+    }
+
+    public Documento(String fechaString, Integer cuitProveedor, boolean pagado, TipoDocumento tipoDocumento) {
+        this.articulos = new ArrayList<>();
+        this.pagado = pagado;
+        this.tipoDocumento = tipoDocumento;
     }
 
     public Optional<Proveedor> getProveedor() {
@@ -37,32 +40,12 @@ public abstract class Documento extends ID {
         this.proveedor = proveedor;
     }
 
-    public String getFechaString() {
-        return fechaString;
-    }
-
-    public void setFechaString(String fechaString) {
-        this.fechaString = fechaString;
-    }
-
-    public void setMontoTotal(double montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    public void setCuitProveedor(Integer cuitProveedor) {
+    public void setCuitProveedor(Integer cuitProveedor){
         this.cuitProveedor = cuitProveedor;
     }
 
-    public int getIdDocumento() {
-        return idDocumento;
-    }
-
-    public void setIdDocumento(int idDocumento) {
-        this.idDocumento = idDocumento;
-    }
-
     public LocalDate getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     public void setFecha(LocalDate fecha) {
@@ -79,11 +62,18 @@ public abstract class Documento extends ID {
         for (int i = 0; i<articulosAux.size(); i++){
             sumaTotal += articulosAux.get(i).getPrecioFinal();
         }
-        this.montoTotal = sumaTotal;
+
+        double sumatotalAux = 0;
+
+        for(Impuesto impuesto : proveedor.get().getImpuestos()){
+            sumatotalAux += sumaTotal * (impuesto.getPorcentaje()/100);
+        }
+
+        this.montoTotal = sumaTotal + sumatotalAux;
     }
 
     public boolean isPagado() {
-        return pagado;
+        return this.pagado;
     }
 
     public void setPagado(boolean pagado) {
@@ -102,14 +92,6 @@ public abstract class Documento extends ID {
         return articulos;
     }
 
-    public Integer getCuitProveedor() {
-        return cuitProveedor;
-    }
-
-    public void setProveedor(Integer cuitProveedor) {
-        this.cuitProveedor = cuitProveedor;
-    }
-
     public void agregarArticulo(CantidadPorProducto producto){
         this.getArticulos().add(producto);
     }
@@ -118,16 +100,29 @@ public abstract class Documento extends ID {
         this.articulos = articulos;
     }
 
-    public static class DocumentoDTO{
-        public Integer cuitProveedor;
+    public void cambiarEstado () {
+        this.setPagado(true);
+        double montoActualizar = 0;
+
+        if (this.getTipoDocumento().equals(TipoDocumento.Factura) ||
+                this.getTipoDocumento().equals(TipoDocumento.NotaCredito)) {
+            montoActualizar = this.getMontoTotal() * -1;
+        } else {
+            montoActualizar = this.getMontoTotal();
+        }
+
+        this.proveedor.get().getCuentaCorriente().actualizarMontoDeuda(montoActualizar);
+    }
+
+    public static class DocumentoDTO {
         public int idDocumento;
         public LocalDate fecha;
-        public String fechaString;
         public double montoTotal;
         public boolean pagado;
         public List<CantidadPorProducto> articulos;
-        public String[][] articulosVista;
         public TipoDocumento tipoDocumento;
+        public Integer cuitProveedor;
+
 
         public void agregarArticulo(CantidadPorProducto articulo){
             this.articulos.add(articulo);
@@ -137,14 +132,15 @@ public abstract class Documento extends ID {
 
     public DocumentoDTO toDTO() {
         DocumentoDTO dto    = new DocumentoDTO();
-        dto.cuitProveedor   = this.cuitProveedor;
-        dto.idDocumento     = this.idDocumento;
+        dto.idDocumento     = this.getID();
         dto.fecha           = this.fecha;
         dto.montoTotal      = this.montoTotal;
         dto.pagado          = pagado;
         dto.articulos       = articulos;
         dto.tipoDocumento   = tipoDocumento;
-        dto.fechaString     = this.fechaString;
+        dto.cuitProveedor   = cuitProveedor;
+
+
         return dto;
     }
 

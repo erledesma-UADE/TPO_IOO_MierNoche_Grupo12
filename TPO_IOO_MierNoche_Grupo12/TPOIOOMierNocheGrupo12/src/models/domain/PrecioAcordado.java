@@ -2,7 +2,7 @@ package models.domain;
 
 import java.time.LocalDate;
 
-public class PreciosAcordados {
+public class PrecioAcordado {
     private LocalDate fechaAcuerdo;
     private float monto;
 
@@ -20,5 +20,20 @@ public class PreciosAcordados {
 
     public void setMonto(float monto) {
         this.monto = monto;
+    }
+
+
+    public PrecioAcordadoDTO toDTO () {
+        PrecioAcordadoDTO dto = new PrecioAcordadoDTO();
+
+        dto.fechaAcuerdo = this.fechaAcuerdo;
+        dto.monto = this.monto;
+
+        return dto;
+    }
+
+    public static class PrecioAcordadoDTO {
+        public LocalDate fechaAcuerdo;
+        public float  monto;
     }
 }

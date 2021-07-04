@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrecioPorProveedor extends ID {
-    private List<PreciosAcordados> preciosAcordados;
+    private List<PrecioAcordado> preciosAcordados;
     private Producto producto;
     private Proveedor proveedor;
     private String fecha;
@@ -18,6 +18,14 @@ public class PrecioPorProveedor extends ID {
         this.preciosAcordados = new ArrayList<>();
         this.productoString = productoString;
         this.cuitProveedor = Integer.parseInt(cuitProveedor);
+    }
+
+    public List<PrecioAcordado> getPreciosAcordados() {
+        return preciosAcordados;
+    }
+
+    public void setPreciosAcordados(List<PrecioAcordado> preciosAcordados) {
+        this.preciosAcordados = preciosAcordados;
     }
 
     private LocalDate stringToLocalDate(String fecha){
@@ -59,7 +67,7 @@ public class PrecioPorProveedor extends ID {
         this.cuitProveedor = cuitProveedor;
     }
 
-    public PreciosAcordados getUltimoPrecio () {
+    public PrecioAcordado getUltimoPrecio () {
 
         return this.preciosAcordados.get(this.preciosAcordados.size()-1);
     }
