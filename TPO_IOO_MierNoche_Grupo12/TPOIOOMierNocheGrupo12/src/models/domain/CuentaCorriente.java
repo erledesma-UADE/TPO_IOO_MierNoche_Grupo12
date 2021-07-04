@@ -121,21 +121,24 @@ public class CuentaCorriente extends ID {
         CuentaCorrienteDTO dto = new CuentaCorrienteDTO();
 
         dto.IDCuentaCorriente = super.getID();
-        dto.proveedor = this.proveedor;
+        dto.proveedor = this.proveedor.toDTO();
         dto.debito = this.debito;
         dto.credito = this.credito;
-        dto.documentos = this.documentos;
         dto.montoDeuda = this.montoDeuda;
+
+        this.documentos.forEach(documento -> {
+            dto.documentos.add(documento.toDTO());
+        });
 
         return dto;
     }
 
     public class CuentaCorrienteDTO{
         public Integer IDCuentaCorriente;
-        public Proveedor proveedor;
+        public Proveedor.ProveedorDTO proveedor;
         public float debito;
         public float credito;
-        public List<Documento> documentos;
+        public List<Documento.DocumentoDTO> documentos;
         public float montoDeuda;
 
         public CuentaCorrienteDTO(){this.documentos = new ArrayList<>();}
