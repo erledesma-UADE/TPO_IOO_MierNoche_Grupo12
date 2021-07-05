@@ -6,18 +6,20 @@ import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
 import models.domain.enums.TipoDocumento;
 import models.domain.enums.TipoPago;
+import models.repositories.RepositorioRetenciones;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrdenPago extends ID {
     private List<Documento> documentos;
-    private String tipoPago;
+    private TipoPago tipoPago;
     private Proveedor proveedor;
     private float totalRetenciones;
     private List<Retencion> retenciones;
-    private LocalDateTime fecha;
+    private LocalDate fecha;
+    private float subTotal;
     private float montoTotal;
     private TipoPago formaPago;
     private boolean pagado;
@@ -31,7 +33,7 @@ public class OrdenPago extends ID {
         this.documentos = documentos;
     }
 
-    public void setTipoPago(String tipoPago) {
+    public void setTipoPago(TipoPago tipoPago) {
         this.tipoPago = tipoPago;
     }
 
@@ -47,8 +49,24 @@ public class OrdenPago extends ID {
         this.retenciones = retenciones;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public void setSubTotal(float monto){
+        this.subTotal = monto;
+    }
+
+    public void calcularSubtotal(){
+        float montoAux = 0;
+        for(Documento documento : this.getDocumentos()){
+            montoAux += documento.getMontoTotal();
+        }
+        this.setSubTotal(montoAux);
+    }
+
+    public float getSubTotal() {
+        return subTotal;
     }
 
     public void setMontoTotal(float montoTotal) {
@@ -63,11 +81,18 @@ public class OrdenPago extends ID {
         this.pagado = pagado;
     }
 
+    public void cambiarEstado(){
+        for(Documento documento : this.documentos){
+            documento.cambiarEstado();
+        }
+        this.pagado = true;
+    }
+
     public List<Documento> getDocumentos() {
         return documentos;
     }
 
-    public String getTipoPago() {
+    public TipoPago getTipoPago() {
         return tipoPago;
     }
 
@@ -76,20 +101,23 @@ public class OrdenPago extends ID {
     }
 
     public float getTotalRetenciones() {
-        return totalRetenciones;
+        return this.totalRetenciones;
     }
 
     public List<Retencion> getRetenciones() {
-        return retenciones;
+        return this.retenciones;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public float calcularMontoTotal() {  // operacion del diagrama
-        return montoTotal;
+    public void calcularMontoTotal() {
+        System.out.println("subtotal " + this.getSubTotal() + "retenciones " + this.getTotalRetenciones());
+        this.setMontoTotal(this.getSubTotal() - this.getTotalRetenciones());
     }
+
+
 
     public boolean isPagado() {
         return pagado;
@@ -104,38 +132,50 @@ public class OrdenPago extends ID {
     }
 
     public void agregarRetencion(Retencion retencion){
-        this.retenciones.add(retencion);
+        this.getRetenciones().add(retencion);
     }
 
-    public float calcularTotalRetenciones () {
+    public void agregarDocumento(Documento documento){
+        this.getDocumentos().add(documento);
+    }
+
+
+    public void calcularTotalRetenciones () {
         float totalRetenciones = 0;
 
         for (Retencion retencion : this.retenciones) {
             totalRetenciones += retencion.getMonto();
         };
 
-        return totalRetenciones;
+        this.totalRetenciones = totalRetenciones;
     }
 
-    public void asignarFactura (Factura.FacturaDTO facturaDTO) {
-        DocumentosController documentosController = DocumentosController.getInstancia();
 
-        if (documentosController.getRepositorioDocumentos().getPorID(facturaDTO.idFactura).isPresent()) {
-            this.documentos.add(documentosController.getRepositorioDocumentos().getPorID(facturaDTO.idFactura).get());
-        } else {
-            throw new DocumentoInexistenteException("No se encontro el documento");
+    public void agregarRetenciones(){
+        RepositorioRetenciones repositorioRetenciones = RepositorioRetenciones.getInstancia();
+        List<Retencion> retenciones = new ArrayList<>();
+        for(Impuesto impuesto : this.getProveedor().getImpuestos()){
+            Retencion retencion = new Retencion();
+            retencion.setImpuesto(impuesto);
+            retencion.setMonto(subTotal);
+            retenciones.add(retencion);
+            repositorioRetenciones.agregar(retencion);
         }
+        this.setRetenciones(retenciones);
     }
+
+
 
     public static class OrdenPagoDTO {
         public List<Documento.DocumentoDTO> documentos;
-        public String tipoPago;
+        public List<Integer> idsDocumentos;
         public Proveedor.ProveedorDTO proveedor;
+        public Integer cuitProveedor;
         public float totalRetenciones;
         public List<Retencion.RetencionDTO> retenciones;
-        public LocalDateTime fecha;
+        public LocalDate fecha;
         public float montoTotal;
-        public TipoPago formaPago;
+        public TipoPago tipoPago;
         public boolean pagado;
     }
 
@@ -145,7 +185,6 @@ public class OrdenPago extends ID {
         dto.montoTotal = this.montoTotal;
         dto.pagado = this.pagado;
         dto.proveedor = this.proveedor.toDTO();
-        dto.formaPago = this.formaPago;
         dto.tipoPago = this.tipoPago;
         dto.totalRetenciones = this.totalRetenciones;
 

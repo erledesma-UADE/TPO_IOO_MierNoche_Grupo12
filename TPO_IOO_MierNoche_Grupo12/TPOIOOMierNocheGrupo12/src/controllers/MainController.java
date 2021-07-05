@@ -3,10 +3,11 @@ package controllers;
 import controllers.exceptions.CuitRepetidoException;
 import controllers.exceptions.ProveedorInexistenteException;
 import models.domain.*;
-import models.repositories.RepositorioCuentasCorrientes;
-import models.repositories.RepositorioOrdenesDePago;
-import models.repositories.RepositorioProveedores;
-import models.repositories.RepositorioRetenciones;
+import models.domain.documentos.Documento;
+import models.domain.enums.Iva;
+import models.domain.enums.TipoDocumento;
+import models.domain.enums.TipoPago;
+import models.repositories.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ public class MainController {
     private RepositorioProveedores repositorioProveedores;
     private RepositorioOrdenesDePago repositorioOrdenesDePago;
     private RepositorioCuentasCorrientes repositorioCuentasCorrientes;
-    public RepositorioRetenciones repositorioRetenciones;
+    private RepositorioRetenciones repositorioRetenciones;
+    private RepositorioDocumentos repositorioDocumentos;
+    private RepositorioRubros repositorioRubros;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -31,7 +34,9 @@ public class MainController {
         this.repositorioProveedores = RepositorioProveedores.getInstancia();
         this.repositorioOrdenesDePago  = RepositorioOrdenesDePago.getInstancia();
         this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
-        //this.repositorioRetenciones = new RepositorioRetenciones();
+        this.repositorioRetenciones = RepositorioRetenciones.getInstancia();
+        this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
+        this.repositorioRubros = RepositorioRubros.getInstancia();
     }
 
     //=================================================================================================================
@@ -53,12 +58,6 @@ public class MainController {
     public void setRepositorioOrdenesDePago(RepositorioOrdenesDePago repositorioOrdenesDePago) {
         this.repositorioOrdenesDePago = repositorioOrdenesDePago;
     }
-
-   /* public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
-        validarDatosProveedor(ordenPagoDTO.proveedor);
-        OrdenPago ordenPago = new OrdenPago();
-        //asignarParametrosOrdenPago()
-    }*/
 
     public RepositorioCuentasCorrientes getRepositorioCuentasCorrientes() {
         return repositorioCuentasCorrientes;
@@ -103,15 +102,23 @@ public class MainController {
             throw new ProveedorInexistenteException("No se encontro el Proveedor");
         }
 
-        ordenPago.setFormaPago(ordenPagoDTO.formaPago);
+        ordenPago.setFormaPago(ordenPagoDTO.tipoPago);
         ordenPago.setFecha(ordenPagoDTO.fecha);
-        ordenPago.setTipoPago(ordenPagoDTO.tipoPago);
-        ordenPago.setPagado(ordenPagoDTO.pagado);
+        ordenPago.setPagado(false);
         ordenPago.setMontoTotal(ordenPagoDTO.montoTotal);
+        Proveedor proveedor = repositorioProveedores.buscarPorCuit(ordenPagoDTO.cuitProveedor).get();
+        ordenPago.setProveedor(proveedor);
+        List<Integer> idsDocumentos = ordenPagoDTO.idsDocumentos;
+        for(Integer id : idsDocumentos){
+            ordenPago.agregarDocumento(this.repositorioDocumentos.getPorID(id).get());
+        }
+        ordenPago.calcularSubtotal();
+        ordenPago.agregarRetenciones();
+        ordenPago.calcularTotalRetenciones();
+        ordenPago.calcularMontoTotal();
 
-        ordenPagoDTO.retenciones.forEach(retencion -> {
-            ordenPago.agregarRetencion(this.repositorioRetenciones.getPorID(retencion.idRetencion).get());
-        });
+        this.repositorioOrdenesDePago.agregar(ordenPago);
+
     }
     //=================================================================================================================
     //FIN ORDEN DE PAGO
@@ -139,19 +146,25 @@ public class MainController {
         }
     }
 
-    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
-        proveedor.setCuit(proveedorDto.cuit);
-        proveedor.setDireccion(proveedorDto.direccion);
-        proveedor.setEmail(proveedorDto.email);
-        proveedor.setNombre(proveedorDto.nombre);
-        proveedor.setInicioActividades(proveedorDto.inicioActividades);
-        proveedor.setRazonSocial(proveedorDto.razonSocial);
-        proveedor.setResponsabilidad(proveedorDto.responsabilidad);
-        proveedor.setNumeroIngresosBrutos(proveedorDto.numeroIngresosBrutos);
-        proveedor.setTope(proveedorDto.tope);
-        proveedor.setCertificado(proveedorDto.certificado);
+    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDTO){
+        proveedor.setCuit(proveedorDTO.cuit);
+        proveedor.setDireccion(proveedorDTO.direccion);
+        proveedor.setEmail(proveedorDTO.email);
+        proveedor.setNombre(proveedorDTO.nombre);
+        proveedor.setInicioActividades(proveedorDTO.inicioActividades);
+        proveedor.setRazonSocial(proveedorDTO.razonSocial);
+        proveedor.setResponsabilidad(proveedorDTO.responsabilidad);
+        proveedor.setNumeroIngresosBrutos(proveedorDTO.numeroIngresosBrutos);
+        proveedor.setTope(proveedorDTO.tope);
+        proveedor.setCertificado(proveedorDTO.certificado);
+        List<Rubro> rubros = new ArrayList<>();
+        proveedorDTO.idsRubros.forEach(idRubro -> {
+            if (this.repositorioRubros.getPorID(idRubro).isPresent()) {
+                rubros.add(this.repositorioRubros.getPorID(idRubro).get());
+            }
+        });
+        proveedor.setRubros(rubros);
         //proveedor.setCatalogo(proveedorDto.catalogo);
-        proveedor.setRubros(proveedorDto.rubros);
         //proveedor.setImpuestos(proveedorDto.impuestos);
     }
 
@@ -194,13 +207,7 @@ public class MainController {
         this.repositorioCuentasCorrientes.getElementos().forEach(cuentaCorriente -> {
             cuentasDTO.add(cuentaCorriente.toVistaCuentasProveedoresDTO());
         });
-        /*cuentasDTO.forEach(cuenta -> {
-            cuenta.montoDeuda;
-            cuenta.documentos.forEach(doc -> {
-                doc.cuitProveedor;
-                doc.idDocumento;
-            });
-        });*/
+
         return cuentasDTO;
     }
 
@@ -221,15 +228,40 @@ public class MainController {
     public float totalImpuestosRetenidos () {
         float totalImpuestosRetenidos = 0;
 
-        /*for (OrdenPago orden : this.repositorioOrdenesDePago.getElementos()) {
-            totalImpuestosRetenidos += orden.calcularTotalRetenciones();
-        }*/
-
         for (Retencion retencion : this.repositorioRetenciones.getElementos()) {
             totalImpuestosRetenidos += retencion.getMonto();
         }
 
         return totalImpuestosRetenidos;
+    }
+
+    public List<LibroIVADTO> libroIVA () {
+        List<LibroIVADTO> librosIVADTO = new ArrayList<>();
+
+        for (Documento documento :this.repositorioDocumentos.getElementos()) {
+            List<CantidadPorProducto> cantidades = documento.getArticulos();
+            cantidades.forEach(producto -> {
+                LibroIVADTO libroIVADTO = new LibroIVADTO();
+                libroIVADTO.cuitProveedor = documento.getProveedor().get().getCuit();
+                libroIVADTO.nombreProveedor = documento.getProveedor().get().getNombre();
+                libroIVADTO.tipoDocumento = documento.getTipoDocumento();
+                libroIVADTO.fecha = documento.getFecha();
+                libroIVADTO.iva = producto.getTipoImpuesto();
+                libroIVADTO.total = producto.getMontoImpuesto();
+                librosIVADTO.add(libroIVADTO);
+            });
+        }
+
+        return librosIVADTO;
+    }
+
+    public static class LibroIVADTO {
+        public Integer cuitProveedor;
+        public String nombreProveedor;
+        public LocalDate fecha;
+        public TipoDocumento tipoDocumento;
+        public Iva iva;
+        public double total;
     }
     //=================================================================================================================
     //FIN CONSULTAS GENERALES

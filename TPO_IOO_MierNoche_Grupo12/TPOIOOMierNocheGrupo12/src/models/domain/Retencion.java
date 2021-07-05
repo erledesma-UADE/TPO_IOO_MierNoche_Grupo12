@@ -4,10 +4,7 @@ public class Retencion extends ID {
     private Impuesto impuesto;
     private float monto;
 
-    public Retencion(Impuesto impuesto, float monto) {
-            this.impuesto = impuesto;
-            this.monto = monto;
-        }
+    public Retencion() { }
 
     public void setImpuesto(Impuesto impuesto) {
         this.impuesto = impuesto;
