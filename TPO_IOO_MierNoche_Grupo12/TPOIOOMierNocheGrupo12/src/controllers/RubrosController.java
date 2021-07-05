@@ -18,7 +18,6 @@ public class RubrosController {
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
-    private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
 
     public MainController mainController = MainController.getInstancia();
 
@@ -32,7 +31,6 @@ public class RubrosController {
         this.repositorioRubros = RepositorioRubros.getInstancia();
         this.repositorioProductos = RepositorioProductos.getInstancia();
         this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
-
     }
 
     //=================================================================================================================
@@ -43,24 +41,12 @@ public class RubrosController {
         return repositorioRubros;
     }
 
-    public void setRepositorioRubros(RepositorioRubros repositorioRubros) {
-        this.repositorioRubros = repositorioRubros;
-    }
-
     public RepositorioProductos getRepositorioProductos() {
         return repositorioProductos;
     }
 
-    public void setRepositorioProductos(RepositorioProductos repositorioProductos) {
-        this.repositorioProductos = repositorioProductos;
-    }
-
-    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProducto() {
-        return repositorioPrecioPorProducto;
-    }
-
-    public void setRepositorioPrecioPorProducto(RepositorioPrecioPorProveedor repositorioPrecioPorProducto) {
-        this.repositorioPrecioPorProducto = repositorioPrecioPorProducto;
+    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProveedor() {
+        return repositorioPrecioPorProveedor;
     }
     //=================================================================================================================
     //FIN GETTERS / SETTERS
@@ -72,15 +58,16 @@ public class RubrosController {
 
     public void altaRubro (Rubro.RubroDTO rubroDTO) {
         Rubro rubro = new Rubro();
-        rubro.setNombre(rubroDTO.nombre);
-
+        asignarParametrosRubro(rubro, rubroDTO);
         this.repositorioRubros.agregar(rubro);
     }
 
     public void asignarParametrosRubro (Rubro rubro, Rubro.RubroDTO rubroDTO) {
         rubro.setNombre(rubroDTO.nombre);
-        rubroDTO.productos.forEach(productoDTO -> {
-            agregarProducto(productoDTO.idProducto);
+        rubroDTO.idsProductos.forEach(idProducto -> {
+            if (this.repositorioProductos.getPorID(idProducto).isPresent()) {
+                rubro.agregarProducto(this.repositorioProductos.getPorID(idProducto).get());
+            }
         });
     }
 

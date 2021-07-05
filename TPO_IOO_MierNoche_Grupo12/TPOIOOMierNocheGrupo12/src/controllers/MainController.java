@@ -22,6 +22,7 @@ public class MainController {
     private RepositorioCuentasCorrientes repositorioCuentasCorrientes;
     private RepositorioRetenciones repositorioRetenciones;
     private RepositorioDocumentos repositorioDocumentos;
+    private RepositorioRubros repositorioRubros;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -35,6 +36,7 @@ public class MainController {
         this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
         this.repositorioRetenciones = RepositorioRetenciones.getInstancia();
         this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
+        this.repositorioRubros = RepositorioRubros.getInstancia();
     }
 
     //=================================================================================================================
@@ -144,19 +146,25 @@ public class MainController {
         }
     }
 
-    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDto){
-        proveedor.setCuit(proveedorDto.cuit);
-        proveedor.setDireccion(proveedorDto.direccion);
-        proveedor.setEmail(proveedorDto.email);
-        proveedor.setNombre(proveedorDto.nombre);
-        proveedor.setInicioActividades(proveedorDto.inicioActividades);
-        proveedor.setRazonSocial(proveedorDto.razonSocial);
-        proveedor.setResponsabilidad(proveedorDto.responsabilidad);
-        proveedor.setNumeroIngresosBrutos(proveedorDto.numeroIngresosBrutos);
-        proveedor.setTope(proveedorDto.tope);
-        proveedor.setCertificado(proveedorDto.certificado);
+    private void asignarParametrosProveedor(Proveedor proveedor, Proveedor.ProveedorDTO proveedorDTO){
+        proveedor.setCuit(proveedorDTO.cuit);
+        proveedor.setDireccion(proveedorDTO.direccion);
+        proveedor.setEmail(proveedorDTO.email);
+        proveedor.setNombre(proveedorDTO.nombre);
+        proveedor.setInicioActividades(proveedorDTO.inicioActividades);
+        proveedor.setRazonSocial(proveedorDTO.razonSocial);
+        proveedor.setResponsabilidad(proveedorDTO.responsabilidad);
+        proveedor.setNumeroIngresosBrutos(proveedorDTO.numeroIngresosBrutos);
+        proveedor.setTope(proveedorDTO.tope);
+        proveedor.setCertificado(proveedorDTO.certificado);
+        List<Rubro> rubros = new ArrayList<>();
+        proveedorDTO.idsRubros.forEach(idRubro -> {
+            if (this.repositorioRubros.getPorID(idRubro).isPresent()) {
+                rubros.add(this.repositorioRubros.getPorID(idRubro).get());
+            }
+        });
+        proveedor.setRubros(rubros);
         //proveedor.setCatalogo(proveedorDto.catalogo);
-        proveedor.setRubros(proveedorDto.rubros);
         //proveedor.setImpuestos(proveedorDto.impuestos);
     }
 
@@ -199,13 +207,7 @@ public class MainController {
         this.repositorioCuentasCorrientes.getElementos().forEach(cuentaCorriente -> {
             cuentasDTO.add(cuentaCorriente.toVistaCuentasProveedoresDTO());
         });
-        /*cuentasDTO.forEach(cuenta -> {
-            cuenta.montoDeuda;
-            cuenta.documentos.forEach(doc -> {
-                doc.cuitProveedor;
-                doc.idDocumento;
-            });
-        });*/
+
         return cuentasDTO;
     }
 
@@ -225,10 +227,6 @@ public class MainController {
 
     public float totalImpuestosRetenidos () {
         float totalImpuestosRetenidos = 0;
-
-        /*for (OrdenPago orden : this.repositorioOrdenesDePago.getElementos()) {
-            totalImpuestosRetenidos += orden.calcularTotalRetenciones();
-        }*/
 
         for (Retencion retencion : this.repositorioRetenciones.getElementos()) {
             totalImpuestosRetenidos += retencion.getMonto();

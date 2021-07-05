@@ -58,19 +58,14 @@ public class Proveedor extends ID {
         return cuit;
     }
 
-    public void setRubros(List<Rubro.RubroDTO> rubrosDTO) {
-        RubrosController rubroController = RubrosController.getInstancia();
-
-        rubrosDTO.forEach(rubroDTO -> {
-            if (rubroController.getRepositorioRubros().getPorID(rubroDTO.idRubro).isPresent()) {
-                this.rubros.add(rubroController.getRepositorioRubros().getPorID(rubroDTO.idRubro).get());
-            }
+    public void setRubros(List<Rubro> rubros) {
+        rubros.forEach(rubro -> {
+            this.rubros.add(rubro);
         });
     }
 
     public void agregarDocumentoEmitido(Factura factura){
         this.getFacturasEmitidas().add(factura);
-
     }
 
     public void setOrdenDeCompra(List<OrdenCompra> ordenDeCompra) {
@@ -249,6 +244,7 @@ public class Proveedor extends ID {
         public String email;
         public int numeroIngresosBrutos;
         public LocalDate inicioActividades;
+        public List<Integer> idsRubros;
         public List<Rubro.RubroDTO> rubros;
         public float tope;
         public List<OrdenCompra.OrdenCompraDTO> ordenDeCompra;
