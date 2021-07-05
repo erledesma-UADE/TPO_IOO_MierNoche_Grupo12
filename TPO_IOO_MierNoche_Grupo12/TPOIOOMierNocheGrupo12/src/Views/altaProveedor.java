@@ -94,7 +94,7 @@ public class altaProveedor extends JFrame{
 
 
                 List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarRubros();
-                List<Rubro.RubroDTO> rubroO = new ArrayList<>();
+                List<Integer> rubroO = new ArrayList<>();
 
                 for (int i=0; i < rubro.size(); i++) {
                     String nombreP = rubro.get(i).nombre;
@@ -102,10 +102,10 @@ public class altaProveedor extends JFrame{
                         Rubro.RubroDTO rubroCont = new Rubro.RubroDTO();
                         //rubroCont.nombre = rubro.get(i).nombre;
                         rubroCont.idRubro = rubro.get(i).idRubro;
-                        rubroO.add(rubroCont);
+                        rubroO.add(1);
                     }
                 }
-
+                rubroO.add(1);
                 String pattern = "dd/MM/yyyy";
                 String date = txtIniAct.getText();
                 Date inicioAct = null ;
@@ -130,7 +130,7 @@ public class altaProveedor extends JFrame{
                 prov2.numeroIngresosBrutos = numeroIngresosBrutos;
                 prov2.inicioActividades = inicioAct2;
                 prov2.rubros = new ArrayList<>();
-                prov2.rubros.addAll(rubroO);
+                prov2.idsRubros=rubroO;
                 prov2.tope = tope;
                 MainController.getInstancia().altaProveedor(prov2);
 

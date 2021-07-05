@@ -1,5 +1,7 @@
 package Views;
 
+import controllers.MainController;
+
 import javax.swing.*;
 
 public class totalRetenciones extends JFrame {
@@ -15,8 +17,7 @@ public class totalRetenciones extends JFrame {
 
         txtTotalRet.setEditable(false);
 
-        int total = 0; //
-        txtTotalRet.setText(Integer.toString(total));
+       txtTotalRet.setText(String.valueOf(MainController.getInstancia().totalImpuestosRetenidos()));
 
     }
 }
