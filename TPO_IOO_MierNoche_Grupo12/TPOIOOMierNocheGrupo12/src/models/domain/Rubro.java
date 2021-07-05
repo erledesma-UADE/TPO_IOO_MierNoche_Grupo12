@@ -34,13 +34,9 @@ public class Rubro extends ID {
         this.productos.add(producto);
     }
 
-    /*public void agregarProveedores(List<Proveedor.ProveedorDTO> proveedores) {
-        for (Proveedor.ProveedorDTO provDTO : proveedores) {
-            Proveedor proveedor = new Proveedor();
-
-            this.proveedores.add(proveedor);
-        }
-    }*/
+    public void agregarProveedores(Proveedor proveedor) {
+        this.proveedores.add(proveedor);
+    }
 
     public RubroDTO toDTO () {
         RubroDTO dto = new RubroDTO();
@@ -69,6 +65,7 @@ public class Rubro extends ID {
         public Integer idRubro;
         public String nombre;
         public List<Integer> idsProductos;
+        public List<Integer> idsProveedores;
         public List<Producto.ProductoDTO> productos;
         public List<Proveedor.ProveedorDTO> proveedores;
 
