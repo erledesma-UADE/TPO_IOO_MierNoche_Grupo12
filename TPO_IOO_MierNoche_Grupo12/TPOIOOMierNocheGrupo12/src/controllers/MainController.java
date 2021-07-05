@@ -191,13 +191,13 @@ public class MainController {
     //-Total Deuda Por Proveedor / Total De Impuestos Retenidos
     //=================================================================================================================
 
-    public int totalFacturasRecibidas(int idProveedor) {
-        Optional<Proveedor> proveedorActual = this.repositorioProveedores.getPorID(idProveedor);
+    public int totalFacturasRecibidas(int cuitProveedor) {
+        Optional<Proveedor> proveedorActual = this.repositorioProveedores.buscarPorCuit(cuitProveedor);
         return proveedorActual.get().cantidadFacturasEmitidas();
     }
 
-    public int totalFacturasRecibidasEldia(int idProveedor, LocalDate unDia){
-        Optional<Proveedor> proveedorActual = this.repositorioProveedores.getPorID(idProveedor);
+    public int totalFacturasRecibidasEldia(int cuitProveedor, LocalDate unDia){
+        Optional<Proveedor> proveedorActual = this.repositorioProveedores.buscarPorCuit(cuitProveedor);
         return proveedorActual.get().cantidadFacturasEmitasElDia(unDia);
     }
 

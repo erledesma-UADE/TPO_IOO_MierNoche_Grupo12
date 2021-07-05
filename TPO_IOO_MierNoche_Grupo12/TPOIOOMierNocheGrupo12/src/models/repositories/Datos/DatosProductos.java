@@ -18,6 +18,7 @@ public class DatosProductos {
         producto1.setTipoUnidad("Unidad");
         producto1.setImpuesto(Iva.tipo4);
 
+
         Producto producto2 = new Producto();
         producto2.setID(2);
         producto2.setNombre("Goma");
