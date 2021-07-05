@@ -18,7 +18,6 @@ public class RubrosController {
     private RepositorioRubros repositorioRubros;
     private RepositorioProductos repositorioProductos;
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
-
     private RepositorioPrecioPorProveedor repositorioPrecioPorProducto;
 
     public MainController mainController = MainController.getInstancia();
@@ -30,7 +29,7 @@ public class RubrosController {
     }
 
     private RubrosController () {
-        this.repositorioRubros = new RepositorioRubros();
+        this.repositorioRubros = RepositorioRubros.getInstancia();
         this.repositorioProductos = RepositorioProductos.getInstancia();
         this.repositorioPrecioPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
 
