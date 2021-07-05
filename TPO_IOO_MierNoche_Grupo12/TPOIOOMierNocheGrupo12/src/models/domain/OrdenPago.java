@@ -1,10 +1,6 @@
 package models.domain;
 
-import controllers.DocumentosController;
-import controllers.exceptions.DocumentoInexistenteException;
 import models.domain.documentos.Documento;
-import models.domain.documentos.Factura;
-import models.domain.enums.TipoDocumento;
 import models.domain.enums.TipoPago;
 import models.repositories.RepositorioRetenciones;
 
@@ -188,13 +184,13 @@ public class OrdenPago extends ID {
         dto.tipoPago = this.tipoPago;
         dto.totalRetenciones = this.totalRetenciones;
 
-        this.documentos.forEach(documento -> {
+        /*this.documentos.forEach(documento -> {
             dto.documentos.add(documento.toDTO());
         });
 
         this.retenciones.forEach(retencion -> {
             dto.retenciones.add(retencion.toDTO());
-        });
+        });*/
 
         return dto;
     }

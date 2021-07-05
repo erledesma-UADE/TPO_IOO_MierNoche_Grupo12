@@ -1,4 +1,4 @@
-/*package Views;
+package Views;
 
 import controllers.MainController;
 import controllers.RubrosController;
@@ -40,6 +40,7 @@ public class altaProveedor extends JFrame{
     private JList listRubros;
     public ProveedorDTO prov;
     public String rubroSelect;
+    public int numeroIngresosBrutos;
 
     public altaProveedor(){
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -59,7 +60,8 @@ public class altaProveedor extends JFrame{
         DefaultListModel lista = new DefaultListModel();
         listRubros.setModel(lista);
 
-        List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarTodos();
+        List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarRubros();
+        System.out.println("rubro : " +rubro.size());
 
         for (int i =0;i < rubro.size(); i++) {
             lista.addElement(rubro.get(i).nombre);
@@ -69,7 +71,6 @@ public class altaProveedor extends JFrame{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 rubroSelect = (String) listRubros.getSelectedValue();
-                System.out.println("rubro select: " +rubroSelect);
             }
         });
 
@@ -78,41 +79,39 @@ public class altaProveedor extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String nombre = txtNombre.getText();
                 int cuit = Integer.parseInt(txtCuit.getText());
+
+
                 Responsabilidad resp = (Responsabilidad) cboResp.getSelectedItem();
+
+
                 String razonSocial = txtRazSocial.getText();
                 String direccion = txtDireccion.getText();
                 int telefono = Integer.parseInt(txtTelefono.getText());
+                System.out.println("telefono: " +telefono);
                 String email = txtMail.getText();
-                int numeroIngresosBrutos = Integer.parseInt(txtIIBB.getText());
 
-                //FALTA SETEAR RUBRO
+                numeroIngresosBrutos = Integer.parseInt(txtIIBB.getText());
 
-                List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarTodos();
-                String rubrotxt = rubroSelect;
-                List<Rubro.RubroDTO> rubroDTO = new ArrayList<>();
-                List<Rubro> rubroO = new ArrayList<>();
-                Rubro rubroCont = new Rubro();
-                System.out.println("rubro tamaño: " +rubro.size());
 
-                for (int i = 1;i < rubro.size(); i++) {
-                    if(rubro.get(i).nombre.equals(rubrotxt)) {
-                        rubroDTO.add(rubro.get(i));
-                        rubroCont.setNombre(rubroDTO.get(i).nombre);
-                        rubroCont.setIdRubro(rubroDTO.get(i).id);
-                        System.out.println("rubro selecionado: " +i);
-                        rubroO.set(i,rubroCont);
-                        //rubroO.add(rubroCont);
+                List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarRubros();
+                List<Integer> rubroO = new ArrayList<>();
+
+                for (int i=0; i < rubro.size(); i++) {
+                    String nombreP = rubro.get(i).nombre;
+                    if (rubro.get(i).nombre.equals(rubroSelect)) {
+                        Rubro.RubroDTO rubroCont = new Rubro.RubroDTO();
+                        //rubroCont.nombre = rubro.get(i).nombre;
+                        rubroCont.idRubro = rubro.get(i).idRubro;
+                        rubroO.add(1);
                     }
                 }
-
-
+                rubroO.add(1);
                 String pattern = "dd/MM/yyyy";
                 String date = txtIniAct.getText();
                 Date inicioAct = null ;
                 try {
                     DateFormat df = new SimpleDateFormat(pattern);
                     inicioAct = df.parse(date);
-                    //System.out.println("Today = " + df.format(inicioAct));
                 } catch (ParseException ie) {
                     ie.printStackTrace();
                 }
@@ -120,7 +119,7 @@ public class altaProveedor extends JFrame{
                 LocalDate inicioAct2 = inicioAct.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 float tope = Float.parseFloat(txtTope.getText());
 
-                ProveedorDTO prov2 = new ProveedorDTO();//prov.toDTO();
+                ProveedorDTO prov2 = new ProveedorDTO();
                 prov2.cuit = cuit;
                 prov2.responsabilidad = resp;
                 prov2.razonSocial = razonSocial;
@@ -130,7 +129,8 @@ public class altaProveedor extends JFrame{
                 prov2.email = email;
                 prov2.numeroIngresosBrutos = numeroIngresosBrutos;
                 prov2.inicioActividades = inicioAct2;
-                prov2.rubros = rubroO;
+                prov2.rubros = new ArrayList<>();
+                prov2.idsRubros=rubroO;
                 prov2.tope = tope;
                 MainController.getInstancia().altaProveedor(prov2);
 
@@ -143,4 +143,3 @@ public class altaProveedor extends JFrame{
 
 
 }
-*/

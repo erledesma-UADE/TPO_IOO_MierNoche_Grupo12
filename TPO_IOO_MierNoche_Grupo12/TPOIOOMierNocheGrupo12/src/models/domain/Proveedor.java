@@ -1,6 +1,5 @@
 package models.domain;
 
-import controllers.RubrosController;
 import models.domain.documentos.Factura;
 import models.domain.enums.Responsabilidad;
 
@@ -269,9 +268,9 @@ public class Proveedor extends ID {
         dto.tope = this.tope;
         dto.certificado = this.certificado;
 
-        this.impuestos.forEach(impuesto -> {
+        /*this.impuestos.forEach(impuesto -> {
             dto.impuestos.add(impuesto.toDTO());
-        });
+        });*/
 
         this.ordenDeCompra.forEach(ordenCompra -> {
             dto.ordenDeCompra.add(ordenCompra.toDTO());
@@ -281,13 +280,13 @@ public class Proveedor extends ID {
             dto.rubros.add(rubro.toDTO());
         });
 
-        this.catalogo.forEach(precioPorProveedor -> {
+        /*this.catalogo.forEach(precioPorProveedor -> {
             dto.catalogo.add(precioPorProveedor.toDTO());
         });
 
         this.impuestos.forEach(impuesto -> {
             dto.impuestos.add(impuesto.toDTO());
-        });
+        });*/
 
         return dto;
     }

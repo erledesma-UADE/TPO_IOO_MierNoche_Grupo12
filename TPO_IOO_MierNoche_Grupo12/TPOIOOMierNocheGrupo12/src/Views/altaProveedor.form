@@ -164,7 +164,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+          <toolTipText value="dd/mm/aaaa"/>
+        </properties>
       </component>
       <component id="a3aba" class="javax.swing.JLabel">
         <constraints>

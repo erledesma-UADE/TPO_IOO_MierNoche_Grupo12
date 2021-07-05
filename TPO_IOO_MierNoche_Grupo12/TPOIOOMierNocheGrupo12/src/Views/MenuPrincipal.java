@@ -1,6 +1,7 @@
-/*package Views;
+package Views;
 
 import controllers.MainController;
+import models.domain.OrdenPago;
 import models.domain.Proveedor;
 
 import javax.swing.*;
@@ -205,8 +206,40 @@ public class MenuPrincipal{
         ordPagoEmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ordenPagoEmitidas ordenPago = new ordenPagoEmitidas();
-                ordenPago.setVisible(true);
+                //ordenPagoEmitidas ordenPago = new ordenPagoEmitidas();
+                //ordenPago.setVisible(true);
+                JFrame frmLista = new JFrame();
+                frmLista.setBounds(100,100,850,500);
+                frmLista.setTitle("Listado de Ordenes de Pago Emitidas");
+                frmLista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frmLista.setVisible(true);
+
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.addColumn("Cuit");
+                tableModel.addColumn("Fecha");
+                tableModel.addColumn("Tipo de Pago");
+                tableModel.addColumn("Monto total");
+                tableModel.addColumn("Total retenciones");
+
+                List<OrdenPago.OrdenPagoDTO> OrdenPago = new ArrayList<>();
+                OrdenPago = MainController.getInstancia().ordenesPagoEmitidas();
+
+                Vector<Vector> rows2 = new Vector<Vector>();
+                for(int i=0; i < OrdenPago.size(); i++){
+                    Vector<String> x = new Vector<String>();
+                    x.addElement(String.valueOf(OrdenPago.get(i).cuitProveedor));
+                    x.addElement(String.valueOf(OrdenPago.get(i).fecha));
+                    x.addElement(String.valueOf(OrdenPago.get(i).tipoPago));
+                    x.addElement(String.valueOf(OrdenPago.get(i).montoTotal));
+                    x.addElement(String.valueOf(OrdenPago.get(i).totalRetenciones));
+                    tableModel.addRow(x);
+
+                }
+                JTable tableOD= new JTable();
+                tableOD.setModel(tableModel);
+                tableOD.setBounds(10, 0, 457, 103);
+                tableOD.setEnabled(false);
+                frmLista.add(new JScrollPane(tableOD));
             }
         });
 
@@ -258,7 +291,6 @@ public class MenuPrincipal{
 
                 List<Proveedor.ProveedorDTO> prov = new ArrayList<>();
                 prov = MainController.getInstancia().listarProveedores();
-                System.out.println(prov.size());
 
                 Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < prov.size(); i++){
@@ -269,7 +301,8 @@ public class MenuPrincipal{
                     x.addElement(String.valueOf(prov.get(i).direccion));
                     x.addElement(String.valueOf(prov.get(i).telefono));
                     x.addElement(String.valueOf(prov.get(i).email));
-                    x.addElement(String.valueOf(prov.get(i).rubros.get(i).getNombre()));
+
+                    //x.addElement(String.valueOf(prov.get(i).rubros.get(0).nombre));//solo un rubro
                     x.addElement(String.valueOf(prov.get(i).responsabilidad));
                     x.addElement(String.valueOf(prov.get(i).numeroIngresosBrutos));
                     x.addElement(String.valueOf(prov.get(i).inicioActividades));
@@ -277,11 +310,11 @@ public class MenuPrincipal{
 
                     tableModel.addRow(x);
 
-                    System.out.println(rows2.size());
                 }
                 JTable tableProv = new JTable();
                 tableProv.setModel(tableModel);
                 tableProv.setBounds(10, 0, 457, 103);
+                tableProv.setEnabled(false);
                 frmLista.add(new JScrollPane(tableProv));
             }
         });
@@ -293,7 +326,7 @@ public class MenuPrincipal{
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.framePpal.setVisible(true);
         //System.exit(0);
-    }
+    }*/
 
 
-}*/
+}
