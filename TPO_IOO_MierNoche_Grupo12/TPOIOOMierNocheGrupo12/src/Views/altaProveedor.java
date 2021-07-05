@@ -2,7 +2,6 @@ package Views;
 
 import controllers.MainController;
 import controllers.RubrosController;
-import models.domain.Impuesto;
 import models.domain.Proveedor.ProveedorDTO;
 import models.domain.Rubro;
 import models.domain.enums.Responsabilidad;
@@ -61,7 +60,7 @@ public class altaProveedor extends JFrame{
         DefaultListModel lista = new DefaultListModel();
         listRubros.setModel(lista);
 
-        List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarTodos();
+        List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarRubros();
         System.out.println("rubro : " +rubro.size());
 
         for (int i =0;i < rubro.size(); i++) {
@@ -81,36 +80,31 @@ public class altaProveedor extends JFrame{
                 String nombre = txtNombre.getText();
                 int cuit = Integer.parseInt(txtCuit.getText());
 
-                ///------------->PARA CARGAR IMPUESTOS<-------------
+
                 Responsabilidad resp = (Responsabilidad) cboResp.getSelectedItem();
-                List<Impuesto> listImp = new ArrayList<>();
-                Impuesto impuesto = new Impuesto();
-                float porcentaje = impuesto.impResposabilidad(resp.name());
-                impuesto.setTipoImpuesto("Resposabilidad");
-                impuesto.setPorcentaje(porcentaje);
-                listImp.add(impuesto);
 
 
                 String razonSocial = txtRazSocial.getText();
                 String direccion = txtDireccion.getText();
                 int telefono = Integer.parseInt(txtTelefono.getText());
+                System.out.println("telefono: " +telefono);
                 String email = txtMail.getText();
 
-                ///---------->PARA CARGAR IMPUESTOS<-----------------
-                if(!txtIIBB.getText().isEmpty()) {
-                    numeroIngresosBrutos = Integer.parseInt(txtIIBB.getText());
-                    Impuesto impIIBB = new Impuesto();
-                    float impIngBrutos = impIIBB.impIngBrutos();
-                    impIIBB.setTipoImpuesto("IIBB");
-                    impIIBB.setPorcentaje(impIngBrutos);
-                    listImp.add(impIIBB);
-                }
+                numeroIngresosBrutos = Integer.parseInt(txtIIBB.getText());
 
-                List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarTodos();
-                List<Rubro> rubroO = new ArrayList<>();
-                Rubro rubroCont = new Rubro();
-                rubroCont.setNombre(rubroSelect);
-                rubroO.add(rubroCont);
+
+                List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarRubros();
+                List<Rubro.RubroDTO> rubroO = new ArrayList<>();
+
+                for (int i=0; i < rubro.size(); i++) {
+                    String nombreP = rubro.get(i).nombre;
+                    if (rubro.get(i).nombre.equals(rubroSelect)) {
+                        Rubro.RubroDTO rubroCont = new Rubro.RubroDTO();
+                        //rubroCont.nombre = rubro.get(i).nombre;
+                        rubroCont.idRubro = rubro.get(i).idRubro;
+                        rubroO.add(rubroCont);
+                    }
+                }
 
                 String pattern = "dd/MM/yyyy";
                 String date = txtIniAct.getText();
@@ -135,9 +129,9 @@ public class altaProveedor extends JFrame{
                 prov2.email = email;
                 prov2.numeroIngresosBrutos = numeroIngresosBrutos;
                 prov2.inicioActividades = inicioAct2;
-                prov2.rubros = rubroO;
+                prov2.rubros = new ArrayList<>();
+                prov2.rubros.addAll(rubroO);
                 prov2.tope = tope;
-                prov2.impuestos = listImp;
                 MainController.getInstancia().altaProveedor(prov2);
 
                 int ok = JOptionPane.showConfirmDialog(null, "Proveedor Creado","Confirmación",JOptionPane.DEFAULT_OPTION);

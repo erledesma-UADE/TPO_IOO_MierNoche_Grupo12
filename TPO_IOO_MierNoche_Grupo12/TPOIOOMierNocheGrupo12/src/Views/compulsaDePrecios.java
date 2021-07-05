@@ -27,7 +27,7 @@ public class compulsaDePrecios extends JFrame{
         this.setBounds(100,100,400,200);
         this.setTitle("Compulsa de Precios");
 
-        List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarTodos();
+        List<Rubro.RubroDTO> rubro = RubrosController.getInstancia().listarRubros();
 
         cmbRubro.setModel(new DefaultComboBoxModel());
         List<String> lista = new ArrayList<>();
@@ -51,7 +51,7 @@ public class compulsaDePrecios extends JFrame{
                 int prod = Integer.parseInt(txtProd.getText());
                 String rubro = (String) cmbRubro.getSelectedItem();
                 int rubroId=0;
-                List<Rubro.RubroDTO> rubroList = RubrosController.getInstancia().listarTodos();
+                List<Rubro.RubroDTO> rubroList = RubrosController.getInstancia().listarRubros();
                 for (int i=0; i < rubroList.size();i++){
                     if(rubroList.get(i).nombre.equals(rubro)){
                         rubroId = rubroList.get(i).idRubro;
