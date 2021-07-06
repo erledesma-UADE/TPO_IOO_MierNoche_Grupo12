@@ -34,10 +34,9 @@ public class RepositorioDocumentos extends Repositorio<Documento>{
 
     }
 
-    public Optional<Documento> buscarPorCuitProveedor(Integer cuit) {
+    public List<Documento> buscarPorCuitProveedor(Integer cuit) {
         return this.getElementos()
                 .stream()
-                .filter(e -> e.getProveedor().get().getCuit().equals(cuit))
-                .findFirst();
+                .filter(e -> e.getProveedor().get().getCuit().equals(cuit)).collect(Collectors.toList());
     }
 }

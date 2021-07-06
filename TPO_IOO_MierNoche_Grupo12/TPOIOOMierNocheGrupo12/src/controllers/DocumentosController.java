@@ -110,6 +110,15 @@ public class DocumentosController {
 
     }
 
+    public List<Documento.DocumentoDTO> documentosPorProveedor (Integer cuit) {
+        List<Documento.DocumentoDTO> documentosDTO = new ArrayList<>();
+        this.repositorioDocumentos.buscarPorCuitProveedor(cuit).forEach(documento -> {
+            documentosDTO.add(documento.toDTO());
+        });
+
+        return  documentosDTO;
+    }
+
     /*public void setArticulos(String[][] articulosVista,Documento documento,Documento.DocumentoDTO documentoDto){
         for (int i = 0; i < articulosVista.length; i++) {
             Optional<Producto> producto = null;
