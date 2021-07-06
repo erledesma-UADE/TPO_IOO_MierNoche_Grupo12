@@ -2,6 +2,7 @@ package models.repositories.Datos;
 
 import models.domain.Producto;
 import models.domain.enums.Iva;
+import models.repositories.RepositorioProductos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.List;
 public class DatosProductos {
 
     public static List<Producto> getProductos(){
-
         List<Producto> productos = new ArrayList<>();
 
         Producto producto1 = new Producto();

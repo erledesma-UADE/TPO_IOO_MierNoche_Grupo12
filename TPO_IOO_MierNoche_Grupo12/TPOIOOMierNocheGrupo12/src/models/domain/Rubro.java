@@ -3,6 +3,7 @@ package models.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Rubro extends ID {
     private String nombre;
@@ -34,8 +35,16 @@ public class Rubro extends ID {
         this.productos.add(producto);
     }
 
+    public void setProducto(Optional<Producto> producto) {
+        this.productos.add(producto.get());
+    }
+
     public void agregarProveedores(Proveedor proveedor) {
         this.proveedores.add(proveedor);
+    }
+
+    public void setProveedores(Optional<Proveedor> proveedor) {
+        this.proveedores.add(proveedor.get());
     }
 
     public RubroDTO toDTO () {

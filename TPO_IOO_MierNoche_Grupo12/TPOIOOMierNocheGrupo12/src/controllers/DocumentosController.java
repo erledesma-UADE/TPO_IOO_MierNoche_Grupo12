@@ -16,7 +16,10 @@ import models.repositories.RepositorioPrecioPorProveedor;
 import models.repositories.RepositorioProductos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DocumentosController {
 
@@ -139,7 +142,14 @@ public class DocumentosController {
     //INICIO CONSULTAS GENERALES
     //=================================================================================================================
     public int facturasEmitidasElDia(LocalDate unDia){
-        return this.repositorioDocumentos.facturasEmitdasElDia(unDia).size();
+        List<Documento> facturas = new ArrayList<>();
+
+        this.repositorioDocumentos.facturasEmitdasElDia(unDia).forEach(documento -> {
+            if (documento.getTipoDocumento().equals(TipoDocumento.Factura)) {
+                facturas.add(documento);
+            }});
+
+        return facturas.size();
     }
 
     /*public int totalFacturasRecibidas () {

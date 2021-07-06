@@ -100,12 +100,12 @@ public class altaProveedor extends JFrame{
                     String nombreP = rubro.get(i).nombre;
                     if (rubro.get(i).nombre.equals(rubroSelect)) {
                         Rubro.RubroDTO rubroCont = new Rubro.RubroDTO();
-                        //rubroCont.nombre = rubro.get(i).nombre;
+                        rubroCont.nombre = rubro.get(i).nombre;
                         rubroCont.idRubro = rubro.get(i).idRubro;
-                        rubroO.add(1);
+                        rubroO.add(rubroCont.idRubro);
                     }
                 }
-                rubroO.add(1);
+
                 String pattern = "dd/MM/yyyy";
                 String date = txtIniAct.getText();
                 Date inicioAct = null ;

@@ -1,5 +1,6 @@
 package main;
 
+import Views.MenuPrincipal;
 import com.sun.tools.javac.Main;
 import controllers.DocumentosController;
 import controllers.MainController;
@@ -25,7 +26,7 @@ public class App {
         RepositorioProveedores repositorioProveedores = RepositorioProveedores.getInstancia();
         RepositorioOrdenesDePago repositorioOrdenesDePago = RepositorioOrdenesDePago.getInstancia();
         RepositorioRetenciones repositorioRetenciones = RepositorioRetenciones.getInstancia();
-
+        RepositorioRubros repositorioRubros = RepositorioRubros.getInstancia();
         MainController mainController = MainController.getInstancia();
 
         List<CuentaCorriente.VistaCuentasProveedoresDTO> cuentaCorriente = mainController.mostrarCuentaCorrienteProveedores();
@@ -33,8 +34,9 @@ public class App {
         System.out.println(mainController.totalImpuestosRetenidos());
 
        // System.out.println(mainController.totalImpuestosRetenidos());
-
-
+        //docController.facturasEmitidasElDia(LocalDate.of(2020,05,10));
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.framePpal.setVisible(true);
         /*for(CuentaCorriente.VistaCuentasProveedoresDTO ctaCorriente : cuentaCorriente){
             System.out.println("cantidad Docs: " + ctaCorriente.documentos.size());
             System.out.println("\nProveedor : " + ctaCorriente.idProveedor + " monto deuda: " + ctaCorriente.montoDeuda );
