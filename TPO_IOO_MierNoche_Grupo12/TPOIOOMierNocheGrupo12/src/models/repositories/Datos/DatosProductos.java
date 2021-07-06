@@ -2,6 +2,7 @@ package models.repositories.Datos;
 
 import models.domain.Producto;
 import models.domain.enums.Iva;
+import models.repositories.RepositorioProductos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.List;
 public class DatosProductos {
 
     public static List<Producto> getProductos(){
-
         List<Producto> productos = new ArrayList<>();
 
         Producto producto1 = new Producto();
@@ -17,7 +17,6 @@ public class DatosProductos {
         producto1.setNombre("Lapicera");
         producto1.setTipoUnidad("Unidad");
         producto1.setImpuesto(Iva.tipo4);
-
 
         Producto producto2 = new Producto();
         producto2.setID(2);

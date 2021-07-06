@@ -302,7 +302,7 @@ public class MenuPrincipal{
                     x.addElement(String.valueOf(prov.get(i).telefono));
                     x.addElement(String.valueOf(prov.get(i).email));
 
-                    //x.addElement(String.valueOf(prov.get(i).rubros.get(0).nombre));//solo un rubro
+                    x.addElement(String.valueOf(prov.get(i).rubros));//.get(0).nombre));//solo un rubro
                     x.addElement(String.valueOf(prov.get(i).responsabilidad));
                     x.addElement(String.valueOf(prov.get(i).numeroIngresosBrutos));
                     x.addElement(String.valueOf(prov.get(i).inicioActividades));

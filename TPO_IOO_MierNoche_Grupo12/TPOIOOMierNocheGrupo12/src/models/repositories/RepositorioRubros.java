@@ -3,6 +3,7 @@ package models.repositories;
 import models.domain.Producto;
 import models.domain.Proveedor;
 import models.domain.Rubro;
+import models.repositories.Datos.DatosRubros;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class RepositorioRubros extends Repositorio<Rubro> {
         return instancia;
     }
 
-    public RepositorioRubros(){
+    private RepositorioRubros(){
         super();
-        //super.elementos = DatosProveedores.getProveedores();
+        super.elementos = DatosRubros.getRubros();
     }
 
 }

@@ -267,6 +267,7 @@ public class Proveedor extends ID {
         dto.inicioActividades = this.inicioActividades;
         dto.tope = this.tope;
         dto.certificado = this.certificado;
+        dto.rubros = new ArrayList<>();
 
         /*this.impuestos.forEach(impuesto -> {
             dto.impuestos.add(impuesto.toDTO());
