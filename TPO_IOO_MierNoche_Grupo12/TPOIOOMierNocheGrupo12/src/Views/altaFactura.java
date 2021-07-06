@@ -1,16 +1,22 @@
 package Views;
 
+import controllers.DocumentosController;
+import controllers.MainController;
 import models.domain.OrdenCompra;
+import models.domain.Proveedor;
+import models.domain.documentos.Documento;
+import models.domain.enums.TipoDocumento;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Vector;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 
 public class altaFactura extends JFrame{
     private JPanel panel1;
@@ -83,6 +89,38 @@ public class altaFactura extends JFrame{
             }
         });
 
+        aceptarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Integer idProv = Integer.parseInt(txtProv.getText());
+
+                String pattern = "dd/MM/yyyy";
+                String date = fechaTxt.getText();
+                Date fecha = null ;
+                try {
+                    DateFormat df = new SimpleDateFormat(pattern);
+                    fecha = df.parse(date);
+                } catch (ParseException ie) {
+                    ie.printStackTrace();
+                }
+
+                float monto = Float.parseFloat(montoTotTxt.getText());
+                TipoDocumento tipoDoc = TipoDocumento.valueOf("Factura");
+
+                LocalDate fechaFact = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Documento.DocumentoDTO fact = new Documento.DocumentoDTO();
+                Optional<Proveedor> prov = MainController.getInstancia().getRepositorioProveedores().buscarPorCuit(idProv);
+                fact.cuitProveedor = idProv;
+                fact.fecha = fechaFact;
+                fact.montoTotal = monto;
+                fact.tipoDocumento = tipoDoc;
+                //fact.agregarArticulo();
+
+                DocumentosController.getInstancia().altaDocumento(fact,prov);
+
+            }
+        });
 
     }
 }

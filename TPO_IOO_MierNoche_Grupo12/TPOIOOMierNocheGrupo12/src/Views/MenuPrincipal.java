@@ -209,7 +209,7 @@ public class MenuPrincipal{
                 //ordenPagoEmitidas ordenPago = new ordenPagoEmitidas();
                 //ordenPago.setVisible(true);
                 JFrame frmLista = new JFrame();
-                frmLista.setBounds(100,100,850,500);
+                frmLista.setBounds(100,100,650,500);
                 frmLista.setTitle("Listado de Ordenes de Pago Emitidas");
                 frmLista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frmLista.setVisible(true);
@@ -219,7 +219,6 @@ public class MenuPrincipal{
                 tableModel.addColumn("Fecha");
                 tableModel.addColumn("Tipo de Pago");
                 tableModel.addColumn("Monto total");
-                tableModel.addColumn("Total retenciones");
 
                 List<OrdenPago.OrdenPagoDTO> OrdenPago = new ArrayList<>();
                 OrdenPago = MainController.getInstancia().ordenesPagoEmitidas();
@@ -227,11 +226,10 @@ public class MenuPrincipal{
                 Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < OrdenPago.size(); i++){
                     Vector<String> x = new Vector<String>();
-                    x.addElement(String.valueOf(OrdenPago.get(i).cuitProveedor));
+                    x.addElement(String.valueOf(OrdenPago.get(i).proveedor.cuit));
                     x.addElement(String.valueOf(OrdenPago.get(i).fecha));
                     x.addElement(String.valueOf(OrdenPago.get(i).tipoPago));
                     x.addElement(String.valueOf(OrdenPago.get(i).montoTotal));
-                    x.addElement(String.valueOf(OrdenPago.get(i).totalRetenciones));
                     tableModel.addRow(x);
 
                 }
@@ -301,8 +299,13 @@ public class MenuPrincipal{
                     x.addElement(String.valueOf(prov.get(i).direccion));
                     x.addElement(String.valueOf(prov.get(i).telefono));
                     x.addElement(String.valueOf(prov.get(i).email));
+                    try {
+                         x.addElement(String.valueOf(prov.get(i).rubros.get(0).nombre));//solo un rubro
+                    }catch (Exception ae){
+                        ae.printStackTrace();
+                        x.addElement(String.valueOf(""));
+                    }
 
-                    //x.addElement(String.valueOf(prov.get(i).rubros.get(0).nombre));//solo un rubro
                     x.addElement(String.valueOf(prov.get(i).responsabilidad));
                     x.addElement(String.valueOf(prov.get(i).numeroIngresosBrutos));
                     x.addElement(String.valueOf(prov.get(i).inicioActividades));
