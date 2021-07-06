@@ -14,7 +14,7 @@ import java.util.Optional;
 public class DatosRubros {
     public static List<Rubro> getRubros () {
         List<Rubro> rubros = new ArrayList<>();
-        RepositorioProveedores repositorioProveedores = RepositorioProveedores.getInstancia();
+        //RepositorioProveedores repositorioProveedores = RepositorioProveedores.getInstancia();
 
 
         Rubro rubro1 = new Rubro();
@@ -24,9 +24,12 @@ public class DatosRubros {
         //rubro1.setProveedores(proveedor1);
         //rubro1.agregarProducto(proveedor1.get().getCatalogo().get(1).getProducto());
         //rubro1.agregarProducto(proveedor1.get().getCatalogo().get(2).getProducto());
-
+        Rubro rubro2 = new Rubro();
+        rubro2.setNombre("Cosas2");
+        rubro2.setID(2);
 
         rubros.add(rubro1);
+        rubros.add(rubro2);
 
         return rubros;
     }

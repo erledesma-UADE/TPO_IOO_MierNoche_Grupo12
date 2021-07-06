@@ -49,8 +49,9 @@ public class Proveedor extends ID {
     }//Verificar si se usa en algun lado
 
 
-    public void agregarRubro(Rubro... rubros){
-        Collections.addAll(this.rubros,rubros);
+    public void agregarRubro(Rubro rubro){
+        this.rubros.add(rubro);
+        //Collections.addAll(this.rubros,rubros);
     }
 
     public Integer getCuit() {
@@ -251,6 +252,16 @@ public class Proveedor extends ID {
         public List<PrecioPorProveedor.PrecioPorProveedorDTO> catalogo;
         public Certificado certificado;
         public List<Impuesto.ImpuestoDTO> impuestos;
+
+        public String getRubros () {
+            String string = new String();
+
+            for (Rubro.RubroDTO rubroDTO : this.rubros) {
+                string += rubroDTO.nombre + " ";
+            }
+            System.out.println(string);
+            return string;
+        }
     }
 
     public ProveedorDTO toDTO() {

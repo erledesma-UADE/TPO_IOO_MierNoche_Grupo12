@@ -26,7 +26,7 @@ public class App {
         RepositorioProveedores repositorioProveedores = RepositorioProveedores.getInstancia();
         RepositorioOrdenesDePago repositorioOrdenesDePago = RepositorioOrdenesDePago.getInstancia();
         RepositorioRetenciones repositorioRetenciones = RepositorioRetenciones.getInstancia();
-
+        RepositorioRubros repositorioRubros = RepositorioRubros.getInstancia();
         MainController mainController = MainController.getInstancia();
 
         List<CuentaCorriente.VistaCuentasProveedoresDTO> cuentaCorriente = mainController.mostrarCuentaCorrienteProveedores();

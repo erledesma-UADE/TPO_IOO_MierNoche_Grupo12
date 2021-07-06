@@ -289,7 +289,7 @@ public class MenuPrincipal{
                 tableModel.addColumn("Inicio Act.");
                 tableModel.addColumn("Tope");
 
-                List<Proveedor.ProveedorDTO> prov = new ArrayList<>();
+                List<Proveedor.ProveedorDTO> prov;//new ArrayList<>();
                 prov = MainController.getInstancia().listarProveedores();
 
                 Vector<Vector> rows2 = new Vector<Vector>();
@@ -302,7 +302,7 @@ public class MenuPrincipal{
                     x.addElement(String.valueOf(prov.get(i).telefono));
                     x.addElement(String.valueOf(prov.get(i).email));
 
-                    x.addElement(String.valueOf(prov.get(i).rubros));//.get(0).nombre));//solo un rubro
+                    x.addElement(String.valueOf(prov.get(i).getRubros()));
                     x.addElement(String.valueOf(prov.get(i).responsabilidad));
                     x.addElement(String.valueOf(prov.get(i).numeroIngresosBrutos));
                     x.addElement(String.valueOf(prov.get(i).inicioActividades));

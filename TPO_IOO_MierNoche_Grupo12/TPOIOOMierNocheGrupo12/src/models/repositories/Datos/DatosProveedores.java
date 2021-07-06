@@ -7,6 +7,7 @@ import models.domain.Proveedor;
 import models.domain.enums.Responsabilidad;
 import models.repositories.RepositorioCuentasCorrientes;
 import models.repositories.RepositorioPrecioPorProveedor;
+import models.repositories.RepositorioRubros;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class DatosProveedores {
 
         RepositorioPrecioPorProveedor repositorioPreciosPorProveedor = RepositorioPrecioPorProveedor.getInstancia();
         RepositorioCuentasCorrientes repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
+        RepositorioRubros repositorioRubros = RepositorioRubros.getInstancia();
 
         List<Proveedor> proveedores = new ArrayList<>();
         Proveedor proveedor1 = new Proveedor();
@@ -39,7 +41,8 @@ public class DatosProveedores {
         proveedor1.agregarCatalogo(repositorioPreciosPorProveedor.getPorID(7).get());
         proveedor1.agregarImpuesto(new Impuesto("Ganancias",11));
         proveedor1.agregarImpuesto(new Impuesto("Ingresos brutos",7));
-
+        proveedor1.agregarRubro(repositorioRubros.getElementos().get(0));
+        proveedor1.agregarRubro(repositorioRubros.getElementos().get(1));
         //proveedor1.setCatalogo();
         //proveedor1.setFacturasEmitidas();
         //proveedor1.setOrdenDeCompra();

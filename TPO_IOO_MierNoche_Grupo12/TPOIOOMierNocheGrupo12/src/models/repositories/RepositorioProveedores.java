@@ -25,6 +25,4 @@ public class RepositorioProveedores extends Repositorio<Proveedor> {
                 .filter(e -> e.getCuit().equals(cuit))
                 .findFirst();
     }
-
-
 }

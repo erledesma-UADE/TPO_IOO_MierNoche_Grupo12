@@ -1,5 +1,6 @@
 package models.repositories;
 
+import models.domain.Proveedor;
 import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
 import models.domain.enums.TipoDocumento;
@@ -31,5 +32,12 @@ public class RepositorioDocumentos extends Repositorio<Documento>{
         return this.getElementos().stream().
                 filter(e -> e.getFecha().equals(unDia)).collect(Collectors.toList());
 
+    }
+
+    public Optional<Documento> buscarPorCuitProveedor(Integer cuit) {
+        return this.getElementos()
+                .stream()
+                .filter(e -> e.getProveedor().get().getCuit().equals(cuit))
+                .findFirst();
     }
 }

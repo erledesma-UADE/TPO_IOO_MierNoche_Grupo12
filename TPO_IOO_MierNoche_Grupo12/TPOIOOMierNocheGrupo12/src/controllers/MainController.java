@@ -31,12 +31,12 @@ public class MainController {
     }
 
     private MainController(){
+        this.repositorioRubros = RepositorioRubros.getInstancia();
         this.repositorioProveedores = RepositorioProveedores.getInstancia();
         this.repositorioOrdenesDePago  = RepositorioOrdenesDePago.getInstancia();
         this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
         this.repositorioRetenciones = RepositorioRetenciones.getInstancia();
         this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
-        this.repositorioRubros = RepositorioRubros.getInstancia();
     }
 
     //=================================================================================================================
