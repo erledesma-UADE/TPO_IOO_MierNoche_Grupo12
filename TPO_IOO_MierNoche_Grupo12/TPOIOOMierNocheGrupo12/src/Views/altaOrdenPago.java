@@ -38,8 +38,6 @@ public class altaOrdenPago extends JFrame{
         this.setTitle("Alta Orden de Pago");
 
         txtFecha.setEditable(false);
-        txtTotalRet.setEditable(false);
-        txtMontoTotal.setEditable(false);
 
         Date hoy = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -54,7 +52,7 @@ public class altaOrdenPago extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 int cuit = Integer.parseInt(txtProv.getText());
 
-                List<Documento> docs = DocumentosController.getInstancia().getRepositorioDocumentos().getElementos();
+                List<Documento> docs = DocumentosController.getInstancia().getRepositorioDocumentos().buscarPorCuitProveedor(cuit);
 
                 DefaultTableModel tableModel = new DefaultTableModel();
                 tableModel.addColumn("Id Doc");
@@ -65,7 +63,10 @@ public class altaOrdenPago extends JFrame{
                     Vector<String> x = new Vector<String>();
                     x.addElement(String.valueOf(docs.get(i).getID()));
                     x.addElement(String.valueOf(docs.get(i).getMontoTotal()));
+
+                    tableModel.addRow(x);
                 }
+
 
             }
         });
