@@ -1,10 +1,15 @@
 package models.repositories;
 
+import models.domain.Proveedor;
 import models.domain.documentos.Documento;
+import models.domain.documentos.Factura;
+import models.domain.enums.TipoDocumento;
 import models.repositories.Datos.DatosDocumentos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RepositorioDocumentos extends Repositorio<Documento>{
@@ -32,7 +37,6 @@ public class RepositorioDocumentos extends Repositorio<Documento>{
     public List<Documento> buscarPorCuitProveedor(Integer cuit) {
         return this.getElementos()
                 .stream()
-                .filter(e -> e.getProveedor().get().getCuit().equals(cuit))
-                .collect(Collectors.toList());
+                .filter(e -> e.getProveedor().get().getCuit().equals(cuit)).collect(Collectors.toList());
     }
 }
