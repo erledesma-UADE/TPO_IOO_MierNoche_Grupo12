@@ -14,15 +14,13 @@ import java.util.Optional;
 public class DatosRubros {
     public static List<Rubro> getRubros () {
         List<Rubro> rubros = new ArrayList<>();
-        //RepositorioProveedores repositorioProveedores = RepositorioProveedores.getInstancia();
-
 
         Rubro rubro1 = new Rubro();
-        rubro1.setNombre("Materiales");
+        rubro1.setNombre("Quiosco");
         rubro1.setID(1);
 
         Rubro rubro2 = new Rubro();
-        rubro2.setNombre("Libreria");
+        rubro2.setNombre("Servicios");
         rubro2.setID(2);
 
         rubros.add(rubro1);

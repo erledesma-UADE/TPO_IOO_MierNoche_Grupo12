@@ -25,7 +25,6 @@ public class RepositorioDocumentos extends Repositorio<Documento>{
     private RepositorioDocumentos(){
         super();
         super.elementos = DatosDocumentos.getDocumentos();
-        System.out.println("Repo Documentos " + super.elementos);
     }
 
     public List<Documento> facturasEmitdasElDia(LocalDate unDia) {

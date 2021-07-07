@@ -17,8 +17,6 @@ public class RepositorioRubros extends Repositorio<Rubro> {
         return instancia;
     }
 
-
-
     private RepositorioRubros(){
         super();
         super.elementos = DatosRubros.getRubros();

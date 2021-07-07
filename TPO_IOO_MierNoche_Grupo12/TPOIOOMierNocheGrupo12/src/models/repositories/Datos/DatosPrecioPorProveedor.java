@@ -35,7 +35,7 @@ public class DatosPrecioPorProveedor {
         precioPorProveedor2.setID(2);
         precioPorProveedor2.setCuitProveedor(123456);
         precioPorProveedor2.setProducto(producto1);
-        precioPorProveedor2.setPreciosAcordados(cargarPreciosAcordados(40,"2020-05-10","2020-10-19"));
+        precioPorProveedor2.setPreciosAcordados(cargarPreciosAcordados(80,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor2);
         producto1.agregarPrecioProveedor(precioPorProveedor2);
@@ -57,7 +57,7 @@ public class DatosPrecioPorProveedor {
         precioPorProveedor4.setID(4);
         precioPorProveedor4.setCuitProveedor(123456);
         precioPorProveedor4.setProducto(producto2);
-        precioPorProveedor4.setPreciosAcordados(cargarPreciosAcordados(50,"2020-05-10","2020-10-19"));
+        precioPorProveedor4.setPreciosAcordados(cargarPreciosAcordados(100,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor4);
         producto2.agregarPrecioProveedor(precioPorProveedor4);
@@ -79,7 +79,7 @@ public class DatosPrecioPorProveedor {
         precioPorProveedor6.setID(6);
         precioPorProveedor6.setCuitProveedor(123456);
         precioPorProveedor6.setProducto(producto3);
-        precioPorProveedor6.setPreciosAcordados(cargarPreciosAcordados(100,"2020-05-10","2020-10-19"));
+        precioPorProveedor6.setPreciosAcordados(cargarPreciosAcordados(190,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor6);
         producto3.agregarPrecioProveedor(precioPorProveedor6);
@@ -90,7 +90,7 @@ public class DatosPrecioPorProveedor {
         precioPorProveedor7.setCuitProveedor(1234);
         Producto producto4 = repositorioProductos.getPorID(4).get();
         precioPorProveedor7.setProducto(producto4);
-        precioPorProveedor7.setPreciosAcordados(cargarPreciosAcordados(150,"2020-05-10","2020-10-19"));
+        precioPorProveedor7.setPreciosAcordados(cargarPreciosAcordados(120,"2020-05-10","2020-10-19"));
 
         preciosPorProveedor.add(precioPorProveedor7);
         producto4.agregarPrecioProveedor(precioPorProveedor7);

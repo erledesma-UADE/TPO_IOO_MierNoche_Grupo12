@@ -74,9 +74,7 @@ public class PrecioPorProveedor extends ID {
 
     public PrecioPorProveedorDTO toDTO () {
         PrecioPorProveedorDTO dto = new PrecioPorProveedorDTO();
-
-        dto.producto = this.producto.toDTO();
-        dto.proveedor = this.proveedor.toDTO();
+        dto.proveedor = this.getCuitProveedor();
 
         return dto;
     }
@@ -99,9 +97,7 @@ public class PrecioPorProveedor extends ID {
     }
 
     public static class PrecioPorProveedorDTO {
-        //public LocalDate fechaAcuerdo;
-        //public float monto;
         public Producto.ProductoDTO producto;
-        public Proveedor.ProveedorDTO proveedor;
+        public Integer proveedor;
     }
 }

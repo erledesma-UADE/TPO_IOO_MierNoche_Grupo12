@@ -4,6 +4,7 @@ import Views.MenuPrincipal;
 import com.sun.tools.javac.Main;
 import controllers.DocumentosController;
 import controllers.MainController;
+import controllers.RubrosController;
 import models.domain.*;
 import models.domain.documentos.Documento;
 import models.domain.documentos.Factura;
@@ -27,23 +28,28 @@ public class App {
         RepositorioOrdenesDePago repositorioOrdenesDePago = RepositorioOrdenesDePago.getInstancia();
         RepositorioRetenciones repositorioRetenciones = RepositorioRetenciones.getInstancia();
         RepositorioRubros repositorioRubros = RepositorioRubros.getInstancia();
+        RubrosController rubrosController = RubrosController.getInstancia();
         MainController mainController = MainController.getInstancia();
 
-        List<CuentaCorriente.VistaCuentasProveedoresDTO> cuentaCorriente = mainController.mostrarCuentaCorrienteProveedores();
 
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.framePpal.setVisible(true);
 
-        List<MainController.LibroIVADTO> libroIva = mainController.libroIVA();
+    }
+}
+
+        /******************* CÓDIGO PARA VERIFICAR DATOS CARGADOS ***************************/
+
+        //List<CuentaCorriente.VistaCuentasProveedoresDTO> cuentaCorriente = mainController.mostrarCuentaCorrienteProveedores();
+
+        /*List<MainController.LibroIVADTO> libroIva = mainController.libroIVA();
         libroIva.forEach(x -> {
             System.out.println("\nProveedor: " + x.nombreProveedor);
             System.out.println("\tCuit: " + x.cuitProveedor);
             System.out.println("\tFecha: " + x.fecha);
             System.out.println("\tIVA: " + x.iva.getPorcentaje());
             System.out.println("\tTotal: " + x.total);
-        });
-
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.framePpal.setVisible(true);
-
+        });*/
 
         /*for(CuentaCorriente.VistaCuentasProveedoresDTO ctaCorriente : cuentaCorriente){
             System.out.println("cantidad Docs: " + ctaCorriente.documentos.size());
@@ -93,5 +99,4 @@ public class App {
         }
     }
 */
-    }
-}
+

@@ -36,18 +36,19 @@ public class compulsaDePrecios extends JFrame{
         }
 
         Vector colName = new Vector(10);
-        colName.addElement(new String("Cuit Proveedor"));
-        colName.addElement(new String("Fecha"));
-        colName.addElement(new String("Precio"));
 
         int nmbrRows = 10;
-        DefaultTableModel tableModel = new DefaultTableModel(nmbrRows,colName.size());
-        tableModel.setColumnIdentifiers(colName);
-        tablePrecios.setModel(tableModel);
+
 
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.addColumn(("Cuit Proveedor"));
+                tableModel.addColumn(("Fecha"));
+                tableModel.addColumn(("Precio"));
+
                 int prod = Integer.parseInt(txtProd.getText());
                 String rubro = (String) cmbRubro.getSelectedItem();
                 int rubroId=0;
@@ -57,26 +58,22 @@ public class compulsaDePrecios extends JFrame{
                         rubroId = rubroList.get(i).idRubro;
                     }
                 }
-                System.out.println("1 " +RubrosController.getInstancia().verProducto(1));
-                System.out.println("2 " +RubrosController.getInstancia().verProducto(2));
-                System.out.println("rubroId " +rubroId);
-
-                System.out.println("Prod" +prod);
 
                 Producto.ProductoDTO prod2 = RubrosController.getInstancia().verProducto(prod);
-                System.out.println("Prod nombre" +prod2.nombre);
-                System.out.println("Prod nombre 2 " +prod2.precioPorProveedor);
+
                 List<PrecioPorProveedor> precios = RubrosController.getInstancia().getPreciosPorProveedor(rubroId, prod2.idProducto);
                 List<PrecioPorProveedor.UltimoPrecioDTO> ultimo = RubrosController.getInstancia().verUltimosPrecios(precios);
-                Vector<String> x = new Vector<>();
+
                 for(int i=0; i < ultimo.size(); i++){
+                    Vector<String> x = new Vector<>();
                     x.addElement(String.valueOf(ultimo.get(i).cuit));
                     x.addElement(String.valueOf(ultimo.get(i).fechaAcuerdo));
                     x.addElement(String.valueOf(ultimo.get(i).monto));
                     tableModel.addRow(x);
                 }
 
-
+                tablePrecios.setModel(tableModel);
+                tablePrecios.setBounds(10, 0, 457, 103);
             }
         });
 

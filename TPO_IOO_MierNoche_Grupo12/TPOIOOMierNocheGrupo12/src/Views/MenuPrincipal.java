@@ -160,6 +160,7 @@ public class MenuPrincipal{
                 tableModel.addColumn("Tipo Documento");
                 tableModel.addColumn("Nombre Proveedor");
                 tableModel.addColumn("IVA");
+                tableModel.addColumn("Total");
 
                 List<MainController.LibroIVADTO> libroIVA = new ArrayList<>();
                 libroIVA = MainController.getInstancia().libroIVA();
@@ -171,6 +172,7 @@ public class MenuPrincipal{
                     x.addElement(String.valueOf(libroIVA.get(i).tipoDocumento));
                     x.addElement(String.valueOf(libroIVA.get(i).nombreProveedor));
                     x.addElement(String.valueOf(libroIVA.get(i).iva.getPorcentaje()));
+                    x.addElement(String.valueOf(libroIVA.get(i).total));
                     tableModel.addRow(x);
 
                 }

@@ -53,7 +53,7 @@ public class Producto extends ID {
     }
 
     public List<PrecioPorProveedor> getPrecioPorProveedor() {
-        return precioPorProveedor;
+        return this.precioPorProveedor;
     }
 
     public void setPrecioPorProveedor(List<PrecioPorProveedor> precioPorProveedor) {
@@ -77,7 +77,8 @@ public class Producto extends ID {
         dto.nombre = this.nombre;
         dto.tipoUnidad = this.tipoUnidad;
         dto.idProducto = super.getID();
-        for (PrecioPorProveedor pPproveedor : this.precioPorProveedor) {
+
+        for (PrecioPorProveedor pPproveedor : this.getPrecioPorProveedor()) {
             PrecioPorProveedor.PrecioPorProveedorDTO pPproveedorDTO = pPproveedor.toDTO();
             dto.precioPorProveedor.add(pPproveedorDTO);
         }
@@ -91,5 +92,10 @@ public class Producto extends ID {
         public String tipoUnidad;
         public Iva impuesto;
         public List<PrecioPorProveedor.PrecioPorProveedorDTO> precioPorProveedor;
+
+        public ProductoDTO(){
+            this.precioPorProveedor = new ArrayList<>();
+        }
     }
+
 }

@@ -112,14 +112,14 @@ public class altaFactura extends JFrame{
 
                 LocalDate fechaFact = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 Documento.DocumentoDTO fact = new Documento.DocumentoDTO();
-                Optional<Proveedor> prov = MainController.getInstancia().getRepositorioProveedores().buscarPorCuit(idProv);
+                //Optional<Proveedor> prov = MainController.getInstancia().getRepositorioProveedores().buscarPorCuit(idProv);
                 fact.cuitProveedor = idProv;
                 fact.fecha = fechaFact;
                 fact.montoTotal = monto;
                 fact.tipoDocumento = tipoDoc;
                 //fact.agregarArticulo();
 
-                DocumentosController.getInstancia().altaDocumento(fact,prov);
+               // DocumentosController.getInstancia().altaDocumento(fact,prov);
 
             }
         });
@@ -141,7 +141,7 @@ public class altaFactura extends JFrame{
 
                 Integer idProveedor = idProv;
                 PrecioPorProveedor prod = new PrecioPorProveedor();
-                prod = RubrosController.getInstancia().getRepositorioPrecioPorProveedor().buscarPrecioProveedor(idProv).get();
+                //prod = RubrosController.getInstancia().getRepositorioPrecioPorProveedor().buscarPrecioProveedor(idProv).get();
 
                 /*for(int i=0; i < prod.size(); i++){
                     Vector<String> x = new Vector<String>();
