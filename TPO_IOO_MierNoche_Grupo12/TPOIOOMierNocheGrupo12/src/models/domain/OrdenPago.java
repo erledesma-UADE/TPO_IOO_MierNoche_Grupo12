@@ -70,7 +70,7 @@ public class OrdenPago extends ID {
     }
 
     public void setFormaPago(TipoPago formaPago) {
-        this.formaPago = formaPago;
+        this.tipoPago = formaPago;
     }
 
     public void setPagado(boolean pagado) {

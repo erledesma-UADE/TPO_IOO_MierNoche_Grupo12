@@ -37,7 +37,6 @@ public class totalFacturasRecibidas extends JFrame{
 
                String date1 = null;
                String date = txtFecha.getText();
-               System.out.println("date --> " +date);
 
                if(!date.equals("") || !date.isEmpty() || !date.isBlank()) {
                    String pattern = "dd/MM/yyyy";
@@ -45,7 +44,6 @@ public class totalFacturasRecibidas extends JFrame{
                    try {
                        DateFormat df = new SimpleDateFormat(pattern);
                        fechaFact = df.parse(date);
-                       System.out.println("Today = " + df.format(fechaFact));
                    } catch (ParseException ie) {
                        ie.printStackTrace();
                    }
@@ -57,17 +55,23 @@ public class totalFacturasRecibidas extends JFrame{
                 }
 
                 if((!date.isEmpty() || !date.isBlank()) && (prov.isBlank() || prov.isEmpty())){
-                    int totalF = DocumentosController.getInstancia().facturasEmitidasElDia(fechaFact2);
-                    txtTotalFact.setText(String.valueOf(totalF));
+                     try{
+                         int totalF = DocumentosController.getInstancia().facturasEmitidasElDia(fechaFact2);
+                         txtTotalFact.setText(String.valueOf(totalF));
+                     }catch (Exception e1){
+                        e1.printStackTrace();
+                         txtFecha.setText("");
+                         txtTotalFact.setText("");
+                     }
                 }else if ((!prov.isBlank() || !prov.isEmpty()) && (date.isEmpty() || date.isBlank())){
                     int totalP = MainController.getInstancia().totalFacturasRecibidas(prov2);
                     txtTotalFact.setText(String.valueOf(totalP));
                 }else if((!prov.isBlank() || !prov.isEmpty()) && (!date.isEmpty() || !date.isBlank())){
                     int total = MainController.getInstancia().totalFacturasRecibidasEldia(prov2,fechaFact2);
                     txtTotalFact.setText(Integer.toString(total));
-                }/*else{
+                }else{
                     int ok = JOptionPane.showConfirmDialog(null, "Debe ingresar al menos una fecha o un proveedor","Advertencia",JOptionPane.DEFAULT_OPTION);
-                }*/
+                }
 
             }
         });

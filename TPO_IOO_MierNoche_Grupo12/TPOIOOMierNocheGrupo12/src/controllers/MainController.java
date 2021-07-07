@@ -6,7 +6,6 @@ import models.domain.*;
 import models.domain.documentos.Documento;
 import models.domain.enums.Iva;
 import models.domain.enums.TipoDocumento;
-import models.domain.enums.TipoPago;
 import models.repositories.*;
 
 import java.time.LocalDate;
@@ -73,21 +72,21 @@ public class MainController {
     //=================================================================================================================
 
     public void altaOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
-        validarDatosProveedor(ordenPagoDTO.proveedor);
+        validarDatosOrdenPago(ordenPagoDTO.cuitProveedor);
         OrdenPago ordenPago = new OrdenPago();
         asignarParametrosOrdenPago(ordenPago, ordenPagoDTO);
         this.repositorioOrdenesDePago.agregar(ordenPago);
     }
 
-    public void validarDatosOrdenPago (OrdenPago.OrdenPagoDTO ordenPagoDTO) {
-        if (!this.validarCuit(ordenPagoDTO.proveedor.cuit)) {
+    public void validarDatosOrdenPago (Integer ordenPagoDTO) {
+        if (!this.validarCuit(ordenPagoDTO)) {
             throw new ProveedorInexistenteException ("No se encontro el Proveedor");
         }
     }
 
     public void asignarParametrosOrdenPago (OrdenPago ordenPago, OrdenPago.OrdenPagoDTO ordenPagoDTO) {
-        if (validarCuit(ordenPagoDTO.proveedor.cuit)) {
-            ordenPago.setProveedor(this.repositorioProveedores.buscarPorCuit(ordenPagoDTO.proveedor.cuit).get());
+        if (validarCuit(ordenPagoDTO.cuitProveedor)) {
+            ordenPago.setProveedor(this.repositorioProveedores.buscarPorCuit(ordenPagoDTO.cuitProveedor).get());
         } else {
             throw new ProveedorInexistenteException("No se encontro el Proveedor");
         }
@@ -107,8 +106,6 @@ public class MainController {
         ordenPago.calcularTotalRetenciones();
         ordenPago.calcularMontoTotal();
 
-        this.repositorioOrdenesDePago.agregar(ordenPago);
-
     }
     //=================================================================================================================
     //FIN ORDEN DE PAGO
@@ -119,7 +116,7 @@ public class MainController {
     //=================================================================================================================
 
     public void altaProveedor(Proveedor.ProveedorDTO proveedorDTO){
-        this.validarDatosProveedor(proveedorDTO);
+        this.validarDatosProveedor(proveedorDTO.cuit);
         Proveedor proveedor = new Proveedor();
         asignarParametrosProveedor(proveedor,proveedorDTO);
         this.repositorioProveedores.agregar(proveedor);
@@ -130,8 +127,8 @@ public class MainController {
         return proveedor.isPresent();
     }
 
-    private void validarDatosProveedor(Proveedor.ProveedorDTO proveedorDTO){
-        if (this.validarCuit(proveedorDTO.cuit)) {
+    private void validarDatosProveedor(Integer proveedorDTO){
+        if (this.validarCuit(proveedorDTO)) {
             throw new CuitRepetidoException("El proveedor ya existe");
         }
     }
