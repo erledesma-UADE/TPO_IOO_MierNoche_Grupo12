@@ -45,30 +45,6 @@ public class DocumentosController {
 
     };
 
-    //=================================================================================================================
-    //INICIO GETTERS / SETTERS
-    //=================================================================================================================
-
-    public RepositorioProductos getRepositorioProductos() {
-        return this.repositorioProductos;
-    }
-
-    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProveedor() { return this.repositorioPrecioPorProveedor;}
-
-    public RepositorioDocumentos getRepositorioDocumentos() {
-        return this.repositorioDocumentos;
-    }
-
-    public void setRepositorioDocumentos(RepositorioDocumentos repositorioDocumentos) {
-        this.repositorioDocumentos = repositorioDocumentos;
-    }
-
-    public void setRepositorioProductos(RepositorioProductos repositorioProductos) {
-        this.repositorioProductos = repositorioProductos;
-    }
-    //=================================================================================================================
-    //FIN GETTERS / SETTERS
-    //=================================================================================================================
 
     //=================================================================================================================
     //INICIO DOCUMENTOS
@@ -105,9 +81,6 @@ public class DocumentosController {
         documento.setCuitProveedor(documentoDto.cuitProveedor);
         documento.setProveedor(proveedor);
 
-        /*String[][] articulosVista = documentoDto.articulosVista;
-        this.setArticulos(articulosVista,documento,documentoDto);*/
-
     }
 
     public List<Documento.DocumentoDTO> documentosPorProveedor (Integer cuit) {
@@ -118,29 +91,6 @@ public class DocumentosController {
 
         return  documentosDTO;
     }
-
-    /*public void setArticulos(String[][] articulosVista,Documento documento,Documento.DocumentoDTO documentoDto){
-        for (int i = 0; i < articulosVista.length; i++) {
-            Optional<Producto> producto = null;
-            float cantidad = 0;
-            double precioFinal = 0.0;
-            for (int j = 0; j < 2.; j++) {
-                if (j == 0) {
-                    String productoActual = articulosVista[i][j];
-                    producto = this.repositorioProductos.buscarProductoPorNombre(productoActual);
-                } else {
-                    cantidad = Float.parseFloat(articulosVista[i][j]);
-
-                }
-            }
-            CantidadPorProducto productoAux = new CantidadPorProducto(producto, cantidad, documentoDto.cuitProveedor);
-            System.out.println(productoAux);
-            documento.agregarArticulo(productoAux);
-        }
-        documento.setMontoTotal();
-<<<<<<< HEAD
-    }*/
-
 
     //=================================================================================================================
     //FIN DOCUMENTOS
@@ -161,35 +111,6 @@ public class DocumentosController {
         return facturas.size();
     }
 
-    /*public int totalFacturasRecibidas () {
-        List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
-        final int[] contador = {0};
-        todosLosDocumentos.forEach(documento -> {
-            if(documento.getTipoDocumento() == "Factura"){
-                contador[0] += 1;
-            }
-        });
-        return contador[0];
-    }
-
-    public int getFacturasPorDia (LocalDateTime fecha) {
-            List<Documento> todosLosDocumentos = this.repositorioDocumentos.buscarTodos();
-            final int[] contador = {0};
-            todosLosDocumentos.forEach(documento -> {
-                if(documento.getTipoDocumento() == "Factura" && documento.getFecha() == fecha){
-                    contador[0] += 1;
-                }
-            });
-            return contador[0];
-    }
 
 
-    public void libroIVACompras () {}
-
-    public void getLibroIVACompras () {}
-
-*/
-    //=================================================================================================================
-    //INICIO CONSULTAS GENERALES
-    //=================================================================================================================
 }

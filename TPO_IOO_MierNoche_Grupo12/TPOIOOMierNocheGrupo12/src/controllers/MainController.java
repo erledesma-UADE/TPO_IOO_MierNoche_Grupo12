@@ -155,13 +155,9 @@ public class MainController {
             }
         });
         proveedor.setRubros(rubros);
-        //proveedor.setCatalogo(proveedorDto.catalogo);
-        //proveedor.setImpuestos(proveedorDto.impuestos);
+
     }
 
-    public Proveedor.ProveedorDTO verProveedorPorCuit (int cuitProveedor) {
-        return this.repositorioProveedores.buscarPorCuit(cuitProveedor).get().toDTO();
-    }
 
     public List<Proveedor.ProveedorDTO> listarProveedores(){
         List<Proveedor.ProveedorDTO> listaProveedoresDto = new ArrayList<>();

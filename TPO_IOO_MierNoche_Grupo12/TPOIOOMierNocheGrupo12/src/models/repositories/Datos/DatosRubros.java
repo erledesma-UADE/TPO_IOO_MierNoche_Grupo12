@@ -18,11 +18,11 @@ public class DatosRubros {
 
 
         Rubro rubro1 = new Rubro();
-        rubro1.setNombre("Cosas");
+        rubro1.setNombre("Materiales");
         rubro1.setID(1);
 
         Rubro rubro2 = new Rubro();
-        rubro2.setNombre("Cosas2");
+        rubro2.setNombre("Libreria");
         rubro2.setID(2);
 
         rubros.add(rubro1);
