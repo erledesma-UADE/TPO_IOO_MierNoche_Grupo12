@@ -148,10 +148,39 @@ public class MenuPrincipal{
         consultaIVA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //prueba consulta =  new prueba();
-                //consulta.setVisible(true);
+                JFrame frmLista = new JFrame();
+                frmLista.setBounds(100,100,750,500);
+                frmLista.setTitle("Consulta de Libro IVA");
+                frmLista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frmLista.setVisible(true);
 
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.addColumn("Cuit");
+                tableModel.addColumn("Fecha");
+                tableModel.addColumn("Tipo Documento");
+                tableModel.addColumn("Nombre Proveedor");
+                tableModel.addColumn("IVA");
+
+                List<MainController.LibroIVADTO> libroIVA = new ArrayList<>();
+                libroIVA = MainController.getInstancia().libroIVA();
+
+                for(int i=0; i < libroIVA.size(); i++){
+                    Vector<String> x = new Vector<String>();
+                    x.addElement(String.valueOf(libroIVA.get(i).cuitProveedor));
+                    x.addElement(String.valueOf(libroIVA.get(i).fecha));
+                    x.addElement(String.valueOf(libroIVA.get(i).tipoDocumento));
+                    x.addElement(String.valueOf(libroIVA.get(i).nombreProveedor));
+                    x.addElement(String.valueOf(libroIVA.get(i).iva.getPorcentaje()));
+                    tableModel.addRow(x);
+
+                }
+                JTable tableLibroIVA= new JTable();
+                tableLibroIVA.setModel(tableModel);
+                tableLibroIVA.setBounds(10, 0, 457, 103);
+                tableLibroIVA.setEnabled(false);
+                frmLista.add(new JScrollPane(tableLibroIVA));
             }
+
         });
 
         jmSalir.addMenuListener(new MenuListener() {
