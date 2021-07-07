@@ -206,8 +206,7 @@ public class MenuPrincipal{
         ordPagoEmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ordenPagoEmitidas ordenPago = new ordenPagoEmitidas();
-                //ordenPago.setVisible(true);
+
                 JFrame frmLista = new JFrame();
                 frmLista.setBounds(100,100,850,500);
                 frmLista.setTitle("Listado de Ordenes de Pago Emitidas");
@@ -219,19 +218,16 @@ public class MenuPrincipal{
                 tableModel.addColumn("Fecha");
                 tableModel.addColumn("Tipo de Pago");
                 tableModel.addColumn("Monto total");
-                tableModel.addColumn("Total retenciones");
 
                 List<OrdenPago.OrdenPagoDTO> OrdenPago = new ArrayList<>();
                 OrdenPago = MainController.getInstancia().ordenesPagoEmitidas();
 
-                Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < OrdenPago.size(); i++){
                     Vector<String> x = new Vector<String>();
-                    x.addElement(String.valueOf(OrdenPago.get(i).cuitProveedor));
+                    x.addElement(String.valueOf(OrdenPago.get(i).proveedor.cuit));
                     x.addElement(String.valueOf(OrdenPago.get(i).fecha));
                     x.addElement(String.valueOf(OrdenPago.get(i).tipoPago));
                     x.addElement(String.valueOf(OrdenPago.get(i).montoTotal));
-                    x.addElement(String.valueOf(OrdenPago.get(i).totalRetenciones));
                     tableModel.addRow(x);
 
                 }
@@ -292,7 +288,6 @@ public class MenuPrincipal{
                 List<Proveedor.ProveedorDTO> prov;//new ArrayList<>();
                 prov = MainController.getInstancia().listarProveedores();
 
-                Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < prov.size(); i++){
                     Vector<String> x = new Vector<String>();
                     x.addElement(String.valueOf(prov.get(i).nombre));

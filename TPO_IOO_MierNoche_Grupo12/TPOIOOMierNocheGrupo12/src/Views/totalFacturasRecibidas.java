@@ -37,7 +37,6 @@ public class totalFacturasRecibidas extends JFrame{
 
                String date1 = null;
                String date = txtFecha.getText();
-               System.out.println("date --> " +date);
 
                if(!date.equals("") || !date.isEmpty() || !date.isBlank()) {
                    String pattern = "dd/MM/yyyy";
@@ -45,10 +44,8 @@ public class totalFacturasRecibidas extends JFrame{
                    try {
                        DateFormat df = new SimpleDateFormat(pattern);
                        fechaFact = df.parse(date);
-                       System.out.println("Today = " + df.format(fechaFact));
                    } catch (ParseException ie) {
                        ie.printStackTrace();
-                       //int ok = JOptionPane.showConfirmDialog(null, "Debe ingresar formato fecha DD/MM/AAAA","Advertencia",JOptionPane.DEFAULT_OPTION);
                    }
                    fechaFact2 = fechaFact.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                }

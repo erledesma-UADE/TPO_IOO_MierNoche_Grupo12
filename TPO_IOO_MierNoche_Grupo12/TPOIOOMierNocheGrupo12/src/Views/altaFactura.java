@@ -2,8 +2,8 @@ package Views;
 
 import controllers.DocumentosController;
 import controllers.MainController;
-import models.domain.OrdenCompra;
-import models.domain.Proveedor;
+import controllers.RubrosController;
+import models.domain.*;
 import models.domain.documentos.Documento;
 import models.domain.enums.TipoDocumento;
 
@@ -54,6 +54,8 @@ public class altaFactura extends JFrame{
             }
         });
 
+        Integer idProv = Integer.parseInt(txtProv.getText());
+
         asociarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,7 +95,7 @@ public class altaFactura extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Integer idProv = Integer.parseInt(txtProv.getText());
+                //Integer idProv = Integer.parseInt(txtProv.getText());
 
                 String pattern = "dd/MM/yyyy";
                 String date = fechaTxt.getText();
@@ -106,7 +108,7 @@ public class altaFactura extends JFrame{
                 }
 
                 float monto = Float.parseFloat(montoTotTxt.getText());
-                TipoDocumento tipoDoc = TipoDocumento.valueOf("Factura");
+                TipoDocumento tipoDoc = TipoDocumento.Factura;
 
                 LocalDate fechaFact = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 Documento.DocumentoDTO fact = new Documento.DocumentoDTO();
@@ -122,5 +124,40 @@ public class altaFactura extends JFrame{
             }
         });
 
+        agregarArticuloButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frmLista = new JFrame();
+                frmLista.setBounds(100,100,850,500);
+                frmLista.setTitle("Listado de Ordenes de Pago Emitidas");
+                frmLista.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frmLista.setVisible(true);
+
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.addColumn("Cuit");
+                tableModel.addColumn("Fecha");
+                tableModel.addColumn("Tipo de Pago");
+                tableModel.addColumn("Monto total");
+
+                Integer idProveedor = idProv;
+                PrecioPorProveedor prod = new PrecioPorProveedor();
+                prod = RubrosController.getInstancia().getRepositorioPrecioPorProveedor().buscarPrecioProveedor(idProv).get();
+
+                /*for(int i=0; i < prod.size(); i++){
+                    Vector<String> x = new Vector<String>();
+                    x.addElement(String.valueOf(prod.get(i).getNombre()));
+                    x.addElement(String.valueOf(prod.get(i).getTipoUnidad()));
+                    x.addElement(String.valueOf(prod.get(i).getNombre());
+                    x.addElement(String.valueOf(prod.get(i).montoTotal));
+                    tableModel.addRow(x);
+
+                }*/
+                JTable tableOD= new JTable();
+                tableOD.setModel(tableModel);
+                tableOD.setBounds(10, 0, 457, 103);
+                tableOD.setEnabled(false);
+                frmLista.add(new JScrollPane(tableOD));
+            }
+        });
     }
 }

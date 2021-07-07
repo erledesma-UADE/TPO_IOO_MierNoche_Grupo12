@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -52,22 +53,23 @@ public class altaOrdenPago extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 int cuit = Integer.parseInt(txtProv.getText());
 
-                List<Documento> docs = DocumentosController.getInstancia().getRepositorioDocumentos().buscarPorCuitProveedor(cuit);
+                List<Documento.DocumentoDTO> docs = DocumentosController.getInstancia().documentosPorProveedor(cuit);
 
                 DefaultTableModel tableModel = new DefaultTableModel();
                 tableModel.addColumn("Id Doc");
                 tableModel.addColumn("Monto");
 
+                System.out.println("docs " +docs);
+                docs.forEach(d -> {System.out.println(d.idDocumento);});
                 Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < docs.size(); i++) {
                     Vector<String> x = new Vector<String>();
-                    x.addElement(String.valueOf(docs.get(i).getID()));
-                    x.addElement(String.valueOf(docs.get(i).getMontoTotal()));
+                    x.addElement(String.valueOf(docs.get(i).idDocumento));
+                    x.addElement(String.valueOf(docs.get(i).montoTotal));
 
                     tableModel.addRow(x);
                 }
-
-
+                tableDocs.setModel(tableModel);
             }
         });
 
@@ -101,9 +103,19 @@ public class altaOrdenPago extends JFrame{
                 ordenPago.fecha = fecha1;
 
                 TipoPago tipoPago = (TipoPago) cboPago.getSelectedItem();
+
                 ordenPago.tipoPago = tipoPago;
 
+                List<Integer> idDocs = new ArrayList<>();
 
+                int[] index = tableDocs.getSelectedRows();
+                for(int i=0; i<index.length;i++ ){
+                    System.out.println("tabla "+tableDocs.getValueAt(i,0));
+                    Integer id = Integer.parseInt(String.valueOf(tableDocs.getValueAt(i,0)));
+                    idDocs.add(id);
+                }
+
+                ordenPago.idsDocumentos = idDocs;
 
                 MainController.getInstancia().altaOrdenPago(ordenPago);
             }
