@@ -9,10 +9,8 @@ public class OrdenCompra extends ID {
     private List<Producto> productos;
     private Proveedor proveedor;
 
-    public OrdenCompra(LocalDate fecha, Proveedor proveedor) {
-        this.fecha = fecha;
+    public OrdenCompra() {
         this.productos = new ArrayList<>();
-        this.proveedor = proveedor;
     }
 
     public LocalDate getFecha() {

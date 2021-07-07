@@ -23,6 +23,7 @@ public class MainController {
     private RepositorioRetenciones repositorioRetenciones;
     private RepositorioDocumentos repositorioDocumentos;
     private RepositorioRubros repositorioRubros;
+    private RepositorioOrdenCompra repositorioOrdenCompra;
 
     public static MainController getInstancia () {
         if(MainController.instancia == null)
@@ -37,6 +38,7 @@ public class MainController {
         this.repositorioCuentasCorrientes = RepositorioCuentasCorrientes.getInstancia();
         this.repositorioRetenciones = RepositorioRetenciones.getInstancia();
         this.repositorioDocumentos = RepositorioDocumentos.getInstancia();
+        this.repositorioOrdenCompra = RepositorioOrdenCompra.getInstancia();
     }
 
     //=================================================================================================================
@@ -71,8 +73,8 @@ public class MainController {
         return repositorioRetenciones;
     }
 
-    public void setRepositorioRetenciones(RepositorioRetenciones repositorioRetenciones) {
-        this.repositorioRetenciones = repositorioRetenciones;
+    public RepositorioOrdenCompra getRepositorioOrdenCompra() {
+        return repositorioOrdenCompra;
     }
     //=================================================================================================================
     //FIN GETTERS / SETTERS
