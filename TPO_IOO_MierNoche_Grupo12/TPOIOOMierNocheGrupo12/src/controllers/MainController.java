@@ -42,31 +42,19 @@ public class MainController {
     }
 
     //=================================================================================================================
-    //INICIO GETTERS / SETTERS
+    //INICIO GETTERS
     //=================================================================================================================
 
     public RepositorioProveedores getRepositorioProveedores() {
         return repositorioProveedores;
     }
 
-    public void setRepositorioProveedores(RepositorioProveedores repositorioProveedores) {
-        this.repositorioProveedores = repositorioProveedores;
-    }
-
     public RepositorioOrdenesDePago getRepositorioOrdenesDePago() {
         return repositorioOrdenesDePago;
     }
 
-    public void setRepositorioOrdenesDePago(RepositorioOrdenesDePago repositorioOrdenesDePago) {
-        this.repositorioOrdenesDePago = repositorioOrdenesDePago;
-    }
-
     public RepositorioCuentasCorrientes getRepositorioCuentasCorrientes() {
         return repositorioCuentasCorrientes;
-    }
-
-    public void setRepositorioCuentasCorrientes(RepositorioCuentasCorrientes repositorioCuentasCorrientes) {
-        this.repositorioCuentasCorrientes = repositorioCuentasCorrientes;
     }
 
     public RepositorioRetenciones getRepositorioRetenciones() {
@@ -77,7 +65,7 @@ public class MainController {
         return repositorioOrdenCompra;
     }
     //=================================================================================================================
-    //FIN GETTERS / SETTERS
+    //FIN GETTERS
     //=================================================================================================================
 
     //=================================================================================================================
@@ -159,6 +147,7 @@ public class MainController {
         proveedor.setNumeroIngresosBrutos(proveedorDTO.numeroIngresosBrutos);
         proveedor.setTope(proveedorDTO.tope);
         proveedor.setCertificado(proveedorDTO.certificado);
+        proveedor.setTelefono(proveedorDTO.telefono);
         List<Rubro> rubros = new ArrayList<>();
         proveedorDTO.idsRubros.forEach(idRubro -> {
             if (this.repositorioRubros.getPorID(idRubro).isPresent()) {

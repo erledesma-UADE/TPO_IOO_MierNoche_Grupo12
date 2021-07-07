@@ -259,7 +259,7 @@ public class Proveedor extends ID {
             for (Rubro.RubroDTO rubroDTO : this.rubros) {
                 string += rubroDTO.nombre + " ";
             }
-            System.out.println(string);
+
             return string;
         }
     }
@@ -302,5 +302,4 @@ public class Proveedor extends ID {
 
         return dto;
     }
-
 }

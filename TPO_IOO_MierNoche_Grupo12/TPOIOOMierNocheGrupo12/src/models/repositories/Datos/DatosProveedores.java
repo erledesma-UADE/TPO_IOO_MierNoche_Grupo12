@@ -29,6 +29,7 @@ public class DatosProveedores {
         proveedor1.setDireccion("Buenos Aires");
         proveedor1.setEmail("proveedor1@gmail.com");
         proveedor1.setNombre("IOO SA");
+        proveedor1.setRazonSocial("IOO SA");
         proveedor1.setInicioActividades(LocalDate.parse("2020-05-10"));
         proveedor1.setNumeroIngresosBrutos(5);
         proveedor1.setResponsabilidad(Responsabilidad.INSCRIPTO);
@@ -66,6 +67,7 @@ public class DatosProveedores {
         proveedor2.setDireccion("Buenos Aires");
         proveedor2.setEmail("proveedor2@gmail.com");
         proveedor2.setNombre("IOO2 SA");
+        proveedor2.setRazonSocial("IOO2 SA");
         proveedor2.setInicioActividades(LocalDate.parse("2020-05-20"));
         proveedor2.setNumeroIngresosBrutos(2);
         proveedor2.setResponsabilidad(Responsabilidad.MONOTRIBUTO);
@@ -78,6 +80,7 @@ public class DatosProveedores {
         proveedor2.agregarCatalogo(repositorioPreciosPorProveedor.getPorID(8).get());
         proveedor2.agregarImpuesto(new Impuesto("Ganancias",9));
         proveedor2.agregarImpuesto(new Impuesto("Ingresos brutos",15));
+        proveedor2.agregarRubro(repositorioRubros.getElementos().get(0));
 
         CuentaCorriente ctaCorrienteProv2 = new CuentaCorriente();
         proveedor2.setCuentaCorriente(ctaCorrienteProv2);

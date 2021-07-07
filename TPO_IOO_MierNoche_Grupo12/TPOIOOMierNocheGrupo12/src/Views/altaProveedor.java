@@ -87,7 +87,6 @@ public class altaProveedor extends JFrame{
                 String razonSocial = txtRazSocial.getText();
                 String direccion = txtDireccion.getText();
                 int telefono = Integer.parseInt(txtTelefono.getText());
-                System.out.println("telefono: " +telefono);
                 String email = txtMail.getText();
 
                 numeroIngresosBrutos = Integer.parseInt(txtIIBB.getText());

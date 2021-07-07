@@ -20,10 +20,7 @@ public class DatosRubros {
         Rubro rubro1 = new Rubro();
         rubro1.setNombre("Cosas");
         rubro1.setID(1);
-        //Optional<Proveedor> proveedor1 = repositorioProveedores.buscarPorCuit(1234);
-        //rubro1.setProveedores(proveedor1);
-        //rubro1.agregarProducto(proveedor1.get().getCatalogo().get(1).getProducto());
-        //rubro1.agregarProducto(proveedor1.get().getCatalogo().get(2).getProducto());
+
         Rubro rubro2 = new Rubro();
         rubro2.setNombre("Cosas2");
         rubro2.setID(2);
