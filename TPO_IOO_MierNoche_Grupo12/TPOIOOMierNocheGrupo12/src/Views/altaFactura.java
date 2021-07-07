@@ -66,7 +66,7 @@ public class altaFactura extends JFrame{
 
                 List<OrdenCompra> oOC = new ArrayList<>();
                 oOC = MainController.getInstancia().getRepositorioOrdenCompra().buscarTodos();
-                
+
                 Vector<Vector> rows2 = new Vector<Vector>();
                 for(int i=0; i < oOC.size(); i++){
                     Vector<String> x = new Vector<String>();
