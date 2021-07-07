@@ -44,25 +44,6 @@ public class MainController {
     //INICIO GETTERS
     //=================================================================================================================
 
-    public RepositorioProveedores getRepositorioProveedores() {
-        return repositorioProveedores;
-    }
-
-    public RepositorioOrdenesDePago getRepositorioOrdenesDePago() {
-        return repositorioOrdenesDePago;
-    }
-
-    public RepositorioCuentasCorrientes getRepositorioCuentasCorrientes() {
-        return repositorioCuentasCorrientes;
-    }
-
-    public RepositorioRetenciones getRepositorioRetenciones() {
-        return repositorioRetenciones;
-    }
-
-    public RepositorioOrdenCompra getRepositorioOrdenCompra() {
-        return repositorioOrdenCompra;
-    }
     //=================================================================================================================
     //FIN GETTERS
     //=================================================================================================================

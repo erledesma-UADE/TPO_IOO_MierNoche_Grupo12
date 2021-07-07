@@ -21,8 +21,6 @@ public class RubrosController {
     private RepositorioPrecioPorProveedor repositorioPrecioPorProveedor;
     private RepositorioProveedores repositorioProveedores;
 
-    public MainController mainController = MainController.getInstancia();
-
     public static RubrosController getInstancia () {
         if(RubrosController.instancia == null)
             instancia = new RubrosController();
@@ -40,17 +38,6 @@ public class RubrosController {
     //INICIO GETTERS / SETTERS
     //=================================================================================================================
 
-    public RepositorioRubros getRepositorioRubros() {
-        return repositorioRubros;
-    }
-
-    public RepositorioProductos getRepositorioProductos() {
-        return repositorioProductos;
-    }
-
-    public RepositorioPrecioPorProveedor getRepositorioPrecioPorProveedor() {
-        return repositorioPrecioPorProveedor;
-    }
     //=================================================================================================================
     //FIN GETTERS / SETTERS
     //=================================================================================================================
